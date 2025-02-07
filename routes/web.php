@@ -4,6 +4,7 @@ use App\Livewire\Dashboard;
 use App\Http\Controllers\BannerDashboardController;
 use App\Http\Controllers\PrayerSchedulesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactMosquesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +19,5 @@ Route::get('/shalat/create', [PrayerSchedulesController::class, 'create'])->name
 Route::get('/shalat/{id}/edit', [PrayerSchedulesController::class, 'edit'])->name('shalat.edit');
 Route::post('/shalat', [PrayerSchedulesController::class, 'store'])->name('shalat.store');
 Route::put('/shalat/{id}', [PrayerSchedulesController::class, 'update'])->name('shalat.update');
+
+Route::get('/contact', [ContactMosquesController::class, 'index']);

@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
+                    <a href="{{ url('/contact') }}">
                         <i class="bi bi-circle"></i><span>Kontak</span>
                     </a>
                 </li>

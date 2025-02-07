@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
+                    <a href="{{ url('/shalat') }}">
                         <i class="bi bi-circle"></i><span>Jadwal Sholat</span>
                     </a>
                 </li>

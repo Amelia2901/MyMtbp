@@ -14,7 +14,7 @@ class BannerDashboardController extends Controller
     public function index()
     {
         $banner = BannerDashboard::all();
-        return view('banner_dashboard.index', compact('banner'));
+        return view('dashboard.index', compact('banner'));
     }
 
     /**

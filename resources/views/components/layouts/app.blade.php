@@ -20,7 +20,7 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
@@ -50,7 +50,7 @@
    @include('menu')
     <!-- End Sidebar-->
 
-    {{ $slot }}
+    @yield('content')
 
     <!-- ======= Footer ======= -->
     @include('footer')
@@ -61,7 +61,7 @@
 
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="/assets/vendor/chart.js/chart.umd.js"></script>
     <script src="/assets/vendor/echarts/echarts.min.js"></script>
     <script src="/assets/vendor/quill/quill.js"></script>

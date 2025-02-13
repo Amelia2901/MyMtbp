@@ -57,7 +57,7 @@
                             <div class="col-lg-12 text-end">
 
 
-                                <a href="{{ route('shalat.create') }}" class="btn btn-primary button-add">+
+                                <a href="{{ route('kegiatan.create') }}" class="btn btn-primary button-add">+
                                     Kegiatan</a>
                                 <!-- Formulir atau konten lainnya di sini -->
                             </div>

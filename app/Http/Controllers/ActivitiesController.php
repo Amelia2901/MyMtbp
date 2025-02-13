@@ -11,4 +11,12 @@ class ActivitiesController extends Controller
     public function index(){
         return view('dashboard.activities');
     }
+
+    public function create(){
+        return view('dashboard.activities_form');
+    }
+
+    public function store(){
+        return view('dashboard.activities_form');
+    }
 }

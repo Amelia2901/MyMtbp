@@ -41,6 +41,11 @@ Route::get('/shalat/create', [PrayerSchedulesController::class, 'create'])->name
 Route::get('/shalat/{id}/edit', [PrayerSchedulesController::class, 'edit'])->name('shalat.edit');
 Route::post('/shalat/store', [PrayerSchedulesController::class, 'store'])->name('shalat.store');
 Route::put('/shalat/{id}', [PrayerSchedulesController::class, 'update'])->name('shalat.update');
+
+// route kegiatan 
 Route::get('/kegiatan', [ActivitiesController::class, 'index'])->name('kegiatan.index');
+Route::get('/kegiatan/create', [ActivitiesController::class, 'create'])->name('kegiatan.create');
+Route::get('/kegiatan/{id}/edit', [ActivitiesController::class, 'edit'])->name('kegiatan.edit');
+Route::post('/kegiatan/store', [ActivitiesController::class, 'store'])->name('kegiatan.store');
 
 Route::get('/dashboard/contact', [ContactMosquesController::class, 'index']);

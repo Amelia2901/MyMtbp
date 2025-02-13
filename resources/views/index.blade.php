@@ -397,7 +397,7 @@
                     sosial di masjid kami. Setiap kontribusi adalah investasi untuk akhirat yang penuh pahala.
                 </p>
                 <div>
-                    <a class="button-selengkapnya" href="infaq.php">
+                    <a class="button-selengkapnya" href="{{ url('/infaq') }}">
                         <i class="fas fa-arrow-down">
                         </i>
                         Salurkan Infaq Anda
@@ -519,12 +519,12 @@
 
         <div class="footer-kanan">
             <ul>
-                <li><a href="#">Beranda</a></li>
-                <li><a href="struktur-organisasi.php">Tentang Kami</a></li>
-                <li><a href="#JadwalShalat">Jadwal Shalat & Kegiatan</a></li>
-                <li><a href="infaq.php">Donasi</a></li>
-                <li><a href="#Kontak">Kontak</a></li>
-                <li><a href="zakat.php">Zakat</a></li>
+                <li><a href="{{ url('/') }}">Beranda</a></li>
+                <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
+                <li><a href="{{ url('/schedule') }}">Jadwal Shalat & Kegiatan</a></li>
+                <li><a href="{{ url('/infaq') }}">Donasi</a></li>
+                <li><a href="{{ url('/contact') }}">Kontak</a></li>
+                <li><a href="{{ url('/zakat') }}">Zakat</a></li>
             </ul>
         </div>
     </footer>

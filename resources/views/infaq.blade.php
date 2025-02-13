@@ -380,12 +380,12 @@
             <!-- <a href="#">Donasi</a> -->
             <!-- <a href="#">Kontak</a> -->
             <ul>
-                <li><a href="index.php">Beranda</a></li>
-                <li><a href="struktur-organisasi.php">Tentang Kami</a></li>
-                <li><a href="../#JadwalShalat">Jadwal Shalat & Kegiatan</a></li>
-                <li><a href="#">Donasi</a></li>
-                <li><a href="../#Kontak">Kontak</a></li>
-                <li><a href="zakat.php">Zakat</a></li>
+                <li><a href="{{ url('/') }}">Beranda</a></li>
+                <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
+                <li><a href="{{ url('/schedule') }}">Jadwal Shalat & Kegiatan</a></li>
+                <li><a href="#"> Donasi</a></li>
+                <li><a href="{{ url('/contact') }}">Kontak</a></li>
+                <li><a href="{{ url('/zakat') }}">Zakat</a></li>
             </ul>
         </div>
     </footer>

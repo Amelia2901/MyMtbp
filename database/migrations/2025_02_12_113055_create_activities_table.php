@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prayer_schedules', function (Blueprint $table) {
+        Schema::create('activities', function (Blueprint $table) {
             $table->id();
+            $table->string('ActivityName');
+            $table->date('ActivityDate');
+            $table->string('ActivityTime');
+            $table->text('ActivityDescription');
             $table->timestamps();
-            $table->string('shalat_name');
-            $table->string('shalat_time');
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prayer_schedules');
+        Schema::dropIfExists('activities');
     }
 };

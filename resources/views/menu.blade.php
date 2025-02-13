@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
+                    <a href="{{ url('/kegiatan') }}">
                         <i class="bi bi-circle"></i><span>Kalender Kegiatan</span>
                     </a>
                 </li>
@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/contact') }}">
+                    <a href="{{ url('/dashboard/contact') }}">
                         <i class="bi bi-circle"></i><span>Kontak</span>
                     </a>
                 </li>

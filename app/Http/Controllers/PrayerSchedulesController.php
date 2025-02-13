@@ -25,9 +25,7 @@ class PrayerSchedulesController extends Controller
         return view('dashboard.shalat_add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Storeprayer_schedulesRequest $request)
     {
         $request->validate([
@@ -35,12 +33,12 @@ class PrayerSchedulesController extends Controller
             'shalat_time' => 'required',
         ]);
 
-        // Menyimpan data baru
         prayer_schedules::create([
             'shalat_name' => $request->shalat_name,
             'shalat_time' => $request->shalat_time,
         ]);
 
+        
         return redirect()->route('shalat.index')->with('success', 'Jadwal Shalat berhasil ditambahkan');
     }
 

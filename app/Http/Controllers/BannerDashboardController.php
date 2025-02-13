@@ -30,22 +30,19 @@ class BannerDashboardController extends Controller
      */
     public function store(StoreBannerDashboardRequest $request)
     {
-        // Ambil data yang sudah tervalidasi
-        $data = $request->validated(); // Ini sudah menangani validasi otomatis
+        $data = $request->validated(); 
 
         if ($request->hasFile('banner_photo')) {
-            // Simpan file gambar ke folder public/uploads/banner_photos
             $filePath = $request->file('banner_photo')->store('uploads/banner_photos', 'public');
         }
 
-        // Simpan data ke database
         BannerDashboard::create([
             'banner_photo' => $filePath,
             'banner_title' => $data['banner_title'],
             'banner_description' => $data['banner_description'],
         ]);
 
-        return redirect()->route('banner.store')->with('success', 'Banner berhasil ditambahkan!');
+        return redirect()->route('banner.index')->with('success', 'Banner berhasil ditambahkan!');
     }
 
 

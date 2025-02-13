@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('prayer_schedules', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('shalat_name');
+            $table->string('shalat_time');
         });
     }
 

@@ -3,21 +3,44 @@
 use App\Livewire\Dashboard;
 use App\Http\Controllers\BannerDashboardController;
 use App\Http\Controllers\PrayerSchedulesController;
+use App\Http\Controllers\ActivitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactMosquesController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-Route::get('/dashboard', Dashboard::class);
-Route::get('/banner', [BannerDashboardController::class, 'index']);
+Route::get('/about', function () {
+    return view('strukturOrganisasi');
+});
+
+Route::get('/schedule', function () {
+    return view('index');
+});
+
+Route::get('/infaq', function () {
+    return view('infaq');
+});
+Route::get('/contact', function () {
+    return view('index');
+});
+
+Route::get('/zakat', function () {
+    return view('zakat');
+});
+
+Route::get('/dashboard', [Dashboard::class, 'index']);
+Route::get('/dashboard2', Dashboard::class);
+Route::get('dashboard/login', [Dashboard::class, 'login'])->name('dashboard.login');
+Route::get('/banner', [BannerDashboardController::class, 'index'])->name('banner.index');
 Route::post('/banner', [BannerDashboardController::class, 'store'])->name('banner.store');
 
-Route::get('/shalat', [PrayerSchedulesController::class, 'index']);
+Route::get('/shalat', [PrayerSchedulesController::class, 'index'])->name('shalat.index');
 Route::get('/shalat/create', [PrayerSchedulesController::class, 'create'])->name('shalat.create');
 Route::get('/shalat/{id}/edit', [PrayerSchedulesController::class, 'edit'])->name('shalat.edit');
-Route::post('/shalat', [PrayerSchedulesController::class, 'store'])->name('shalat.store');
+Route::post('/shalat/store', [PrayerSchedulesController::class, 'store'])->name('shalat.store');
 Route::put('/shalat/{id}', [PrayerSchedulesController::class, 'update'])->name('shalat.update');
+Route::get('/kegiatan', [ActivitiesController::class, 'index'])->name('kegiatan.index');
 
-Route::get('/contact', [ContactMosquesController::class, 'index']);
+Route::get('/dashboard/contact', [ContactMosquesController::class, 'index']);

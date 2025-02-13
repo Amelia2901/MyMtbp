@@ -11,7 +11,7 @@ class Storeprayer_schedulesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class Storeprayer_schedulesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'shalat_name' => 'required|string|max:255',
+            'shalat_time' => 'required|string|max:255',
         ];
     }
 }

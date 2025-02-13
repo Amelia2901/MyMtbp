@@ -380,7 +380,7 @@
                             Emas</p>
                         <div class="box-hasil-zakat">
                             <p style="color: white">Rp.</p>
-                            <input type="text" class="form-control" readonly>
+                            <input type="text" class="form-control" id="hitungZakatEmasUang" readonly>
                         </div>
                     </div>
                     <div class="form-hasil-zakat"
@@ -389,7 +389,7 @@
                             Perak</p>
                         <div class="box-hasil-zakat">
                             <p style="color: white">Rp.</p>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="hitungZakatPerakUang" >
                         </div>
                     </div>
                 </div>
@@ -597,42 +597,60 @@
             document.getElementById("hasilZakat").value = totalZakat.toLocaleString("id-ID");
         }
 
-        // perhitungan zakat emas uang
+        // perhitungan zakat emas dan perak
+        const hargaEmasPerGram = 108070; // Harga emas per gram dalam Rupiah
+        const hargaPerakPerGram = 17000; // Harga perak per gram dalam Rupiah
+        const nishabEmas = 85; // Nishab emas dalam gram
+        const nishabPerak = 595; // Nishab perak dalam gram
+
         function HitungZakatEmas() {
-            let JumlahEmas = parseInt($('#JumlahEmas').val()) || 0;
-            let totalzakatemas;
+            let jumlahEmas = parseFloat(document.getElementById("JumlahEmas").value) || 0;
+            let hasilZakatEmas = document.getElementById("HasilZakatEmas");
+            let hasilZakatEmasUang = document.getElementById("hitungZakatEmasUang");
 
-            if (JumlahEmas == 0) {
-                $('#HasilZakatEmas').val(0);
-                return;
-            } else if (JumlahEmas >= 85) {
-                totalzakatemas = (JumlahEmas * 2.5) / 100;
-                $('#HasilZakatEmas').val(totalzakatemas);
-            } else if (JumlahEmas < 85) {
-                $('#HasilZakatEmas').val("Anda belum mencapai nishab");
-            }
+        if (jumlahEmas == 0) {
+            hasilZakatEmas.value = 0;
+            hasilZakatEmasUang.value = 0;
+        return;
+        } else if (jumlahEmas >= nishabEmas) {
 
-            //ini pake uang
-            // const zakatPerEmas = 85685972; 
-            // let totalZakat = JumlahEmas * zakatPerEmas;
+        // Hitung zakat emas
+        let zakatEmas = (jumlahEmas * 2.5) / 100;
+        hasilZakatEmas.value = zakatEmas.toFixed(2); 
 
-            // document.getElementById("hasilZakatEmasUang").value = totalZakat.toLocaleString("id-ID"); 
-
+        // Hitung jika dibayar dengan uang
+        let zakatEmasUang = zakatEmas * hargaEmasPerGram;
+        hasilZakatEmasUang.value = zakatEmasUang.toLocaleString("id-ID");
+        
+        } else {
+            hasilZakatEmas.value = "Anda belum mencapai nishab";
+            hasilZakatEmasUang.value = "Anda belum mencapai nishab";
+        }   
         }
 
         function HitungZakatPerak() {
-            let JumlahPerak = parseInt($('#JumlahPerak').val()) || 0;
-            let totalzakatperak;
+        let jumlahPerak = parseFloat(document.getElementById("JumlahPerak").value) || 0;
+        let hasilZakatPerak = document.getElementById("HasilZakatPerak");
+        let hasilZakatPerakUang = document.getElementById("hitungZakatPerakUang");
 
-            if (JumlahPerak == 0) {
-                $('#HasilZakatPerak').val(0);
-                return;
-            } else if (JumlahPerak >= 85) {
-                totalzakatperak = (JumlahPerak * 2.5) / 100;
-                $('#HasilZakatPerak').val(totalzakatperak);
-            } else if (JumlahPerak < 85) {
-                $('#HasilZakatPerak').val("Anda belum mencapai nishab");
-            }
+        if (jumlahPerak == 0) {
+            hasilZakatPerak.value = 0;
+            hasilZakatPerakUang.value = 0;
+        return;
+        } else if (jumlahPerak >= nishabPerak) {
+        
+        // Hitung zakat perak 
+        let zakatPerak = (jumlahPerak * 2.5) / 100;
+        hasilZakatPerak.value = zakatPerak.toFixed(2) ; 
+
+        // Hitung jika dibayar dengan uang
+        let zakatPerakUang = zakatPerak * hargaPerakPerGram;
+        hasilZakatPerakUang.value = zakatPerakUang.toLocaleString("id-ID");
+        
+        } else {
+            hasilZakatPerak.value = "Anda belum mencapai nishab";
+            hasilZakatPerakUang.value = "Anda belum mencapai nishab";
+        }
         }
 
         // zakat penghasilan

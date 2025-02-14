@@ -41,7 +41,6 @@
 </head>
 
 <body>
-
     <!-- ======= Header ======= -->
     @include('header')
     <!-- End Header -->
@@ -61,7 +60,7 @@
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-        <button style="margin-bottom: 10px" type="button" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>
+        <button style="margin-bottom: 10px;" type="button" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>
             Add Contact</button>
 
         <section class="section">

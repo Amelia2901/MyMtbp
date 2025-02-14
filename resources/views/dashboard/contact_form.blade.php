@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard | Jadwal Sholat</title>
+    <title>Dashboard | Kegiatan</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -59,30 +59,40 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Formulir Jadwal Shalat</h5>
-                            <form action="{{ route('shalat.update', $shalat->id) }}" method="POST" id="shalat_form">
+                            <h5 class="card-title">Formulir Kalender Kegiatan</h5>
+                            <form action="{{ route('contact.update', $item->id) }}" method="POST" id="activityForm">
                                 @csrf
-                                @method('PUT') <!-- Use PUT method for updating -->
-
+                                @if (isset($item))
+                                    @method('PUT')
+                                @endif
                                 <div class="row mb-4">
-                                    <label for="shalat_name" class="col-sm-2 col-form-label">Nama Jadwal Shalat</label>
+                                    <label for="shalat_name" class="col-sm-2 col-form-label">Akun Youtube</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="shalat_name" id="shalat_name"
-                                            value="{{ old('shalat_name', $shalat->shalat_name) }}" required>
+                                        <input type="text" class="form-control" name="youtube_channel"
+                                            id="youtube_channel"
+                                            value="{{ old('youtube_channel', $item->youtube_channel ?? '') }}"
+                                            required>
                                     </div>
                                 </div>
-
                                 <div class="row mb-4">
-                                    <label for="shalat_time" class="col-sm-2 col-form-label">Waktu Jadwal Shalat</label>
+                                    <label for="shalat_time" class="col-sm-2 col-form-label">Link URL Youtube</label>
                                     <div class="col-sm-10">
-                                        <input type="time" class="form-control" name="shalat_time" id="shalat_time"
-                                            value="{{ old('shalat_time', $shalat->shalat_time) }}" required>
+                                        <input type="text" class="form-control" name="url_youtube" id="url_youtube"
+                                            value="{{ old('url_youtube', $item->url_youtube ?? '') }}" required>
                                     </div>
                                 </div>
-
+                                <div class="row mb-4">
+                                    <label for="shalat_time" class="col-sm-2 col-form-label">Alamat Masjid</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="address_mosque"
+                                            id="address_mosque"
+                                            value="{{ old('address_mosque', $item->address_mosque ?? '') }}" required>
+                                    </div>
+                                </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-primary">Submit Form</button>
+                                        <button type="button" onclick="simpan()"
+                                            class="btn btn-primary">Simpan</button>
                                     </div>
                                 </div>
                             </form>
@@ -121,29 +131,34 @@
         function validateForm() {
             let valid = true;
 
-            if ($.trim($("#shalat_name").val()) == "") {
-                $('#shalat_name').addClass('is-invalid');
-                $('#shalat_name').after('<div class="invalid-feedback">Nama Jadwal Shalat wajib diisi.</div>');
+            if ($.trim($("#youtube_channel").val()) == "") {
+                $('#youtube_channel').addClass('is-invalid');
+                $('#youtube_channel').after('<div class="invalid-feedback">Nama Jadwal Shalat wajib diisi.</div>');
                 valid = false;
             }
-            if ($.trim($("#shalat_time").val()) == "") {
-                $('#shalat_time').addClass('is-invalid');
-                $('#shalat_time').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+            if ($.trim($("#url_youtube").val()) == "") {
+                $('#url_youtube').addClass('is-invalid');
+                $('#url_youtube').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
                 valid = false;
             }
+            if ($.trim($("#address_mosque").val()) == "") {
+                $('#address_mosque').addClass('is-invalid');
+                $('#address_mosque').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                valid = false;
+            }
+
 
             return valid;
         }
 
         // Display confirmation popup when form is submitted
-        $('#shalat_form').submit(function(e) {
+        function simpan() {
             if (!validateForm()) {
-                e.preventDefault(); // prevent form from submitting if invalid
                 return false;
             }
 
-            // let form = document.querySelector('#shalat_form');
-            // console.log(form);
+            let form = document.querySelector('#activityForm');
+            console.log(form);
 
             Swal.fire({
                 title: 'Confirmation?',
@@ -155,15 +170,14 @@
                 cancelButtonText: 'No, Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.submit(); // Submit the form after confirmation
+                    $('#activityForm').submit();
                 }
             });
 
-            e.preventDefault(); // prevent the form from submitting by default
-        });
+        };
 
         // Remove invalid class when user starts typing
-        $('#shalat_name, #shalat_time').on('input', function() {
+        $('#youtube_channel, #url_youtube, #address_mosque').on('input', function() {
             if ($.trim($(this).val()) !== "") {
                 $(this).removeClass('is-invalid');
                 $(this).next('.invalid-feedback').remove();

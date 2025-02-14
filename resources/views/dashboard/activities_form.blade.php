@@ -62,7 +62,7 @@
                             <h5 class="card-title">Formulir Kalender Kegiatan</h5>
                             <form
                                 action="{{ isset($item) ? route('kegiatan.update', $item->id) : route('kegiatan.store') }}"
-                                method="POST">
+                                method="POST" id="activityForm">
                                 @csrf
                                 @if (isset($item))
                                     @method('PUT')
@@ -71,27 +71,27 @@
                                     <label for="shalat_name" class="col-sm-2 col-form-label">Nama Kegiatan</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="activityName" id="activityName"
-                                            value="" required>
+                                            value="{{ old('activityName', $item->ActivityName ?? '') }}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <label for="shalat_time" class="col-sm-2 col-form-label">Deskrisi kegiatan</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="activityDescription" id="activityDescription" value="" required></textarea>
+                                        <textarea class="form-control" name="activityDescription" id="activityDescription" required>{{ old('activityDescription', $item->ActivityDescription ?? '') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <label for="shalat_time" class="col-sm-2 col-form-label">Tanggal Kegiatan</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="activityDate" id="activityDate"
-                                            value="" required>
+                                        <input type="date" class="form-control" name="activityDate" id="activityDate"
+                                            value="{{ old('activityDate', $item->ActivityDate ?? '') }}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <label for="shalat_time" class="col-sm-2 col-form-label">Waktu Kegiatan</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="activityTime" id="activityTime"
-                                            value="" required>
+                                        <input type="time" class="form-control" name="activityTime" id="activityTime"
+                                            value="{{ old('activityTime', $item->ActivityTime ?? '') }}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -136,14 +136,24 @@
         function validateForm() {
             let valid = true;
 
-            if ($.trim($("#shalat_name").val()) == "") {
-                $('#shalat_name').addClass('is-invalid');
-                $('#shalat_name').after('<div class="invalid-feedback">Nama Jadwal Shalat wajib diisi.</div>');
+            if ($.trim($("#activityName").val()) == "") {
+                $('#activityName').addClass('is-invalid');
+                $('#activityName').after('<div class="invalid-feedback">Nama Jadwal Shalat wajib diisi.</div>');
                 valid = false;
             }
-            if ($.trim($("#shalat_time").val()) == "") {
-                $('#shalat_time').addClass('is-invalid');
-                $('#shalat_time').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+            if ($.trim($("#activityDescription").val()) == "") {
+                $('#activityDescription').addClass('is-invalid');
+                $('#activityDescription').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                valid = false;
+            }
+            if ($.trim($("#activityDate").val()) == "") {
+                $('#activityDate').addClass('is-invalid');
+                $('#activityDate').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                valid = false;
+            }
+            if ($.trim($("#activityTime").val()) == "") {
+                $('#activityTime').addClass('is-invalid');
+                $('#activityTime').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
                 valid = false;
             }
 
@@ -151,11 +161,13 @@
         }
 
         // Display confirmation popup when form is submitted
-        $('#shalat_form').submit(function(e) {
+        function simpan() {
             if (!validateForm()) {
-                e.preventDefault(); // prevent form from submitting if invalid
                 return false;
             }
+
+            let form = document.querySelector('#activityForm');
+            console.log(form);
 
             Swal.fire({
                 title: 'Confirmation?',
@@ -167,15 +179,14 @@
                 cancelButtonText: 'No, Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.submit(); // Submit the form after confirmation
+                    $('#activityForm').submit();
                 }
             });
 
-            e.preventDefault(); // prevent the form from submitting by default
-        });
+        };
 
         // Remove invalid class when user starts typing
-        $('#shalat_name, #shalat_time').on('input', function() {
+        $('#activityName, #activityDescription, #activityDate, #activityTime').on('input', function() {
             if ($.trim($(this).val()) !== "") {
                 $(this).removeClass('is-invalid');
                 $(this).next('.invalid-feedback').remove();

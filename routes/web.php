@@ -47,5 +47,10 @@ Route::get('/kegiatan', [ActivitiesController::class, 'index'])->name('kegiatan.
 Route::get('/kegiatan/create', [ActivitiesController::class, 'create'])->name('kegiatan.create');
 Route::get('/kegiatan/{id}/edit', [ActivitiesController::class, 'edit'])->name('kegiatan.edit');
 Route::post('/kegiatan/store', [ActivitiesController::class, 'store'])->name('kegiatan.store');
+Route::put('/kegiatan/{id}', [ActivitiesController::class, 'update'])->name('kegiatan.update');
 
-Route::get('/dashboard/contact', [ContactMosquesController::class, 'index']);
+
+//route contact
+Route::get('/dashboard/contact', [ContactMosquesController::class, 'index'])->name('contact.index');
+Route::get('/dashboard/contact/{id}/edit', [ContactMosquesController::class, 'edit'])->name('contact.edit');
+Route::put('/dashboard/contact/{id}', [ContactMosquesController::class, 'update'])->name('contact.update');

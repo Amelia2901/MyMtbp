@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard | Kegiatan</title>
+    <title>Dashboard | Kontak Masjid</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -30,63 +30,57 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
     @extends('components.layouts.app')
-    <!-- ======= Header ======= -->
 
     <main id="main" class="main">
+
         <div class="pagetitle">
-            <h1>Kalender Kegiatan</h1>
+            <h1>Contact Mosques</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Kalender Kegiatan</li>
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Contact Mosques</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
+        <button style="margin-bottom: 10px;" type="button" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>
+            Add Contact</button>
 
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Data Kegiatan</h5>
-                            <div class="col-lg-12 text-end">
-
-
-                                <a href="{{ route('kegiatan.create') }}" class="btn btn-primary button-add">+
-                                    Kegiatan</a>
-                                <!-- Formulir atau konten lainnya di sini -->
-                            </div>
-
-
+                            <h5 class="card-title">Kontak Masjid</h5>
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nama Kegiatan</th>
-                                        <th>Deskripsi</th>
-                                        <th>Tanggal</th>
-                                        <th>Waktu</th>
+                                        <th>Akun Youtube</th>
+                                        <th>Link URL Youtube</th>
+                                        <th>Alamat</th>
+                                        <th>Perubahan Terakhir</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($activities as $index => $item)
+                                    @foreach ($contact_mosques as $p)
                                         <tr>
-                                            <td>{{ $index + 1 }}</td>
-                                            <td>{{ $item->ActivityName }}</td>
-                                            <td>{{ $item->ActivityDescription }}</td>
-                                            <td>{{ $item->ActivityDate }}</td>
-                                            <td>{{ $item->ActivityTime }}</td>
+                                            <td>{{ $p->youtube_channel }}</td>
+                                            <td>{{ $p->url_youtube }}</td>
+                                            <td>{{ $p->address_mosque }}</td>
+                                            <td>{{ $p->updated_at }}</td>
                                             <td>
-                                                <a href="{{ route('kegiatan.edit', $item->id) }}"
-                                                    class="btn btn-primary">
+                                                <a href="{{ route('contact.edit', $p->id) }}" class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
+                                                </a>
+                                                |
+                                                <a href="{{ route('contact.edit', $p->id) }}" class="btn btn-primary">
+                                                    <i class="bi bi-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -94,24 +88,18 @@
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
+
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
-    </main><!-- End #main -->
 
-    <!-- ======= Footer ======= -->
+    </main>
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+</body>
 
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: 'Sukses!',
-                text: "{{ session('success') }}",
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    @endif
+</html>

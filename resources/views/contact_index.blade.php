@@ -6,6 +6,7 @@
 </head>
 
 <body>
+    @extends('components.layouts.app')
 
     <h2>www.malasngoding.com</h2>
     <h3>Data Pegawai</h3>

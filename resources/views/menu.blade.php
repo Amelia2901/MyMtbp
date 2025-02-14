@@ -83,12 +83,12 @@
             </a>
             <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="icons-bootstrap.html">
+                    <a href="{{ url('/banner-about') }}">
                         <i class="bi bi-circle"></i><span>Banner</span>
                     </a>
                 </li>
                 <li>
-                    <a href="icons-remix.html">
+                    <a href="{{ url('/vision') }}">
                         <i class="bi bi-circle"></i><span>Visi Misi</span>
                     </a>
                 </li>

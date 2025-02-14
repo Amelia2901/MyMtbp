@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BannerAboutController;
+use App\Http\Controllers\VisionController;
 use App\Livewire\Dashboard;
 use App\Http\Controllers\BannerDashboardController;
 use App\Http\Controllers\PrayerSchedulesController;
@@ -54,3 +56,13 @@ Route::put('/kegiatan/{id}', [ActivitiesController::class, 'update'])->name('keg
 Route::get('/dashboard/contact', [ContactMosquesController::class, 'index'])->name('contact.index');
 Route::get('/dashboard/contact/{id}/edit', [ContactMosquesController::class, 'edit'])->name('contact.edit');
 Route::put('/dashboard/contact/{id}', [ContactMosquesController::class, 'update'])->name('contact.update');
+
+// route struktur organisasi
+// Route::get('/banner-about', [BannerAboutController::class, 'index']);
+Route::get('/banner-about', [BannerAboutController::class, 'index'])->name('banner-about.index');
+Route::post('/banner-about', [BannerAboutController::class, 'store'])->name('banner-about.store');
+
+// route visi misi
+// Route::get('/vision', [VisionController::class, 'index']);
+Route::get('/vision', [VisionController::class, 'edit'])->name('vision.edit');
+Route::put('/vision', [VisionController::class, 'update'])->name('vision.update');

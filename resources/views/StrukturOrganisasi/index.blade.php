@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-12">
-                                        <button type="button" onclick="save()" class="btn btn-primary">Submit
+                                        <button type="button" onclick="simpan()" class="btn btn-primary">Submit
                                             Form</button>
                                     </div>
                                 </div>

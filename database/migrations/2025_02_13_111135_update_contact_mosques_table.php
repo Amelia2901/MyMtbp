@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('contact_mosques', function (Blueprint $table) {
-            $table->id();
+            // $table->id();
             $table->renameColumn('title_contact', 'youtube_channel');
             $table->string('url_youtube');
             $table->renameColumn('subtitle_contact', 'address_mosque'); 

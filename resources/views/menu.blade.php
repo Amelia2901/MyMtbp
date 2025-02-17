@@ -78,7 +78,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-people-fill"></i><span>Stuktur Organisasi</span><i
+                <i class="bi bi-people-fill"></i><span>Struktur Organisasi</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -98,7 +98,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="icons-boxicons.html">
+                    <!-- <a href="icons-boxicons.html"> -->
+                    <a href="{{ url('/organizational_chart') }}">
                         <i class="bi bi-circle"></i><span>Susunan Organisasi DKM</span>
                     </a>
                 </li>

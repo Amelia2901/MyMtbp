@@ -8,6 +8,8 @@ use App\Http\Controllers\PrayerSchedulesController;
 use App\Http\Controllers\ActivitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactMosquesController;
+use App\Http\Controllers\OrganizationalChartController;
+
 
 Route::get('/', function () {
     return view('index');
@@ -63,6 +65,16 @@ Route::get('/banner-about', [BannerAboutController::class, 'index'])->name('bann
 Route::post('/banner-about', [BannerAboutController::class, 'store'])->name('banner-about.store');
 
 // route visi misi
-// Route::get('/vision', [VisionController::class, 'index']);
-Route::get('/vision', [VisionController::class, 'edit'])->name('vision.edit');
-Route::put('/vision', [VisionController::class, 'update'])->name('vision.update');
+Route::get('/vision', [VisionController::class, 'index']);
+Route::get('/vision/edit', [VisionController::class, 'edit'])->name('vision.edit');
+Route::put('/vision/update/{id}', [VisionController::class, 'update'])->name('vision.update');
+
+Route::prefix('organizational_chart')->group(function () {
+    Route::get('/', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
+    Route::get('/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
+    Route::post('/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
+    Route::get('/edit/{id}', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
+    Route::put('/update/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
+    Route::delete('/delete/{id}', [OrganizationalChartController::class, 'destroy'])->name('organizational_chart.destroy');
+});
+

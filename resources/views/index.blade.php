@@ -64,12 +64,9 @@
             <div class="link">
                 <img src="{{ asset('assets/img/website/logo_masjid.svg') }}" alt="">
                 <ul>
-                    <li><a href="#">Beranda</a></li>
-                    <li><a href="{{ url('/about') }}"> Tentang Kami</a></li>
-                    <li><a href="#JadwalShalat">Jadwal Shalat & Kegiatan</a></li>
-                    <li><a href="{{ url('/infaq') }}">Donasi</a></li>
-                    <li><a href="#Kontak">Kontak</a></li>
-                    <li><a href="{{ url('/zakat') }}">Zakat</a></li>
+                    @foreach ($data['navbar'] as $nav)
+                        <li><a href="{{ $nav->url }}">{{ $nav->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
 

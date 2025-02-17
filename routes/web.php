@@ -13,12 +13,11 @@ use App\Http\Controllers\OrganizationalChartController;
 use App\Http\Controllers\BaganController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\Front\LandingController;
 
 
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [LandingController::class, 'index'])->name('landing.index');
 
 Route::get('/about', function () {
     return view('strukturOrganisasi');

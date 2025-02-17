@@ -67,7 +67,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Banner About Form</h5>
+                            <h5 class="card-title">Formulir Banner Struktur Organisasi</h5>
                             <form action="{{ route('banner-about.store') }}" method="POST" enctype="multipart/form-data"
                                 id="banner_about_form">
                                 @csrf
@@ -158,8 +158,8 @@
 
             if (valid) {
                 Swal.fire({
-                    title: 'Confirmation?',
-                    text: 'Are you sure?',
+                    title: 'Konfirmasi?',
+                    text: 'Apakah anda yakin?',
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonText: 'Tambah Data',

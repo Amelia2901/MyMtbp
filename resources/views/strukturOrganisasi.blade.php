@@ -88,10 +88,10 @@
                 <img src="{{ asset('assets/img/website/logo_masjid.svg') }}" alt="">
                 <ul>
                     <li><a href="{{ url('/') }}">Beranda</a></li>
-                    <li><a href="#"> Tentang Kami</a></li>
-                    <li><a href="{{ url('/schedule') }}">Jadwal Shalat & Kegiatan</a></li>
+                    <li><a href="{{ url('/about') }}"> Tentang Kami</a></li>
+                    <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
                     <li><a href="{{ url('/infaq') }}">Donasi</a></li>
-                    <li><a href="{{ url('/contact') }}">Kontak</a></li>
+                    <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
                     <li><a href="{{ url('/zakat') }}">Zakat</a></li>
                 </ul>
             </div>
@@ -299,9 +299,9 @@
             <ul>
                 <li><a href="{{ url('/') }}">Beranda</a></li>
                 <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
-                <li><a href="#">Jadwal Shalat & Kegiatan</a></li>
+                <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
                 <li><a href="{{ url('/infaq') }}">Donasi</a></li>
-                <li><a href="{{ url('/contact') }}">Kontak</a></li>
+                <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
                 <li><a href="{{ url('/zakat') }}">Zakat</a></li>
             </ul>
         </div>

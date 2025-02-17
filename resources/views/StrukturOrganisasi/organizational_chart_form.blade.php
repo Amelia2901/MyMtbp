@@ -64,6 +64,13 @@
                                         @method('PUT')
                                     @endif
                                     <div class="row mb-4">
+                                        <label for="inputText" class="col-sm-2 col-form-label">Foto Banner</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="file" id="banner_photo"
+                                                name="banner_photo">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
                                         <label for="position" class="col-sm-2 col-form-label">Jabatan</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="position" id="position" value="{{ old('position', $item->position ?? '') }}" required>
@@ -75,12 +82,12 @@
                                             <input type="text" class="form-control" name="name" id="name" value="{{ old('name', $item->name ?? '') }}" required>
                                         </div>
                                     </div>
-                                    <div class="row mb-4">
+                                    <!-- <div class="row mb-4">
                                         <label for="photo" class="col-sm-2 col-form-label">Foto</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="photo" id="photo" value="{{ old('photo', $item->photo ?? '') }}" required>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row mb-4">
                                         <div class="col-sm-12">
                                             <button type="submit" onclick="simpan()" class="btn btn-primary">Submit Form</button>

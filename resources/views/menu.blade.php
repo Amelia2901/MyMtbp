@@ -88,7 +88,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/vision') }}">
+                    <a href="{{ url('/visi_misi') }}">
                         <i class="bi bi-circle"></i><span>Visi Misi</span>
                     </a>
                 </li>

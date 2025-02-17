@@ -35,9 +35,9 @@
                 <ul>
                     <li><a href="{{ url('/') }}">Beranda</a></li>
                     <li><a href="{{ url('/about') }}"> Tentang Kami</a></li>
-                    <li><a href="{{ url('/schedule') }}">Jadwal Shalat & Kegiatan</a></li>
-                    <li><a href="#">Donasi</a></li>
-                    <li><a href="{{ url('/contact') }}">Kontak</a></li>
+                    <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
+                    <li><a href="{{ url('/infaq') }}">Donasi</a></li>
+                    <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
                     <li><a href="{{ url('/zakat') }}">Zakat</a></li>
                 </ul>
             </div>
@@ -382,16 +382,15 @@
             <ul>
                 <li><a href="{{ url('/') }}">Beranda</a></li>
                 <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
-                <li><a href="{{ url('/schedule') }}">Jadwal Shalat & Kegiatan</a></li>
-                <li><a href="#"> Donasi</a></li>
-                <li><a href="{{ url('/contact') }}">Kontak</a></li>
+                <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
+                <li><a href="{{ url('/infaq') }}"> Donasi</a></li>
+                <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
                 <li><a href="{{ url('/zakat') }}">Zakat</a></li>
             </ul>
         </div>
     </footer>
     <script>
         function toggleSidebar() {
-            // alert('woi');
             $('.floating-sidebar').toggleClass('active');
         }
 

@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('organizational_charts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('position');
-            $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('organizational_charts')->onDelete('cascade');
-            $table->timestamps();
+            $table->string('name');            // For storing the name of the person
+            $table->string('position');        // For storing the position of the person
+            $table->string('photo')->nullable(); // For storing the photo file path (nullable if no photo is provided)
+            $table->timestamps();             // Laravel will automatically add created_at and updated_at columns
         });
     }
 

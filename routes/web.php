@@ -19,16 +19,17 @@ Route::get('/about', function () {
     return view('strukturOrganisasi');
 });
 
-Route::get('/schedule', function () {
-    return view('index');
-});
+// Route::get('/schedule', function () {
+//     return view('index');
+// });
 
 Route::get('/infaq', function () {
     return view('infaq');
 });
-Route::get('/contact', function () {
-    return view('index');
-});
+
+// Route::get('/contact', function () {
+//     return view('index');
+// });
 
 Route::get('/zakat', function () {
     return view('zakat');
@@ -59,16 +60,18 @@ Route::get('/dashboard/contact', [ContactMosquesController::class, 'index'])->na
 Route::get('/dashboard/contact/{id}/edit', [ContactMosquesController::class, 'edit'])->name('contact.edit');
 Route::put('/dashboard/contact/{id}', [ContactMosquesController::class, 'update'])->name('contact.update');
 
-// route struktur organisasi
-// Route::get('/banner-about', [BannerAboutController::class, 'index']);
+// <Route Struktur Organisasi>
+
+// route banner
 Route::get('/banner-about', [BannerAboutController::class, 'index'])->name('banner-about.index');
 Route::post('/banner-about', [BannerAboutController::class, 'store'])->name('banner-about.store');
 
 // route visi misi
-Route::get('/vision', [VisionController::class, 'index']);
-Route::get('/vision/edit', [VisionController::class, 'edit'])->name('vision.edit');
-Route::put('/vision/update/{id}', [VisionController::class, 'update'])->name('vision.update');
+Route::get('/visi_misi', [VisionController::class, 'index']);
+Route::get('/visi_misi/edit', [VisionController::class, 'edit'])->name('visi_misi.edit');
+Route::put('/visi_misi/update/{id}', [VisionController::class, 'update'])->name('visi_misi.update');
 
+// route susunan organisasi dkm
 Route::prefix('organizational_chart')->group(function () {
     Route::get('/', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
     Route::get('/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');

@@ -69,20 +69,22 @@
                         <div class="card-body">
                             <h5 class="card-title">Formulir Visi Misi</h5>
                                 
-                            <form id="visionForm" action="{{ route('vision.update', $vision->id ?? '') }}" method="POST">
+                            <form id="visionForm" action="{{ route('visi_misi.update', $vision->id ?? '') }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row mb-4">
                                 <label for="vision" class="col-sm-2 col-form-label">Visi</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="vision" id="vision" required>{{ old('vision', $vision->vision ?? '') }}</textarea>
+                                    <!-- <textarea class="form-control" name="vision" id="vision" required>{{ old('vision', $vision->vision ?? '') }}</textarea> -->
+                                    <textarea class="form-control" name="vision" id="vision" required>{{ old('vision', '') }}</textarea>
                                 </div>
                             </div>
                             
                             <div class="row mb-4">
                                 <label for="mission" class="col-sm-2 col-form-label">Misi</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="mission" id="mission" required>{{ old('mission', $vision->mission ?? '') }}</textarea>
+                                    <!-- <textarea class="form-control" name="mission" id="mission" required>{{ old('mission', $vision->mission ?? '') }}</textarea> -->
+                                    <textarea class="form-control" name="mission" id="mission" required>{{ old('mission', '') }}</textarea>
                                 </div>
                             </div>
 
@@ -139,20 +141,25 @@
     }
 
     function simpan() {
-        Swal.fire({
-                    title: 'Confirmation?',
-                    text: 'Are you sure you want to update the data?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, Update Data',
-                    confirmButtonColor: '#253A82',
-                    cancelButtonText: 'No, Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $('#visionForm').submit();
-                    }
-                });
-    }
+    Swal.fire({
+        title: 'Konfirmasi?',
+        text: 'Apakah anda yakin akan mengupdate data?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Update Data',
+        confirmButtonColor: '#253A82',
+        cancelButtonText: 'Tidak, Kembali'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $('#visionForm').submit();
+
+            // Mengosongkan input setelah submit
+            $('#vision').val('');
+            $('#mission').val('');
+        }
+    });
+}
+
 
     </script>
     

@@ -80,21 +80,40 @@
             style="align-items: center; margin-bottom: 0px; width:300px; height: 400px; margin-left: 60px;">
     </div>
     <div class="container-fluid">
-        <form action="{{ route('dashboard.login') }}">
+        <form action="{{ route('login') }}" method="post">
+            @csrf
+            @if ($errors->has('loginError'))
+                <div class="alert alert-danger" role="alert">
+                    {{ $errors->first('loginError') }}
+                </div>
+            @endif
+
+            @error('captcha')
+                <div class="alert alert-danger">
+                    Captcha is not correct, please try again.
+                </div>
+            @enderror
             <img src="{{ asset('assets/img/website/logo_masjid.svg') }}" alt="logo_masjid"
                 style="width:200px; height: 200px; margin-left: 50px; ">
             <h3 style="text-align: left; margin-top:auto; font-size:15px;"> Login to your Account</h3>
             <div class="form-floating">
-                <input type="text" class="form-control" placeholder="Username" name="Username" required>
+                <input type="text" class="form-control" placeholder="Username" name="login" required>
                 <label>Username</label>
             </div>
             <div class="form-floating" style="position: relative;">
-                <input type="password" class="form-control" placeholder="Password" id="passwordKu" name="Password"
+                <input type="password" class="form-control" placeholder="Password" id="passwordKu" name="password"
                     required>
                 <label>Password</label>
                 <i class="fa-solid fa-eye" id="togglePassword"
                     style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
             </div>
+            @if (!config('captcha.disable'))
+                <div class="form-floating d-flex align-items-center">
+                    <input type="text" class="form-control" placeholder="Captcha" name="captcha" required>
+                    <label>Captcha</label>
+                    <img src="{{ captcha_src() }}" alt="captcha" style="margin-right: 10px;">
+                </div>
+            @endif
             <button class="btn btn-primary w-100" style="margin-top:10px;">Sign in</button>
         </form>
     </div>

@@ -69,33 +69,44 @@
                         <div class="card-body">
                             <h5 class="card-title">Formulir Bagan Struktur Organisasi</h5>
                             <form action="{{ route('bagan.store') }}" method="POST" enctype="multipart/form-data"
-                                id="bagan_form">
+                                id="bagan_dashboard_form">
                                 @csrf
+                                @method('PUT')
+                                @if (isset($bagan))
+                                    <div class="row mb-3">
+                                        <label for="inputText" class="col-sm-2 col-form-label">Foto Banner
+                                            Sekarang</label>
+                                        <div class="col-sm-10">
+                                            <img src="{{ asset('storage/' . $bagan['bagan_photo']) }}"
+                                                alt="banner_photo" class="img-thumbnail">
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Foto bagan</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="file" id="bagan_photo"
-                                            name="bagan_photo">
+                                        <input class="form-control" type="file" id="bagan_photo" name="bagan_photo">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Judul bagan</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="bagan_title"
-                                            id="bagan_title">
+                                        <input type="text" class="form-control" name="bagan_title" id="bagan_title"
+                                            value="{{ old('bagan_title', $bagan->bagan_title ?? '') }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputPassword" class="col-sm-2 col-form-label">Deskripsi bagan</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="bagan_description"
-                                            id="bagan_description">
+                                            id="bagan_description"
+                                            value="{{ old('bagan_description', $bagan->bagan_description ?? '') }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <button type="button" onclick="simpan()" class="btn btn-primary">Submit
-                                            Form</button>
+                                    <div class="col-sm-12" style="display:flex; justify-content: right;">
+                                        <button type="button" onclick="simpan()"
+                                            class="btn btn-primary">Update</button>
                                     </div>
                                 </div>
                             </form><!-- End General Form Elements -->
@@ -167,7 +178,6 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        $('#bagan_dashboard_form').attr("action", "{{ route('bagan.store') }}");
                         $('#bagan_dashboard_form').submit();
                     }
                 });

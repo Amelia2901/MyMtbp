@@ -10,17 +10,37 @@ class VisionController extends Controller
 {
     public function index()
     {
-        $vision = Vision::first(); // Ambil data pertama
+        $vision = Vision::first();
         return view('StrukturOrganisasi.visi', compact('vision'));
     }
 
     public function edit()
     {
-        $vision = Vision::first(); // Ambil data pertama
+        $vision = Vision::first();
         return view('StrukturOrganisasi.visi', compact('vision'));
     }
 
+    public function store(Request $request){
+        $data = $request->validate([
+            'vision' => 'required',
+            'mission' => 'required',
+        ]);
 
+        $vision = Vision::first();
+
+        if ($vision) {
+            $vision->update([
+                'vision' => $data['vision'],
+                'mission' => $data['mission'],
+            ]);
+        } else {
+            Vision::create([
+                'vision' => $data['vision'],
+                'mission' => $data['mission'],
+            ]);
+        }
+        return redirect()->route('vision.index')->with('success', 'Banner berhasil ditambahkan atau diperbarui!');
+    }
 
     public function update(Request $request)
 {
@@ -28,22 +48,14 @@ class VisionController extends Controller
         'vision' => 'required',
         'mission' => 'required',
     ]);
-
-    // Ambil data pertama atau buat baru jika tidak ada
     $vision = Vision::firstOrCreate([], [
         'vision' => $request->vision,
         'mission' => $request->mission,
     ]);
-
-    // Update jika data sudah ada
     $vision->update([
         'vision' => $request->vision,
         'mission' => $request->mission,
     ]);
-
-    // return redirect()->back()->with('success', 'Data berhasil diperbarui!');
     return redirect()->back()->with('success', 'Data berhasil diperbarui!');
-
 }
-    
 }

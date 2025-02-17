@@ -77,13 +77,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/banner-about', [BannerAboutController::class, 'store'])->name('banner-about.store');
 
     // route visi misi
-    Route::get('/visi_misi', [VisionController::class, 'index']);
+    Route::get('/visi_misi', [VisionController::class, 'index'])->name('vision.index');
     Route::get('/visi_misi/edit', [VisionController::class, 'edit'])->name('visi_misi.edit');
-    Route::put('/visi_misi/update/{id}', [VisionController::class, 'update'])->name('visi_misi.update');
+    Route::put('/visi_misi/update', [VisionController::class, 'store'])->name('visi_misi.store');
+    // Route::put('/visi_misi/update/{id}', [VisionController::class, 'update'])->name('visi_misi.update');
 
     // route bagan struktur organisasi
     Route::get('/bagan', [BaganController::class, 'index'])->name('bagan.index');
-    Route::post('/bagan', [BaganController::class, 'store'])->name('bagan.store');
+    Route::put('/bagan', [BaganController::class, 'store'])->name('bagan.store');
 
     // route susunan organisasi dkm
     // Route::prefix('organizational_chart')->group(function () {

@@ -10,7 +10,8 @@ class BaganController extends Controller
 {
     public function index()
     { 
-        return view('StrukturOrganisasi.bagan');
+        $bagan = Bagan::first();
+        return view('StrukturOrganisasi.bagan', compact('bagan'));
     }
 
     public function store(StoreBaganRequest $request)
@@ -21,11 +22,22 @@ class BaganController extends Controller
             $filePath = $request->file('bagan_photo')->store('uploads/bagan_photos', 'public');
         }
 
-        Bagan::create([
-            'bagan_photo' => $filePath ?? null,
+        $bagan = Bagan::first();
+
+        if ($bagan) {
+            $bagan->update([
+                'bagan_photo' => $filePath ?? null,
+                'bagan_title' => $data['bagan_title'],
+                'bagan_description' => $data['bagan_description'],
+            ]);
+        } else {
+            Bagan::create([
+                'bagan_photo' => $filePath ?? null,
             'bagan_title' => $data['bagan_title'],
             'bagan_description' => $data['bagan_description'],
-        ]);
+            ]);
+        }
+
 
         return redirect()->back()->with('success', 'Bagan berhasil ditambahkan!');
     }

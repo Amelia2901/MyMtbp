@@ -31,11 +31,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
-                        <i class="bi bi-circle"></i><span>Banner Infaq</span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{ url('/dashboard/contact') }}">
                         <i class="bi bi-circle"></i><span>Kontak</span>
                     </a>

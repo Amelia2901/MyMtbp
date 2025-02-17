@@ -31,18 +31,14 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <style>
+
+    </style>
 </head>
 
 <body>
-<!-- ======= Header ======= -->
-@include('header')
+    <!-- ======= Header ======= -->
+    @include('header')
     <!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
@@ -60,7 +56,7 @@
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-        
+
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
@@ -68,43 +64,42 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Formulir Visi Misi</h5>
-                                
-                            <form id="visionForm" action="{{ route('visi_misi.update', $vision->id ?? '') }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="row mb-4">
-                                <label for="vision" class="col-sm-2 col-form-label">Visi</label>
-                                <div class="col-sm-10">
-                                    <!-- <textarea class="form-control" name="vision" id="vision" required>{{ old('vision', $vision->vision ?? '') }}</textarea> -->
-                                    <textarea class="form-control" name="vision" id="vision" required>{{ old('vision', '') }}</textarea>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-4">
-                                <label for="mission" class="col-sm-2 col-form-label">Misi</label>
-                                <div class="col-sm-10">
-                                    <!-- <textarea class="form-control" name="mission" id="mission" required>{{ old('mission', $vision->mission ?? '') }}</textarea> -->
-                                    <textarea class="form-control" name="mission" id="mission" required>{{ old('mission', '') }}</textarea>
-                                </div>
-                            </div>
 
-                            <div class="row mb-4">
-                                <div class="col-sm-12">
-                                <button type="button" onclick="simpan()" class="btn btn-primary">Submit form</button>
+                            <form id="visionForm" action="{{ route('visi_misi.store') }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="row mb-4">
+                                    <label for="vision" class="col-sm-2 col-form-label">Visi</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="vision" id="vision" required>{{ old('vision', $vision->vision ?? '') }}</textarea>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </form>
+                                <div class="row mb-4">
+                                    <label for="mission" class="col-sm-2 col-form-label">Misi</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="mission" id="mission" required>{{ old('mission', $vision->mission ?? '') }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-12">
+                                    <div class="col-sm-12" style="display:flex; justify-content: right !important;">
+                                        <button type="button" onclick="simpan()" class="btn btn-primary btn-submit"
+                                            disabled>Update</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
-    
+
     @include('footer')
-    
-        <!-- Vendor JS Files -->
-        <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+
+    <!-- Vendor JS Files -->
+    <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
     <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
@@ -120,49 +115,51 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    
+
     <script>
         function validateForm() {
-    let valid = true;
+            let valid = true;
 
-        // Reset error messages
-        $('.form-control').removeClass('is-invalid');
+            // Reset error messages
+            $('.form-control').removeClass('is-invalid');
 
-        if ($.trim($("#vision").val()) == "") {
-            $('#vision').addClass('is-invalid');
-            valid = false;
+            if ($.trim($("#vision").val()) == "") {
+                $('#vision').addClass('is-invalid');
+                valid = false;
+            }
+            if ($.trim($("#mission").val()) == "") {
+                $('#mission').addClass('is-invalid');
+                valid = false;
+            }
+
+            return valid;
         }
-        if ($.trim($("#mission").val()) == "") {
-            $('#mission').addClass('is-invalid');
-            valid = false;
+
+        $('#vision, #mission').on('input', function() {
+            $('.btn-submit').attr('disabled', false);
+        })
+
+        function simpan() {
+            Swal.fire({
+                title: 'Konfirmasi?',
+                text: 'Apakah anda yakin akan mengupdate data?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Update Data',
+                confirmButtonColor: '#253A82',
+                cancelButtonText: 'Tidak, Kembali'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#visionForm').submit();
+
+                    // Mengosongkan input setelah submit
+                    $('#vision').val('');
+                    $('#mission').val('');
+                }
+            });
         }
-
-        return valid;
-    }
-
-    function simpan() {
-    Swal.fire({
-        title: 'Konfirmasi?',
-        text: 'Apakah anda yakin akan mengupdate data?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Ya, Update Data',
-        confirmButtonColor: '#253A82',
-        cancelButtonText: 'Tidak, Kembali'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $('#visionForm').submit();
-
-            // Mengosongkan input setelah submit
-            $('#vision').val('');
-            $('#mission').val('');
-        }
-    });
-}
-
-
     </script>
-    
+
     @if (session('success'))
         <script>
             Swal.fire({

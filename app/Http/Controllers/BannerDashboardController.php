@@ -36,13 +36,23 @@ class BannerDashboardController extends Controller
             $filePath = $request->file('banner_photo')->store('uploads/banner_photos', 'public');
         }
 
-        BannerDashboard::create([
-            'banner_photo' => $filePath,
-            'banner_title' => $data['banner_title'],
-            'banner_description' => $data['banner_description'],
-        ]);
+        $banner = BannerDashboard::first();
 
-        return redirect()->route('banner.index')->with('success', 'Banner berhasil ditambahkan!');
+        if ($banner) {
+            $banner->update([
+                'banner_photo' => $filePath ?? $banner->banner_photo,
+                'banner_title' => $data['banner_title'],
+                'banner_description' => $data['banner_description'],
+            ]);
+        } else {
+            BannerDashboard::create([
+                'banner_photo' => $filePath,
+                'banner_title' => $data['banner_title'],
+                'banner_description' => $data['banner_description'],
+            ]);
+        }
+
+        return redirect()->route('banner.index')->with('success', 'Banner berhasil ditambahkan atau diperbarui!');
     }
 
 

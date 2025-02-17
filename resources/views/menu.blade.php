@@ -49,7 +49,7 @@
             </a>
             <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="charts-chartjs.html">
+                    <a href="{{ url('/banner_infaq') }}">
                         <i class="bi bi-circle"></i><span>Banner</span>
                     </a>
                 </li>

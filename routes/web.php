@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactMosquesController;
 use App\Http\Controllers\OrganizationalChartController;
 use App\Http\Controllers\BaganController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NavbarController;
 
 
 
@@ -85,23 +86,34 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bagan', [BaganController::class, 'index'])->name('bagan.index');
     Route::post('/bagan', [BaganController::class, 'store'])->name('bagan.store');
 
-// route susunan organisasi dkm
-// Route::prefix('organizational_chart')->group(function () {
-//     Route::get('/', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
-//     Route::get('/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
-//     Route::post('/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
-//     Route::get('/edit/{id}', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
-//     Route::put('/update/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
-//     Route::delete('/delete/{id}', [OrganizationalChartController::class, 'destroy'])->name('organizational_chart.destroy');
+    // route susunan organisasi dkm
+    // Route::prefix('organizational_chart')->group(function () {
+    //     Route::get('/', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
+    //     Route::get('/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
+    //     Route::post('/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
+    //     Route::get('/edit/{id}', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
+    //     Route::put('/update/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
+    //     Route::delete('/delete/{id}', [OrganizationalChartController::class, 'destroy'])->name('organizational_chart.destroy');
 
     //route infaq
-//     Route::get('/banner_infaq', [OrganizationalChartController::class, 'banner_infaq'])->name('banner_infaq.index');
-//     Route::get('/deskripsi_infaq_satu', [OrganizationalChartController::class, 'deskripsi_infaq_satu'])->name('deskripsi_infaq_satu.index');
-//     Route::get('/deskripsi_infaq_dua', [OrganizationalChartController::class, 'deskripsi_infaq_dua'])->name('deskripsi_infaq_dua.index');
-//     Route::get('/kategori_infaq', [OrganizationalChartController::class, 'kategori_infaq'])->name('kategori_infaq.index');
-//     Route::get('/metode_pembayaran', [OrganizationalChartController::class, 'metode_pembayaran'])->name('metode_pembayaran.index');
-// });
+    //     Route::get('/banner_infaq', [OrganizationalChartController::class, 'banner_infaq'])->name('banner_infaq.index');
+    //     Route::get('/deskripsi_infaq_satu', [OrganizationalChartController::class, 'deskripsi_infaq_satu'])->name('deskripsi_infaq_satu.index');
+    //     Route::get('/deskripsi_infaq_dua', [OrganizationalChartController::class, 'deskripsi_infaq_dua'])->name('deskripsi_infaq_dua.index');
+    //     Route::get('/kategori_infaq', [OrganizationalChartController::class, 'kategori_infaq'])->name('kategori_infaq.index');
+    //     Route::get('/metode_pembayaran', [OrganizationalChartController::class, 'metode_pembayaran'])->name('metode_pembayaran.index');
+    // });
 
-// Route::get('/banner_infaq', [BannerInfaqController::class, 'banner_infaq'])->name('banner_infaq.index');
-Route::get('/banner_infaq', [BannerInfaqController::class, 'index']);
-// Route::post('/banner-about', [BannerAboutController::class, 'store'])->name('banner-about.store');
+    // Route::get('/banner_infaq', [BannerInfaqController::class, 'banner_infaq'])->name('banner_infaq.index');
+    Route::get('/banner_infaq', [BannerInfaqController::class, 'index']);
+    // Route::post('/banner-about', [BannerAboutController::class, 'store'])->name('banner-about.store');
+
+
+    // Navbar Menu 
+    Route::get('/navbar', [NavbarController::class, 'index'])->name('navbar.index');
+    Route::get('/navbar/create', [NavbarController::class, 'create'])->name('navbar.create');
+    Route::post('/navbar/store', [NavbarController::class, 'store'])->name('navbar.store');
+    Route::get('/navbar/{id}/edit', [NavbarController::class, 'edit'])->name('navbar.edit');
+    Route::put('/navbar/{id}', [NavbarController::class, 'update'])->name('navbar.update');
+    Route::delete('/navbar/{id}', [NavbarController::class, 'destroy'])->name('navbar.destroy');
+    Route::post("/navbar/data", [NavbarController::class, 'data'])->name('navbar.data');
+});

@@ -53,7 +53,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Bagan StrukturOrganisasi</h1>
+            <h1>Bagan Struktur Organisasi</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Struktur Organisasi</a></li>
@@ -67,26 +67,26 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Banner Dashboard Form</h5>
+                            <h5 class="card-title">Formulir Bagan Struktur Organisasi</h5>
                             <form action="{{ route('bagan.store') }}" method="POST" enctype="multipart/form-data"
                                 id="bagan_form">
                                 @csrf
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Foto Banner</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Foto bagan</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="file" id="bagan_photo"
                                             name="bagan_photo">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputEmail" class="col-sm-2 col-form-label">Judul banner</label>
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Judul bagan</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="bagan_title"
                                             id="bagan_title">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputPassword" class="col-sm-2 col-form-label">Deskripsi banner</label>
+                                    <label for="inputPassword" class="col-sm-2 col-form-label">Deskripsi bagan</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="bagan_description"
                                             id="bagan_description">

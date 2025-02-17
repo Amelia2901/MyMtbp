@@ -44,7 +44,7 @@ Route::get('/login', [AuthController::class, 'index'])->name('login.index');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () { 
     Route::get('/dashboard', [Dashboard::class, 'index']);
     Route::get('/dashboard2', Dashboard::class);
     Route::get('dashboard/login', [Dashboard::class, 'login'])->name('dashboard.login');
@@ -85,6 +85,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bagan', [BaganController::class, 'index'])->name('bagan.index');
     Route::post('/bagan', [BaganController::class, 'store'])->name('bagan.store');
 
+    // route banner infaq 
+    // Route::get('/banner_infaq', [BannerInfaqController::class, 'index']);
+        Route::get('/banner_infaq', [BannerInfaqController::class, 'banner_infaq'])->name('banner_infaq.index');
+
+    
 // route susunan organisasi dkm
 // Route::prefix('organizational_chart')->group(function () {
 //     Route::get('/', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
@@ -93,15 +98,7 @@ Route::middleware(['auth'])->group(function () {
 //     Route::get('/edit/{id}', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
 //     Route::put('/update/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
 //     Route::delete('/delete/{id}', [OrganizationalChartController::class, 'destroy'])->name('organizational_chart.destroy');
-
-    //route infaq
-//     Route::get('/banner_infaq', [OrganizationalChartController::class, 'banner_infaq'])->name('banner_infaq.index');
-//     Route::get('/deskripsi_infaq_satu', [OrganizationalChartController::class, 'deskripsi_infaq_satu'])->name('deskripsi_infaq_satu.index');
-//     Route::get('/deskripsi_infaq_dua', [OrganizationalChartController::class, 'deskripsi_infaq_dua'])->name('deskripsi_infaq_dua.index');
-//     Route::get('/kategori_infaq', [OrganizationalChartController::class, 'kategori_infaq'])->name('kategori_infaq.index');
-//     Route::get('/metode_pembayaran', [OrganizationalChartController::class, 'metode_pembayaran'])->name('metode_pembayaran.index');
 // });
 
-// Route::get('/banner_infaq', [BannerInfaqController::class, 'banner_infaq'])->name('banner_infaq.index');
-Route::get('/banner_infaq', [BannerInfaqController::class, 'index']);
-// Route::post('/banner-about', [BannerAboutController::class, 'store'])->name('banner-about.store');
+});
+    

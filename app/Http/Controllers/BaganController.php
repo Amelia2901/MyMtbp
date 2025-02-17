@@ -9,22 +9,11 @@ use App\Http\Requests\UpdateBaganRequest;
 class BaganController extends Controller
 {
     public function index()
-    {
-        // $banner = BannerAbout::all();
-        return view('StrukturOrganisasi.index');
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    { 
+        return view('StrukturOrganisasi.bagan');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreBagan $request)
+    public function store(StoreBaganRequest $request)
     {
         $data = $request->validated(); 
 
@@ -33,7 +22,7 @@ class BaganController extends Controller
         }
 
         Bagan::create([
-            'bagan_photo' => $filePath,
+            'bagan_photo' => $filePath ?? null,
             'bagan_title' => $data['bagan_title'],
             'bagan_description' => $data['bagan_description'],
         ]);
@@ -41,37 +30,23 @@ class BaganController extends Controller
         return redirect()->back()->with('success', 'Bagan berhasil ditambahkan!');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Bagan $bagan)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Bagan $bagan)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateBagan $request, Bagan $bagan)
+    public function update(UpdateBaganRequest $request, Bagan $bagan)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Bagan $bagan)
     {
         //
     }
 }
-

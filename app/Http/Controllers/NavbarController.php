@@ -70,6 +70,20 @@ class NavbarController extends Controller
         }
     }
 
+    public function destroy(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+            $navbar = Navbar::find($id);
+            $navbar->delete();
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Navbar deleted successfully']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
     public function data(Request $request)
     {
         $query = Navbar::select('id', 'name', 'url', 'order')->orderBy('order', 'asc');
@@ -82,7 +96,8 @@ class NavbarController extends Controller
             })
             ->addIndexColumn()
             ->addColumn('action', function ($query) {
-                return '<a href="' . route('navbar.edit', $query->id) . '" class="btn btn-primary btn-sm">Edit</a>';
+                return '<a href="' . route('navbar.edit', $query->id) . '" class="btn btn-primary btn-sm">Edit</a>
+                        <button class="btn btn-danger btn-sm" onclick="deleteData(' . htmlspecialchars($query->id, ENT_QUOTES, 'UTF-8') . ')">Delete</button>';
             })
             ->rawColumns(['action'])
             ->make(true);

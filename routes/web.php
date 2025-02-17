@@ -109,11 +109,22 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Navbar Menu 
-    Route::get('/navbar', [NavbarController::class, 'index'])->name('navbar.index');
-    Route::get('/navbar/create', [NavbarController::class, 'create'])->name('navbar.create');
-    Route::post('/navbar/store', [NavbarController::class, 'store'])->name('navbar.store');
-    Route::get('/navbar/{id}/edit', [NavbarController::class, 'edit'])->name('navbar.edit');
-    Route::put('/navbar/{id}', [NavbarController::class, 'update'])->name('navbar.update');
-    Route::delete('/navbar/{id}', [NavbarController::class, 'destroy'])->name('navbar.destroy');
+    Route::resource('navbar', NavbarController::class)
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
+        ->names([
+            'index' => 'navbar.index',
+            'create' => 'navbar.create',
+            'store' => 'navbar.store',
+            'edit' => 'navbar.edit',
+            'update' => 'navbar.update',
+            'destroy' => 'navbar.destroy',
+        ]);
+
+    // Route::get('/navbar', [NavbarController::class, 'index'])->name('navbar.index');
+    // Route::get('/navbar/create', [NavbarController::class, 'create'])->name('navbar.create');
+    // Route::post('/navbar/store', [NavbarController::class, 'store'])->name('navbar.store');
+    // Route::get('/navbar/{id}/edit', [NavbarController::class, 'edit'])->name('navbar.edit');
+    // Route::put('/navbar/{id}', [NavbarController::class, 'update'])->name('navbar.update');
+    // Route::delete('/navbar/{id}', [NavbarController::class, 'destroy'])->name('navbar.destroy');
     Route::post("/navbar/data", [NavbarController::class, 'data'])->name('navbar.data');
 });

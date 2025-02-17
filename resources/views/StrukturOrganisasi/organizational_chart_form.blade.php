@@ -64,10 +64,10 @@
                                         @method('PUT')
                                     @endif
                                     <div class="row mb-4">
-                                        <label for="inputText" class="col-sm-2 col-form-label">Foto Banner</label>
+                                        <label for="inputText" class="col-sm-2 col-form-label">Foto</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="file" id="banner_photo"
-                                                name="banner_photo">
+                                            <input class="form-control" type="file" id="photo"
+                                                    name="photo">
                                         </div>
                                     </div>
                                     <div class="row mb-4">

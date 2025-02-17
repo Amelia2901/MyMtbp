@@ -105,17 +105,21 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    @if (session('success'))
+            {{ dd(session('success')) }}
+            @if (session('success'))
+    @push('scripts')
         <script>
             Swal.fire({
                 title: 'Sukses!',
-                text: "{{ session('success') }}",
+                text: `{!! session('success') !!}`,
                 icon: 'success',
                 confirmButtonText: 'OK'
             });
-            {{ session('success') }}
         </script>
-    @endif
+    @endpush
+@endif
+@stack('scripts')
+
 </body>
 </html>
 

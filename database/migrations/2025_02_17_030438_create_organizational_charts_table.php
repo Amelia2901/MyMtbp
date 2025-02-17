@@ -9,16 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up()
+{
+    if (!Schema::hasTable('organizational_charts')) {
         Schema::create('organizational_charts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');            // For storing the name of the person
-            $table->string('position');        // For storing the position of the person
-            $table->string('photo')->nullable(); // For storing the photo file path (nullable if no photo is provided)
-            $table->timestamps();             // Laravel will automatically add created_at and updated_at columns
+            $table->string('name');
+            $table->string('position');
+            $table->string('photo')->nullable();
+            $table->timestamps();
         });
     }
+}
+
 
     /**
      * Reverse the migrations.

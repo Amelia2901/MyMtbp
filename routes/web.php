@@ -9,6 +9,8 @@ use App\Http\Controllers\ActivitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactMosquesController;
 use App\Http\Controllers\OrganizationalChartController;
+use App\Http\Controllers\BaganController;
+
 
 
 Route::get('/', function () {
@@ -71,13 +73,17 @@ Route::get('/visi_misi', [VisionController::class, 'index']);
 Route::get('/visi_misi/edit', [VisionController::class, 'edit'])->name('visi_misi.edit');
 Route::put('/visi_misi/update/{id}', [VisionController::class, 'update'])->name('visi_misi.update');
 
+// route bagan struktur organisasi
+Route::get('/bagan', [BaganController::class, 'index'])->name('bagan.index');
+Route::post('/bagan', [BaganController::class, 'store'])->name('bagan.store');
+
 // route susunan organisasi dkm
-Route::prefix('organizational_chart')->group(function () {
-    Route::get('/', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
-    Route::get('/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
-    Route::post('/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
-    Route::get('/edit/{id}', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
-    Route::put('/update/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
-    Route::delete('/delete/{id}', [OrganizationalChartController::class, 'destroy'])->name('organizational_chart.destroy');
-});
+// Route::prefix('organizational_chart')->group(function () {
+//     Route::get('/', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
+//     Route::get('/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
+//     Route::post('/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
+//     Route::get('/edit/{id}', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
+//     Route::put('/update/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
+//     Route::delete('/delete/{id}', [OrganizationalChartController::class, 'destroy'])->name('organizational_chart.destroy');
+// });
 

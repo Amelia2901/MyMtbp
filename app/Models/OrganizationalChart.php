@@ -9,11 +9,6 @@ class OrganizationalChart extends Model
 {
     use HasFactory;
 
-    protected $table = 'organizational_charts';
-
-    protected $fillable = [
-        'name',
-        'position',
-        'photo',
-    ];
+    protected $fillable = ['name', 'position', 'photo'];
 }
+

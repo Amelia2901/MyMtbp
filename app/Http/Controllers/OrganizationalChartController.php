@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\OrganizationalChart;
 use Illuminate\Support\Facades\Storage;
@@ -62,7 +63,8 @@ class OrganizationalChartController extends Controller
         }
 
         $data->update($updateData);
-        return redirect()->route('organizational_chart.index')->with('success', 'Data berhasil diperbarui!');
+        // return redirect()->route('organizational_chart.index')->with('success', 'Data berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Data berhasil disimpan!');
     }
 
     public function destroy($id)

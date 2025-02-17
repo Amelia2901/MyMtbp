@@ -93,7 +93,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="icons-boxicons.html">
+                <a href="{{ url('/bagan') }}">
                         <i class="bi bi-circle"></i><span>Bagan Struktur Organisasi</span>
                     </a>
                 </li>

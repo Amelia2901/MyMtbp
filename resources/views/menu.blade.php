@@ -78,8 +78,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-people-fill"></i><span>Struktur Organisasi</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-people-fill"></i><span>Struktur Organisasi</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -93,7 +92,7 @@
                     </a>
                 </li>
                 <li>
-                <a href="{{ url('/bagan') }}">
+                    <a href="{{ url('/bagan') }}">
                         <i class="bi bi-circle"></i><span>Bagan Struktur Organisasi</span>
                     </a>
                 </li>
@@ -107,7 +106,7 @@
         </li><!-- End Icons Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed" href="{{ route('navbar.index') }}">
                 <i class="bi bi-list-task"></i>
                 <span>Navbar</span>
             </a>

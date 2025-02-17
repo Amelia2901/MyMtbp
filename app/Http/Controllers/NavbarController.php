@@ -20,11 +20,9 @@ class NavbarController extends Controller
 
     public function create()
     {
-        $data = array(
-            'title' => 'Create Navbar',
-            'description' => 'Create Navbar Page'
-        );
-        return view('navbar.create', compact('data'));
+        $title = 'Edit Navbar';
+        $description = 'Edit Navbar Page';
+        return view('navbar.create', compact('title', 'description'));
     }
 
     public function store(Request $request)

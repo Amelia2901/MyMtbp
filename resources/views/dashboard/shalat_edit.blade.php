@@ -65,24 +65,60 @@
                                 @method('PUT') <!-- Use PUT method for updating -->
 
                                 <div class="row mb-4">
-                                    <label for="shalat_name" class="col-sm-2 col-form-label">Nama Jadwal Shalat</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="shalat_name" id="shalat_name"
-                                            value="{{ old('shalat_name', $shalat->shalat_name) }}" required>
+                                    <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
+                                    <div class="col-sm-10 mt-2">
+                                        <b>{{ $shalat->tanggal }}</b>
                                     </div>
                                 </div>
 
                                 <div class="row mb-4">
-                                    <label for="shalat_time" class="col-sm-2 col-form-label">Waktu Jadwal Shalat</label>
+                                    <label for="subuh" class="col-sm-2 col-form-label">Subuh</label>
                                     <div class="col-sm-10">
-                                        <input type="time" class="form-control" name="shalat_time" id="shalat_time"
-                                            value="{{ old('shalat_time', $shalat->shalat_time) }}" required>
+                                        <input type="time" class="form-control" name="subuh" id="subuh"
+                                            value="{{ old('subuh', str_replace(' (WIB)', '', $shalat->subuh)) }}"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="dzuhur" class="col-sm-2 col-form-label">Dzuhur</label>
+                                    <div class="col-sm-10">
+                                        <input type="time" class="form-control" name="dzuhur" id="dzuhur"
+                                            value="{{ old('dzuhur', str_replace(' (WIB)', '', $shalat->dzuhur)) }}"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="ashar" class="col-sm-2 col-form-label">Ashar</label>
+                                    <div class="col-sm-10">
+                                        <input type="time" class="form-control" name="ashar" id="ashar"
+                                            value="{{ old('ashar', str_replace(' (WIB)', '', $shalat->ashar)) }}"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="maghrib" class="col-sm-2 col-form-label">Maghrib</label>
+                                    <div class="col-sm-10">
+                                        <input type="time" class="form-control" name="maghrib" id="maghrib"
+                                            value="{{ old('maghrib', str_replace(' (WIB)', '', $shalat->maghrib)) }}"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="isya" class="col-sm-2 col-form-label">Isya</label>
+                                    <div class="col-sm-10">
+                                        <input type="time" class="form-control" name="isya" id="isya"
+                                            value="{{ old('isya', str_replace(' (WIB)', '', $shalat->isya)) }}"
+                                            required>
                                     </div>
                                 </div>
 
-                                <div class="row mb-4">
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-primary">Submit Form</button>
+                                <div class="row" style="display: flex; justify-content: right; padding-right: 40px;">
+                                    <div class="col-sm-1">
+                                        <a type="button" class="btn btn-secondary"
+                                            href="{{ route('shalat.index') }}">Batal</a>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                 </div>
                             </form>
@@ -121,14 +157,29 @@
         function validateForm() {
             let valid = true;
 
-            if ($.trim($("#shalat_name").val()) == "") {
-                $('#shalat_name').addClass('is-invalid');
-                $('#shalat_name').after('<div class="invalid-feedback">Nama Jadwal Shalat wajib diisi.</div>');
+            if ($.trim($("#subuh").val()) == "") {
+                $('#subuh').addClass('is-invalid');
+                $('#subuh').after('<div class="invalid-feedback">Nama Jadwal Shalat wajib diisi.</div>');
                 valid = false;
             }
-            if ($.trim($("#shalat_time").val()) == "") {
-                $('#shalat_time').addClass('is-invalid');
-                $('#shalat_time').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+            if ($.trim($("#dzuhur").val()) == "") {
+                $('#dzuhur').addClass('is-invalid');
+                $('#dzuhur').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                valid = false;
+            }
+            if ($.trim($("#ashar").val()) == "") {
+                $('#ashar').addClass('is-invalid');
+                $('#ashar').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                valid = false;
+            }
+            if ($.trim($("#maghrib").val()) == "") {
+                $('#maghrib').addClass('is-invalid');
+                $('#maghrib').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                valid = false;
+            }
+            if ($.trim($("#isya").val()) == "") {
+                $('#isya').addClass('is-invalid');
+                $('#isya').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
                 valid = false;
             }
 
@@ -159,11 +210,10 @@
                 }
             });
 
-            e.preventDefault(); // prevent the form from submitting by default
+            e.preventDefault();
         });
 
-        // Remove invalid class when user starts typing
-        $('#shalat_name, #shalat_time').on('input', function() {
+        $('#subuh, #dzuhur, #ashar, #maghrib, #isya').on('input', function() {
             if ($.trim($(this).val()) !== "") {
                 $(this).removeClass('is-invalid');
                 $(this).next('.invalid-feedback').remove();

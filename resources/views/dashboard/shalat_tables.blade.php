@@ -55,31 +55,31 @@
                         <div class="card-body">
                             <h5 class="card-title">Data Jadwal Shalat</h5>
                             <div class="col-lg-12 text-end">
-
-
-                                <a href="{{ route('shalat.create') }}" class="btn btn-primary button-add">+ Jadwal
-                                    Sholat</a>
-                                <!-- Formulir atau konten lainnya di sini -->
                             </div>
-
-
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Jam</th>
+                                        <th>Tanggal</th>
+                                        <th>Subuh</th>
+                                        <th>Dzuhur</th>
+                                        <th>Ashar</th>
+                                        <th>Maghrib</th>
+                                        <th>Isya</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($data as $index => $d)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $d->shalat_name }}</td>
-                                            <td>{{ $d->shalat_time }}</td>
+                                            <td>{{ $d->tanggal }}</td>
+                                            <td>{{ $d->subuh }}</td>
+                                            <td>{{ $d->dzuhur }}</td>
+                                            <td>{{ $d->ashar }}</td>
+                                            <td>{{ $d->maghrib }}</td>
+                                            <td>{{ $d->isya }}</td>
                                             <td>
                                                 <a href="{{ route('shalat.edit', $d->id) }}" class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
@@ -90,21 +90,15 @@
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
-
     </main><!-- End #main -->
-
     <!-- ======= Footer ======= -->
-
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
-
     <!-- Vendor JS Files -->
     @if (session('success'))
         <script>

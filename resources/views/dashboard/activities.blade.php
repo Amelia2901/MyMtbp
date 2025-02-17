@@ -46,7 +46,9 @@
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-
+        <a style="margin-bottom: 10px;" type="button" class="btn btn-primary" href="{{ route('kegiatan.create') }}"><i
+                class="bi bi-plus-lg me-1"></i>
+            Tambah Kegiatan</a>
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
@@ -55,14 +57,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Data Kegiatan</h5>
                             <div class="col-lg-12 text-end">
-
-
-                                <a href="{{ route('kegiatan.create') }}" class="btn btn-primary button-add">+
-                                    Kegiatan</a>
                                 <!-- Formulir atau konten lainnya di sini -->
                             </div>
-
-
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
                                 <thead>

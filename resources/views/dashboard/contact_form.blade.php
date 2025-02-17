@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard | Kegiatan</title>
+    <title>Home | Kegiatan</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -45,11 +45,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Jadwal Shalat</h1>
+            <h1>Kontao\k Masjid</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Jadwal Shalat</li>
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Kontak Masjid</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -59,7 +59,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Formulir Kalender Kegiatan</h5>
+                            <h5 class="card-title">Formulir Kontak Masjid</h5>
                             <form action="{{ route('contact.update', $item->id) }}" method="POST" id="activityForm">
                                 @csrf
                                 @if (isset($item))

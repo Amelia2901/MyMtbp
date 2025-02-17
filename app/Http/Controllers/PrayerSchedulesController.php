@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\prayer_schedules;
 use App\Http\Requests\Storeprayer_schedulesRequest;
 use App\Http\Requests\Updateprayer_schedulesRequest;
+use App\Models\prayer_times;
+
 
 class PrayerSchedulesController extends Controller
 {
@@ -13,7 +15,7 @@ class PrayerSchedulesController extends Controller
      */
     public function index()
     {
-        $data = prayer_schedules::all();
+        $data = prayer_times::all();
         return view('dashboard.shalat_tables', compact('data'));
     }
 
@@ -53,9 +55,9 @@ class PrayerSchedulesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(prayer_schedules $request, $id = null)
+    public function edit(prayer_times $request, $id = null)
     {
-        $shalat = prayer_schedules::findOrFail($id);
+        $shalat = prayer_times::findOrFail($id);
         return view('dashboard.shalat_edit', compact('shalat'));
     }
 
@@ -65,15 +67,26 @@ class PrayerSchedulesController extends Controller
     public function update(Updateprayer_schedulesRequest $request, $id)
     {
         $request->validate([
-            'shalat_name' => 'required',
-            'shalat_time' => 'required',
+            'subuh' => 'required',
+            'dzuhur' => 'required',
+            'ashar' => 'required',
+            'maghrib' => 'required',
+            'isya' => 'required',
         ]);
 
         // Update data berdasarkan ID
-        $shalat = prayer_schedules::findOrFail($id);
+        $shalat = prayer_times::findOrFail($id);
+        $subuh = $request->subuh;
+        $dzuhur = $request->dzuhur;
+        $ashar = $request->ashar;
+        $maghrib = $request->maghrib;
+        $isya = $request->isya;
         $shalat->update([
-            'shalat_name' => $request->shalat_name,
-            'shalat_time' => $request->shalat_time,
+            'subuh' => $subuh . " (WIB)",
+            'dzuhur' => $dzuhur . " (WIB)",
+            'ashar' => $ashar . " (WIB)",
+            'maghrib' =>$maghrib . " (WIB)",
+            'isya' =>$isya . " (WIB)",
         ]);
 
         return redirect()->route('shalat.index')->with('success', 'Jadwal Shalat berhasil diperbarui');

@@ -39,11 +39,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Contact Mosques</h1>
+            <h1>kontak Masjid</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Contact Mosques</li>
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Kontak Masjid</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->

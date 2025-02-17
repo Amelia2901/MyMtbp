@@ -71,6 +71,23 @@
                             <form action="{{ route('banner.store') }}" method="POST" enctype="multipart/form-data"
                                 id="banner_dashboard_form">
                                 @csrf
+
+                                <!-- input type hidden -->
+                                <input type="hidden" name="id" id="id"
+                                    value="{{ isset($banner) && !is_array($banner) ? $banner->id : '' }}">
+
+                                {{-- Existing Image --}}
+                                @if (isset($banner))
+                                    <div class="row mb-3">
+                                        <label for="inputText" class="col-sm-2 col-form-label">Foto Banner
+                                            Sekarang</label>
+                                        <div class="col-sm-10">
+                                            <img src="{{ asset('storage/' . $banner['banner_photo']) }}"
+                                                alt="banner_photo" class="img-thumbnail">
+                                        </div>
+                                    </div>
+                                @endif
+
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Foto Banner</label>
                                     <div class="col-sm-10">
@@ -78,18 +95,23 @@
                                             name="banner_photo">
                                     </div>
                                 </div>
+
+                                {{-- Judul --}}
                                 <div class="row mb-3">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Judul banner</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="banner_title"
-                                            id="banner_title">
+                                        <input type="text" class="form-control" name="banner_title" id="banner_title"
+                                            value="{{ isset($banner) ? $banner->banner_title : '' }}">
                                     </div>
                                 </div>
+
+                                {{-- Deskripsi --}}
                                 <div class="row mb-3">
                                     <label for="inputPassword" class="col-sm-2 col-form-label">Deskripsi banner</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="banner_description"
-                                            id="banner_description">
+                                            id="banner_description"
+                                            value="{{ isset($banner) ? $banner->banner_description : '' }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">

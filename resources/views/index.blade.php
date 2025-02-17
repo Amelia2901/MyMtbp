@@ -105,14 +105,9 @@
         </div>
         <div class="d-block d-md-none">
             <div class="floating-sidebar">
-                <a href="#"><i class="fa-solid fa-house"></i> <span>Home</span></a>
-                <a href="{{ url('/about') }}"><i class="fa-solid fa-users"></i> <span>Tentang Kami</span></a>
-                <a href="{{ url('/schedule') }}"><i class="fa-solid fa-calendar"></i> <span>Jadwal Shalat</span></a>
-                <a href="{{ url('/donation') }}"><i class="fa-solid fa-hand-holding-heart"> </i>
-                    <span>Donasi</span></a>
-                <a href="{{ url('/contact') }}"><i class="fa-solid fa-hand-holding-heart"></i>
-                    <span>Kontak</span></a>
-                <a href="{{ url('/zakat') }}"><i class="fa-solid fa-hand-holding-heart"></i> <span>Zakat</span></a>
+                @foreach ($data['navbar'] as $nav)
+                    <a href="{{ $nav->url }}">{{ $nav->name }}</a>
+                @endforeach
             </div>
         </div>
     </div>
@@ -121,14 +116,18 @@
 
 
     <div class="slider">
-        <img src="{{ asset('assets/img/website/slider.jpg') }}" alt="">
+        <img src="{{ $data['banner']['banner_photo'] ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
+            alt="">
         <div class="content">
             <div class="isi-content">
                 <h1>
-                    Masjid Bumi Prima
+                    {{ $data['banner']['banner_title'] ? $data['banner']['banner_title'] : 'Masjid Bumi Prima' }}
                 </h1>
                 <p>
-                    "Merajut Iman, Membangun Umat"
+                    {{ $data['banner']['banner_description']
+                        ? $data['banner']['banner_description']
+                        : 'Selamat datang di
+                                        Masjid Bumi Prima, tempat ibadah yang nyaman dan penuh keberkahan.' }}
                 </p>
                 <div style="display: flex; justify-content: center;">
                     <a class="btn button-selengkapnya" onclick="scrollKebawah()" style="text-align: center; margin: 0;"

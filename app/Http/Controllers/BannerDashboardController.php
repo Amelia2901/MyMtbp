@@ -13,7 +13,7 @@ class BannerDashboardController extends Controller
      */
     public function index()
     {
-        $banner = BannerDashboard::all();
+        $banner = BannerDashboard::first();
         return view('dashboard.index', compact('banner'));
     }
 
@@ -30,7 +30,7 @@ class BannerDashboardController extends Controller
      */
     public function store(StoreBannerDashboardRequest $request)
     {
-        $data = $request->validated(); 
+        $data = $request->validated();
 
         if ($request->hasFile('banner_photo')) {
             $filePath = $request->file('banner_photo')->store('uploads/banner_photos', 'public');

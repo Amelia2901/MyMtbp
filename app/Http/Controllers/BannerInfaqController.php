@@ -8,6 +8,7 @@ class BannerInfaqController extends Controller
 {
     public function index()
     {
+        // $banner = BannerAbout::all();
         return view('infaq.banner_infaq');
     }
 }

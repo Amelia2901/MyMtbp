@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\infaq_descriptions;
+use Illuminate\Http\Request;
 
 
-class PrayerSchedulesController extends Controller
+class InfaqDescriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = infaq_descriptions::all();
+        $data = infaq_descriptions::first();
         return view('infaq.deskripsi1', compact('data'));
     }
 
@@ -23,24 +24,27 @@ class PrayerSchedulesController extends Controller
    
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'description_1' => 'required',
         ]);
 
-        $description = infaq_descriptions::firts();
+
+        $description = infaq_descriptions::first();
 
 
         if($description){
             $description->update([
                 'description_1' => $data['description_1'],
+                'description_2' => $description->description_2,
             ]);
         }else{
             infaq_descriptions::create([
                 'description_1' => $data['description_1'],
+                'description_2' => '',
             ]);
         }
        
-        return redirect()->route('infaq.index')->with('success', 'Deskripsi Infaq berhasil diupdate');
+        return redirect()->route('infaqDescription.index')->with('success', 'Deskripsi Infaq berhasil diupdate');
     }
 
     /**

@@ -14,6 +14,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\Front\LandingController;
 use App\Http\Controllers\OrganizationalChartController;
+use App\Http\Controllers\InfaqDescriptionController;
+
 
 
 
@@ -109,6 +111,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/banner-infaq', [BannerInfaqController::class, 'index'])->name('banner-infaq.index');
     Route::post('/banner-infaq', [BannerInfaqController::class, 'store'])->name('banner-infaq.store');
 
+    //route deskripsi infaq
+    Route::get('/deskripsi-infaq', [InfaqDescriptionController::class, 'index'])->name('infaqDescription.index');
+    Route::post('/deskripsi-infaq/update', [InfaqDescriptionController::class, 'store'])->name('infaqDescription.store');
 
     // Navbar Menu 
     Route::resource('navbar', NavbarController::class)

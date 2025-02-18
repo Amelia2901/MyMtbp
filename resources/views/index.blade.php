@@ -126,8 +126,7 @@
                 <p>
                     {{ $data['banner']['banner_description']
                         ? $data['banner']['banner_description']
-                        : 'Selamat datang di
-                                        Masjid Bumi Prima, tempat ibadah yang nyaman dan penuh keberkahan.' }}
+                        : 'Selamat datang di Masjid Bumi Prima, tempat ibadah yang nyaman dan penuh keberkahan.' }}
                 </p>
                 <div style="display: flex; justify-content: center;">
                     <a class="btn button-selengkapnya" onclick="scrollKebawah()" style="text-align: center; margin: 0;"

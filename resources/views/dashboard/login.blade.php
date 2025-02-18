@@ -25,7 +25,7 @@
 
     <style>
         body {
-            height: 90vh;
+            height: 80vh;
             display: flex;
             align-items: center;
             background-color: #f5f5f5;
@@ -33,11 +33,13 @@
         }
 
         .container-fluid {
-            max-width: 380px;
+            max-width: 395px;
+            /* max-height: fit-content; */
             margin: auto;
+            height: 500px;
             background-color: white;
             box-shadow: 2px 2px 2px rgb(169, 160, 160);
-            padding: 30px 50px 45px 50px;
+            padding: 0px 50px 50px 50px;
             font-family: Alata;
             margin-right: 330px;
             border-radius: 10px;
@@ -67,8 +69,9 @@
             margin-left: 260px;
             /* background-image: linear-gradient( to top, #583e31,rgb(182, 161, 152)); */
             background-color: #804B2A;
+            margin-top: 2px;
             width: 450px;
-            height: 483px;
+            height: 501px;
             border-radius: 10px;
         }
     </style>
@@ -77,7 +80,7 @@
 <body>
     <div class="login">
         <img src="{{ asset('assets/img/website/3dmas.png') }}"
-            style="align-items: center; margin-bottom: 0px; width:300px; height: 400px; margin-left: 60px;">
+            style="align-items: center; margin-bottom: 0px; width:300px; height: 430px; margin-left: 50px;">
     </div>
     <div class="container-fluid">
         <form action="{{ route('login') }}" method="post">
@@ -89,13 +92,13 @@
             @endif
 
             @error('captcha')
-                <div class="alert alert-danger">
+                <div class="alert alert-danger" style="margin-bottom: -80px;">
                     Captcha is not correct, please try again.
                 </div>
             @enderror
             <img src="{{ asset('assets/img/website/logo_masjid.svg') }}" alt="logo_masjid"
                 style="width:200px; height: 200px; margin-left: 50px; ">
-            <h3 style="text-align: left; margin-top:auto; font-size:15px;"> Login to your Account</h3>
+            <h3 style="text-align: left; margin-top:-10px; font-size:15px;"> Login to your Account</h3>
             <div class="form-floating">
                 <input type="text" class="form-control" placeholder="Username" name="login" required>
                 <label>Username</label>

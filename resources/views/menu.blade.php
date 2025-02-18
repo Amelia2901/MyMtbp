@@ -54,12 +54,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="charts-echarts.html">
+                    <a href="{{ url('deskripsi-infaq2') }}">
                         <i class="bi bi-circle"></i><span>Deskripsi Infaq 2</span>
                     </a>
                 </li>
                 <li>
-                    <a href="charts-echarts.html">
+                    <a href="{{ url('kategori-infaq') }}">
                         <i class="bi bi-circle"></i><span>Kategori Infaq</span>
                     </a>
                 </li>
@@ -107,13 +107,6 @@
                 <span>Navbar</span>
             </a>
         </li><!-- End Profile Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-faq.html">
-                <i class="bi bi-journal-text"></i>
-                <span>Footer</span>
-            </a>
-        </li><!-- End F.A.Q Page Nav -->
 
 
 

@@ -17,6 +17,11 @@ class InfaqDescriptionController extends Controller
         return view('infaq.deskripsi1', compact('data'));
     }
 
+    public function index2()
+    {
+        $data = infaq_descriptions::first();
+        return view('infaq.deskripsi2', compact('data'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -44,62 +49,89 @@ class InfaqDescriptionController extends Controller
             ]);
         }
        
-        return redirect()->route('infaqDescription.index')->with('success', 'Deskripsi Infaq berhasil diupdate');
+        return redirect()->route('infaqDescription.index')->with('success', 'Deskripsi Infaq 1 berhasil diupdate!');
     }
+
+    public function store2(Request $request)
+    {
+        $data = $request->validate([
+            'description_2' => 'required',
+        ]);
+
+
+        $description = infaq_descriptions::first();
+
+
+        if($description){
+            $description->update([
+                'description_2' => $data['description_2'],
+                'description_1' => $description->Description_1,
+            ]);
+        }else{
+            infaq_descriptions::create([
+                'description_2' => $data['description_2'],
+                'description_1' => '',
+            ]);
+        }
+       
+        return redirect()->route('infaqDescription.index2')->with('success', 'Deskripsi Infaq 2 berhasil diupdate!');
+    }
+
+}
 
     /**
      * Display the specified resource.
      */
-    public function show(prayer_schedules $prayer_schedules)
-    {
-        //
-    }
+    // public function show(prayer_schedules $prayer_schedules)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(prayer_times $request, $id = null)
-    {
-        $shalat = prayer_times::findOrFail($id);
-        return view('dashboard.shalat_edit', compact('shalat'));
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function edit(prayer_times $request, $id = null)
+    // {
+    //     $shalat = prayer_times::findOrFail($id);
+    //     return view('dashboard.shalat_edit', compact('shalat'));
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updateprayer_schedulesRequest $request, $id)
-    {
-        $request->validate([
-            'subuh' => 'required',
-            'dzuhur' => 'required',
-            'ashar' => 'required',
-            'maghrib' => 'required',
-            'isya' => 'required',
-        ]);
+    // public function update(Updateprayer_schedulesRequest $request, $id)
+    // {
+    //     $request->validate([
+    //         'subuh' => 'required',
+    //         'dzuhur' => 'required',
+    //         'ashar' => 'required',
+    //         'maghrib' => 'required',
+    //         'isya' => 'required',
+    //     ]);
 
-        // Update data berdasarkan ID
-        $shalat = prayer_times::findOrFail($id);
-        $subuh = $request->subuh;
-        $dzuhur = $request->dzuhur;
-        $ashar = $request->ashar;
-        $maghrib = $request->maghrib;
-        $isya = $request->isya;
-        $shalat->update([
-            'subuh' => $subuh . " (WIB)",
-            'dzuhur' => $dzuhur . " (WIB)",
-            'ashar' => $ashar . " (WIB)",
-            'maghrib' =>$maghrib . " (WIB)",
-            'isya' =>$isya . " (WIB)",
-        ]);
+    //     // Update data berdasarkan ID
+    //     $shalat = prayer_times::findOrFail($id);
+    //     $subuh = $request->subuh;
+    //     $dzuhur = $request->dzuhur;
+    //     $ashar = $request->ashar;
+    //     $maghrib = $request->maghrib;
+    //     $isya = $request->isya;
+    //     $shalat->update([
+    //         'subuh' => $subuh . " (WIB)",
+    //         'dzuhur' => $dzuhur . " (WIB)",
+    //         'ashar' => $ashar . " (WIB)",
+    //         'maghrib' =>$maghrib . " (WIB)",
+    //         'isya' =>$isya . " (WIB)",
+    //     ]);
 
-        return redirect()->route('shalat.index')->with('success', 'Jadwal Shalat berhasil diperbarui');
-    }
+    //     return redirect()->route('shalat.index')->with('success', 'Jadwal Shalat berhasil diperbarui');
+    // }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(prayer_schedules $prayer_schedules)
-    {
-        //
-    }
-}
+//     public function destroy(prayer_schedules $prayer_schedules)
+//     {
+//         //
+//     }
+// }

@@ -7,6 +7,7 @@ use App\Http\Controllers\BannerDashboardController;
 use App\Http\Controllers\BannerInfaqController;
 use App\Http\Controllers\PrayerSchedulesController;
 use App\Http\Controllers\ActivitiesController;
+use App\Http\Controllers\CategoriInfaqController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactMosquesController;
 use App\Http\Controllers\BaganController;
@@ -111,9 +112,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/banner-infaq', [BannerInfaqController::class, 'index'])->name('banner-infaq.index');
     Route::post('/banner-infaq', [BannerInfaqController::class, 'store'])->name('banner-infaq.store');
 
-    //route deskripsi infaq
+    //route deskripsi infaq 1
     Route::get('/deskripsi-infaq', [InfaqDescriptionController::class, 'index'])->name('infaqDescription.index');
     Route::post('/deskripsi-infaq/update', [InfaqDescriptionController::class, 'store'])->name('infaqDescription.store');
+
+    //route deskripsi infaq 2
+    Route::get('/deskripsi-infaq2', [InfaqDescriptionController::class, 'index2'])->name('infaqDescription.index2');
+    Route::post('/deskripsi-infaq/update', [InfaqDescriptionController::class, 'store2'])->name('infaqDescription.store2');
+
+    //route kategori infaq
+    Route::get('/kategori-infaq', [CategoriInfaqController::class, 'index'])->name('CategoriInfaq.index');
+    Route::post('/kategori-infaq/update', [CategoriInfaqController::class, 'store'])->name('CategoriInfaq.store');
+
 
     // Navbar Menu 
     Route::resource('navbar', NavbarController::class)

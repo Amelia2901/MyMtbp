@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Infaq | Deskripsi</title>
+    <title>Infaq | Deskripsi Infaq 1</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -46,11 +46,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Banner</h1>
+            <h1>Deskripsi Infaq 1</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Infaq</a></li>
-                    <li class="breadcrumb-item active">Banner</li>
+                    <li class="breadcrumb-item active">Deskripsi Infaq 1</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -60,7 +60,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Formulir Deskripsi 1 Infaq </h5>
+                            <h5 class="card-title">Formulir Deskripsi Infaq 1</h5>
                             <form action="{{ route('infaqDescription.store') }}" method="POST"
                                 enctype="multipart/form-data" id="infaq_description">
                                 @csrf
@@ -134,8 +134,8 @@
 
             if (valid) {
                 Swal.fire({
-                    title: 'Confirmation?',
-                    text: 'Are you sure?',
+                    title: 'Konfirmasi?',
+                    text: 'Apakah anda yakin?',
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonText: 'Tambah Data',

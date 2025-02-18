@@ -170,13 +170,13 @@
             console.log(form);
 
             Swal.fire({
-                title: 'Confirmation?',
-                text: 'Are you sure you want to update the data?',
+                title: 'Konfirmasi?',
+                text: 'Apakah anda yakin akan mengupdate data?',
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, Update Data',
+                confirmButtonText: 'Ya, Update Data',
                 confirmButtonColor: '#253A82',
-                cancelButtonText: 'No, Cancel'
+                cancelButtonText: 'Tidak, Kembali'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#activityForm').submit();

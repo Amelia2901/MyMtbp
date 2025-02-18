@@ -31,7 +31,7 @@ class ActivitiesController extends Controller
             'ActivityTime'=> $data['activityTime'],
         ]);
 
-        return redirect()->route('kegiatan.index')->with('success', 'Banner berhasil ditambahkan!');
+        return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil ditambahkan!');
     }
 
     public function edit(activities $request, $id = null)
@@ -58,6 +58,6 @@ class ActivitiesController extends Controller
             'ActivityTime' => $request->activityTime,
         ]);
 
-        return redirect()->route('kegiatan.index')->with('success', 'Jadwal Shalat berhasil diperbarui');
+        return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil diperbarui');
     }
 }

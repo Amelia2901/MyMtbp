@@ -39,7 +39,7 @@ class VisionController extends Controller
                 'mission' => $data['mission'],
             ]);
         }
-        return redirect()->route('vision.index')->with('success', 'Banner berhasil ditambahkan atau diperbarui!');
+        return redirect()->route('vision.index')->with('success', 'Visi Misi berhasil ditambahkan atau diperbarui!');
     }
 
     public function update(Request $request)
@@ -56,6 +56,6 @@ class VisionController extends Controller
         'vision' => $request->vision,
         'mission' => $request->mission,
     ]);
-    return redirect()->back()->with('success', 'Data berhasil diperbarui!');
+    return redirect()->back()->with('success', 'Visi Misi berhasil diperbarui!');
 }
 }

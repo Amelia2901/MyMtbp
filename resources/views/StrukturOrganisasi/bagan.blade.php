@@ -169,8 +169,8 @@
 
             if (valid) {
                 Swal.fire({
-                    title: 'Confirmation?',
-                    text: 'Are you sure?',
+                    title: 'Konfirmasi?',
+                    text: 'Apakah anda yakin?',
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonText: 'Tambah Data',

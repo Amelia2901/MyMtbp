@@ -35,7 +35,7 @@ class InfaqDescriptionController extends Controller
         if($description){
             $description->update([
                 'description_1' => $data['description_1'],
-                'description_2' => $description->description_2,
+                'description_2' => $description->Description_2,
             ]);
         }else{
             infaq_descriptions::create([

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\prayer_schedules;
 use App\Models\infaq_descriptions;
 
 
@@ -22,19 +21,25 @@ class PrayerSchedulesController extends Controller
      */
 
    
-    public function store(Storeprayer_schedulesRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
-            'shalat_name' => 'required',
-            'shalat_time' => 'required',
+            'description_1' => 'required',
         ]);
 
-        prayer_schedules::create([
-            'shalat_name' => $request->shalat_name,
-            'shalat_time' => $request->shalat_time,
-        ]);
+        $description = infaq_descriptions::firts();
 
-        
+
+        if($description){
+            $description->update([
+                'description_1' => $data['description_1'],
+            ]);
+        }else{
+            infaq_descriptions::create([
+                'description_1' => $data['description_1'],
+            ]);
+        }
+       
         return redirect()->route('infaq.index')->with('success', 'Deskripsi Infaq berhasil diupdate');
     }
 

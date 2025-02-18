@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\BannerAbout;
 use App\Http\Requests\StoreBannerAboutRequest;
 use App\Http\Requests\UpdateBannerAboutRequest;
 
 class BannerAboutController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        // $banner = BannerAbout::all();
-        return view('StrukturOrganisasi.index');
+        $banner = BannerAbout::first();
+        return view('StrukturOrganisasi.index', compact('banner'));
     }
-    /**
-     * Show the form for creating a new resource.
-     */
+
+    //  * Show the form for creating a new resource.
+    //  */
     public function create()
     {
         //
@@ -25,22 +27,36 @@ class BannerAboutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(StoreBannerAboutRequest $request)
     {
-        $data = $request->validated(); 
+        $data = $request->validated();
 
         if ($request->hasFile('banner_photo')) {
             $filePath = $request->file('banner_photo')->store('uploads/banner_photos', 'public');
         }
 
-        BannerAbout::create([
-            'banner_photo' => $filePath,
-            'banner_title' => $data['banner_title'],
-            'banner_description' => $data['banner_description'],
-        ]);
+        $banner = BannerAbout::first();
 
-        return redirect()->back()->with('success', 'Banner berhasil ditambahkan!');
+        if ($banner) {
+            $banner->update([
+                'banner_photo' => $filePath ?? $banner->banner_photo,
+                'banner_title' => $data['banner_title'],
+                'banner_description' => $data['banner_description'],
+            ]);
+        } else {
+            BannerAbout::create([
+                'banner_photo' => $filePath,
+                'banner_title' => $data['banner_title'],
+                'banner_description' => $data['banner_description'],
+            ]);
+        }
+
+        return redirect()->route('banner-about.index')->with('success', 'Banner berhasil ditambahkan atau diperbarui!');
     }
+
 
 
     /**

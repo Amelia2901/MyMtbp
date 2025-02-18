@@ -67,7 +67,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Banner Dashboard Form</h5>
+                            <h5 class="card-title">Formulir Banner Dashboard</h5>
                             <form action="{{ route('banner.store') }}" method="POST" enctype="multipart/form-data"
                                 id="banner_dashboard_form">
                                 @csrf

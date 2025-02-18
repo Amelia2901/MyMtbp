@@ -44,7 +44,7 @@
             </a>
             <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ url('/banner_infaq') }}">
+                    <a href="{{ url('/banner-infaq') }}">
                         <i class="bi bi-circle"></i><span>Banner</span>
                     </a>
                 </li>

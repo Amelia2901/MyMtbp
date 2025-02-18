@@ -23,13 +23,24 @@
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
-    @extends('components.layouts.app')
+    <!-- ======= Header ======= -->
+    @include('header')
+    <!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    @include('menu')
+    <!-- End Sidebar-->
+
 
     <main id="main" class="main">
         <div class="pagetitle">
@@ -64,7 +75,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($structures as $index => $item)
+                                    @foreach ($organizational_chart as $index => $item)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $item->name }}</td>
@@ -79,6 +90,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <!-- End Table with stripped rows -->
                         </div>
                     </div>
                 </div>
@@ -86,8 +98,16 @@
         </section>
     </main>
     
-<!-- Vendor JS Files -->
-<script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+
+    <!-- ======= Footer ======= -->
+    @include('footer')
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
     <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
@@ -101,25 +121,21 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
-    <!-- ======= Footer ======= -->
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <script></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
 
-            {{ dd(session('success')) }}
-            @if (session('success'))
-    @push('scripts')
-        <script>
-            Swal.fire({
-                title: 'Sukses!',
-                text: `{!! session('success') !!}`,
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    @endpush
-@endif
-@stack('scripts')
+            <!-- {{ dd(session('success')) }} -->
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            title: 'Sukses!',
+            text: "{{ session('success') }}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
 
-</body>
-</html>
+
 

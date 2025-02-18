@@ -93,7 +93,6 @@
                                             <button type="submit" onclick="simpan()" class="btn btn-primary">Submit Form</button>
                                         </div>
                                     </div>
-                                </form>
                         </div>
                     </div>
                 </div>
@@ -127,49 +126,76 @@
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
 
-    <script>
-    function simpan(event) {
-        event.preventDefault(); // Mencegah form submit langsung
 
-        let form = document.querySelector('#orgChartForm');
+<script>
+        // Validation for form before submission
+        function validateForm() {
+            let valid = true;
 
-        Swal.fire({
-            title: 'Konfirmasi',
-            text: 'Apakah Anda yakin ingin menyimpan data ini?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, Simpan',
-            confirmButtonColor: '#253A82',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                form.submit(); // Submit form setelah user klik "Ya, Simpan"
+            if ($.trim($("#photo").val()) == "") {
+                $('#photo').addClass('is-invalid');
+                $('#photo').after('<div class="invalid-feedback">Photo wajib diisi</div>');
+                valid = false;
+            }
+            if ($.trim($("#position").val()) == "") {
+                $('#position').addClass('is-invalid');
+                $('#position').after('<div class="invalid-feedback">Jabatan wajib diisi.</div>');
+                valid = false;
+            }
+            if ($.trim($("#name").val()) == "") {
+                $('#name').addClass('is-invalid');
+                $('#name').after('<div class="invalid-feedback">nama wajib diisi.</div>');
+                valid = false;
+            }
+            return valid;
+        }
+
+        // Display confirmation popup when form is submitted
+        function simpan() {
+            if (!validateForm()) {
+                return false;
+            }
+
+            let form = document.querySelector('#OrgChatForm');
+            console.log(form);
+
+            Swal.fire({
+                title: 'Confirmation?',
+                text: 'Are you sure you want to update the data?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Update Data',
+                confirmButtonColor: '#253A82',
+                cancelButtonText: 'No, Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#OrgChatForm').submit();
+                }
+            });
+
+        };
+
+        // Remove invalid class when user starts typing
+        $('#photo, #position, #name,').on('input', function() {
+            if ($.trim($(this).val()) !== "") {
+                $(this).removeClass('is-invalid');
+                $(this).next('.invalid-feedback').remove();
             }
         });
-    }
+    </script>
 
-    // Tambahkan event listener ke tombol submit
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelector('#orgChartForm').addEventListener('submit', simpan);
-    });
-</script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Sukses!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 
 
-<!-- @if (session('success'))
-@if (session('success'))
-    <p style="color: red;">Session Terdeteksi: {{ session('success') }}</p>
-@endif -->
-
-    <!-- <script>
-        console.log("Session sukses: {{ session('success') }}");
-        Swal.fire({
-            title: 'Sukses!',
-            text: "{{ session('success') }}",
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-    </script> -->
-<!-- @endif -->
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>

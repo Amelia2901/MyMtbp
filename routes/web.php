@@ -9,11 +9,11 @@ use App\Http\Controllers\PrayerSchedulesController;
 use App\Http\Controllers\ActivitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactMosquesController;
-use App\Http\Controllers\OrganizationalChartController;
 use App\Http\Controllers\BaganController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\Front\LandingController;
+use App\Http\Controllers\OrganizationalChartController;
 
 
 
@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/contact/{id}/edit', [ContactMosquesController::class, 'edit'])->name('contact.edit');
     Route::put('/dashboard/contact/{id}', [ContactMosquesController::class, 'update'])->name('contact.update');
 
-    // <Route Struktur Organisasi>
+    // <!Route Struktur Organisasi -->
 
     // route banner
     Route::get('/banner-about', [BannerAboutController::class, 'index'])->name('banner-about.index');
@@ -87,6 +87,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/bagan', [BaganController::class, 'store'])->name('bagan.store');
 
     // route susunan organisasi dkm
+    Route::get('/organizational_chart', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
+    Route::get('/organizational_chart/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
+    Route::get('/organizational_chart/{id}/edit', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
+    Route::post('/organizational_chart/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
+    Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
+
     // Route::prefix('organizational_chart')->group(function () {
     //     Route::get('/', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
     //     Route::get('/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
@@ -94,18 +100,14 @@ Route::middleware(['auth'])->group(function () {
     //     Route::get('/edit/{id}', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
     //     Route::put('/update/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
     //     Route::delete('/delete/{id}', [OrganizationalChartController::class, 'destroy'])->name('organizational_chart.destroy');
-
-    //route infaq
-    //     Route::get('/banner_infaq', [OrganizationalChartController::class, 'banner_infaq'])->name('banner_infaq.index');
-    //     Route::get('/deskripsi_infaq_satu', [OrganizationalChartController::class, 'deskripsi_infaq_satu'])->name('deskripsi_infaq_satu.index');
-    //     Route::get('/deskripsi_infaq_dua', [OrganizationalChartController::class, 'deskripsi_infaq_dua'])->name('deskripsi_infaq_dua.index');
-    //     Route::get('/kategori_infaq', [OrganizationalChartController::class, 'kategori_infaq'])->name('kategori_infaq.index');
-    //     Route::get('/metode_pembayaran', [OrganizationalChartController::class, 'metode_pembayaran'])->name('metode_pembayaran.index');
     // });
+    
 
-    // Route::get('/banner_infaq', [BannerInfaqController::class, 'banner_infaq'])->name('banner_infaq.index');
-    Route::get('/banner_infaq', [BannerInfaqController::class, 'index']);
-    // Route::post('/banner-about', [BannerAboutController::class, 'store'])->name('banner-about.store');
+    // <!-- route infaq-->
+
+    // route banner
+    Route::get('/banner-infaq', [BannerInfaqController::class, 'index'])->name('banner-infaq.index');
+    Route::post('/banner-infaq', [BannerInfaqController::class, 'store'])->name('banner-infaq.store');
 
 
     // Navbar Menu 

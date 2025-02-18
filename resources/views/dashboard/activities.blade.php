@@ -46,6 +46,7 @@
                 </ol>
             </nav>
         </div><!-- End Page Title -->
+
         <a style="margin-bottom: 10px;" type="button" class="btn btn-primary" href="{{ route('kegiatan.create') }}"><i
                 class="bi bi-plus-lg me-1"></i>
             Tambah Kegiatan</a>
@@ -59,6 +60,7 @@
                             <div class="col-lg-12 text-end">
                                 <!-- Formulir atau konten lainnya di sini -->
                             </div>
+                            
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
                                 <thead>

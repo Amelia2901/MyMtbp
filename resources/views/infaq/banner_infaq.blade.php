@@ -68,14 +68,13 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Formulir Banner Infaq </h5>
-                            <form action="{{ route('banner-infaq.store') }}" method="POST" enctype="multipart/form-data"
-                                id="banner_infaq_form">
+                            <form action="{{ route('banner-infaq.store') }}" method="POST"
+                                enctype="multipart/form-data" id="banner_infaq_form">
                                 @csrf
 
                                 <!-- input type hidden -->
                                 <input type="hidden" name="id" id="id"
                                     value="{{ isset($banner) && !is_array($banner) ? $banner->id : '' }}">
-
                                 {{-- Existing Image --}}
                                 @if (isset($banner))
                                     <div class="row mb-3">
@@ -100,8 +99,8 @@
                                 <div class="row mb-3">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Judul banner</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="banner_title"
-                                            id="banner_title">
+                                        <input type="text" class="form-control" name="banner_title" id="banner_title"
+                                            value="{{ old('banner_title', $banner->banner_title) }}">
                                     </div>
                                 </div>
 
@@ -110,7 +109,8 @@
                                     <label for="inputPassword" class="col-sm-2 col-form-label">Deskripsi banner</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="banner_description"
-                                            id="banner_description">
+                                            id="banner_description"
+                                            value="{{ old('banner_description', $banner->banner_description) }}">
                                     </div>
                                 </div>
 

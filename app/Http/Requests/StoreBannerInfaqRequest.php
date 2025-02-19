@@ -22,7 +22,7 @@ class StoreBannerInfaqRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'banner_photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'banner_photo' => 'image|mimes:jpg,jpeg,png|max:2048',
             'banner_title' => 'required|string|max:255',
             'banner_description' => 'required|string|max:1000',
         ];
@@ -34,7 +34,6 @@ class StoreBannerInfaqRequest extends FormRequest
      */ public function messages()
     {
         return [
-            'banner_photo.required' => 'Nama foto banner wajib diisi.',
             'banner_photo.image' => 'File yang diunggah harus berupa gambar.',
             'banner_photo.mimes' => 'File gambar harus bertipe JPG, JPEG, atau PNG.',
             'banner_photo.max' => 'Ukuran file gambar maksimal 2MB.',

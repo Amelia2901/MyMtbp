@@ -9,7 +9,9 @@ class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('prayer:fetch')->monthlyOn(1, '00:00');
+        $schedule->command('prayer:fetch')
+        ->monthlyOn(19, '00:00')
+        ->timezone('Asia/Jakarta');
     }
 
     protected function commands()

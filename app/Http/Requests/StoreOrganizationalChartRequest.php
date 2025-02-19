@@ -22,9 +22,10 @@ class StoreOrganizationalChartRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Foto wajib diunggah
+             // Foto wajib diunggah
         ];
     }
 

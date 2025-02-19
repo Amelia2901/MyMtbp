@@ -60,17 +60,18 @@
                         <div class="card-body">
                             <h5 class="card-title">Data Susunan Organisasi DKM</h5>
                             <div class="col-lg-12 text-end">
-                                <a href="{{ route('organizational_chart.create') }}" class="btn btn-primary">+ Tambah</a>
+                                <a href="{{ route('organizational_chart.create') }}" class="btn btn-primary">+
+                                    Tambah</a>
                             </div>
-                            
+
                             <!-- Table -->
                             <table class="table datatable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Foto</th>
-                                        <th>Jabatan</th>
                                         <th>Nama</th>
+                                        <th>Jabatan</th>
+                                        <th>Foto</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -82,7 +83,8 @@
                                             <td>{{ $item->position }}</td>
                                             <td><img src="{{ asset('storage/' . $item->photo) }}" width="50"></td>
                                             <td>
-                                                <a href="{{ route('organizational_chart.edit', $item->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('organizational_chart.edit', $item->id) }}"
+                                                    class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
                                             </td>
@@ -97,7 +99,7 @@
             </div>
         </section>
     </main>
-    
+
 
     <!-- ======= Footer ======= -->
     @include('footer')
@@ -125,17 +127,16 @@
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
 
-            <!-- {{ dd(session('success')) }} -->
     @if (session('success'))
-    <script>
-        Swal.fire({
-            title: 'Sukses!',
-            text: "{{ session('success') }}",
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-    </script>
+        <script>
+            Swal.fire({
+                title: 'Sukses!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+        @php
+            session()->forget('success');
+        @endphp
     @endif
-
-
-

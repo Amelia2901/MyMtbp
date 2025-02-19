@@ -22,15 +22,19 @@ class OrganizationalChartController extends Controller
 
     public function store(StoreOrganizationalChartRequest $request){
         
-        $data = $request->validated(); 
+        $data = $request->validated();
+        // echo $data; 
+        if ($request->hasFile('photo')) {
+            $filePath = $request->file('photo')->store('uploads/organizationStructures_photos', 'public');
+        }
 
         OrganizationalChart::create([
-            'photo'=> $data['photo'],
+            'photo'=> $filePath,
             'position'=> $data['position'],
             'name' => $data['name'],
         ]);
 
-        return redirect()->route('organizational_chart.index')->with('success', 'Banner berhasil ditambahkan!');
+        return redirect()->route('organizational_chart.index')->with('success', 'Susunan Organisasi berhasil ditambahkan!');
     }
 
     public function edit(OrganizationalChart $request, $id = null)
@@ -49,12 +53,15 @@ class OrganizationalChartController extends Controller
 
         // Update data berdasarkan ID
         $data = OrganizationalChart::findOrFail($id);
+        if ($request->hasFile('photo')) {
+            $filePath = $request->file('photo')->store('uploads/organizationStructures_photos', 'public');
+        }
         $data->update([
-            'photo' => $request->photo,
+            'photo' => $filePath,
             'position' => $request->position,
             'name' => $request->name,
         ]);
 
-        return redirect()->route('organizational_chart.index')->with('success', 'Jadwal Shalat berhasil diperbarui');
+        return redirect()->route('organizational_chart.index')->with('success', 'Susunan Organisasi berhasil diperbarui');
     }
 }

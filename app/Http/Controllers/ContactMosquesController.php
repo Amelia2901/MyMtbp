@@ -16,8 +16,8 @@ class ContactMosquesController extends Controller
         return view('dashboard.contact', compact('contact_mosques'));
     }
 
-    public function edit(contact_mosques $request, $id = null){
-        $item = contact_mosques::findOrFail($id);
+    public function edit(contact_mosques $request, $contact_id = null){
+        $item = contact_mosques::findOrFail($contact_id);
         return view('dashboard.contact_form', compact('item'));
     }
 

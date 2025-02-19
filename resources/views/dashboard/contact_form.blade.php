@@ -60,7 +60,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Formulir Kontak Masjid</h5>
-                            <form action="{{ route('contact.update', $item->id) }}" method="POST" id="activityForm">
+                            <form action="{{ route('contact.update', $item->contact_id) }}" method="POST"
+                                id="activityForm">
                                 @csrf
                                 @if (isset($item))
                                     @method('PUT')

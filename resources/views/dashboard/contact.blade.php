@@ -47,8 +47,6 @@
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-        <button style="margin-bottom: 10px;" type="button" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>
-            Add Contact</button>
 
         <section class="section">
             <div class="row">
@@ -75,12 +73,9 @@
                                             <td>{{ $p->address_mosque }}</td>
                                             <td>{{ $p->updated_at }}</td>
                                             <td>
-                                                <a href="{{ route('contact.edit', $p->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('contact.edit', $p->contact_id) }}"
+                                                    class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                                |
-                                                <a href="{{ route('contact.edit', $p->id) }}" class="btn btn-primary">
-                                                    <i class="bi bi-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -88,7 +83,6 @@
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
-
                         </div>
                     </div>
 

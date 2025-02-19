@@ -16,8 +16,7 @@ use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\Front\LandingController;
 use App\Http\Controllers\OrganizationalChartController;
 use App\Http\Controllers\InfaqDescriptionController;
-
-
+use App\Http\Controllers\methodPaymentController;
 
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.index');
@@ -48,13 +47,15 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () { 
-    Route::get('/dashboard', [Dashboard::class, 'index']);
+    Route::get('/dashboard', Dashboard::class);
     Route::get('/dashboard2', Dashboard::class);
     Route::get('dashboard/login', [Dashboard::class, 'login'])->name('dashboard.login');
     Route::get('/banner', [BannerDashboardController::class, 'index'])->name('banner.index');
     Route::post('/banner', [BannerDashboardController::class, 'store'])->name('banner.store');
 
+    // route shalat
     Route::get('/shalat', [PrayerSchedulesController::class, 'index'])->name('shalat.index');
+    Route::get('/shalat/updatePrayerTimes', [PrayerSchedulesController::class, 'fetchData'])->name('shalat.fetch');
     Route::get('/shalat/create', [PrayerSchedulesController::class, 'create'])->name('shalat.create');
     Route::get('/shalat/{id}/edit', [PrayerSchedulesController::class, 'edit'])->name('shalat.edit');
     Route::post('/shalat/store', [PrayerSchedulesController::class, 'store'])->name('shalat.store');
@@ -118,11 +119,16 @@ Route::middleware(['auth'])->group(function () {
 
     //route deskripsi infaq 2
     Route::get('/deskripsi-infaq2', [InfaqDescriptionController::class, 'index2'])->name('infaqDescription.index2');
-    Route::post('/deskripsi-infaq/update', [InfaqDescriptionController::class, 'store2'])->name('infaqDescription.store2');
+    Route::post('/deskripsi-infaq2/update', [InfaqDescriptionController::class, 'store2'])->name('infaqDescription.store2');
 
     //route kategori infaq
     Route::get('/kategori-infaq', [CategoriInfaqController::class, 'index'])->name('CategoriInfaq.index');
     Route::post('/kategori-infaq/update', [CategoriInfaqController::class, 'store'])->name('CategoriInfaq.store');
+
+    // route metode pembayaran
+    Route::get('/dashboard/payment-method', [methodPaymentController::class, 'index'])->name('payment.index');
+    Route::post('/dashboard/payment-method/updateBank', [methodPaymentController::class, 'store'])->name('payment.store');
+    Route::post('/dashboard/payment-method/updateQRIS', [methodPaymentController::class, 'storeqris'])->name('payment.storeqris');
 
 
     // Navbar Menu 

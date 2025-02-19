@@ -58,9 +58,14 @@
 
         .btn-primary:hover {
             /* background-color :rgb(214, 206, 206); */
-            background-color: #583e31;
+            background-color: #583e31 !important;
             color: white;
             transition: background 0.3s ease;/
+        }
+
+        .btn-primary:focus{
+            background-color: #583e31 !important;
+
         }
 
         .login {
@@ -74,6 +79,16 @@
             height: 501px;
             border-radius: 10px;
         }
+
+        .alert-danger {
+        position: absolute;
+        width: 100%;
+        top: -1px;
+        left: 0;
+        z-index: 1000;
+        text-align: center;
+    }
+
     </style>
 </head>
 
@@ -83,7 +98,7 @@
             style="align-items: center; margin-bottom: 0px; width:300px; height: 430px; margin-left: 50px;">
     </div>
     <div class="container-fluid">
-        <form action="{{ route('login') }}" method="post">
+        <form action="{{ route('login') }}" method="post" style="position: relative;">
             @csrf
             @if ($errors->has('loginError'))
                 <div class="alert alert-danger" role="alert">
@@ -92,13 +107,14 @@
             @endif
 
             @error('captcha')
-                <div class="alert alert-danger" style="margin-bottom: -80px;">
+                <div class="alert alert-danger" style="margin-bottom: -10px;">
                     Captcha is not correct, please try again.
                 </div>
             @enderror
+        
             <img src="{{ asset('assets/img/website/logo_masjid.svg') }}" alt="logo_masjid"
                 style="width:200px; height: 200px; margin-left: 50px; ">
-            <h3 style="text-align: left; margin-top:-10px; font-size:15px;"> Login to your Account</h3>
+            <h3 style="text-align: left; margin-top:-20px; font-size:15px;"> Login to your Account</h3>
             <div class="form-floating">
                 <input type="text" class="form-control" placeholder="Username" name="login" required>
                 <label>Username</label>

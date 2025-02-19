@@ -46,7 +46,7 @@ class OrganizationalChartController extends Controller
     public function update(UpdateOrganizationalChartRequest $request, $id)
     {
         $request->validate([
-            'photo' => 'required',
+            'photo' ,
             'position' => 'required',
             'name' => 'required',
         ]);

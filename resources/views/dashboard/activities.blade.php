@@ -41,7 +41,7 @@
             <h1>Kalender Kegiatan</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                     <li class="breadcrumb-item active">Kalender Kegiatan</li>
                 </ol>
             </nav>
@@ -67,6 +67,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Kegiatan</th>
+                                        <th>Foto</th>
                                         <th>Deskripsi</th>
                                         <th>Tanggal</th>
                                         <th>Waktu</th>
@@ -77,7 +78,11 @@
                                     @foreach ($activities as $index => $item)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
+                                            <!-- <td>{{ $loop->iteration }}</td> -->
                                             <td>{{ $item->ActivityName }}</td>
+                                            <td>
+                                                <img src="{{ asset('storage/'.$item->ActivityPhoto) }}" width="100" style="max-height: 80px;" alt="Activity Image">
+                                            </td>
                                             <td>{{ $item->ActivityDescription }}</td>
                                             <td>{{ $item->ActivityDate }}</td>
                                             <td>{{ $item->ActivityTime }}</td>

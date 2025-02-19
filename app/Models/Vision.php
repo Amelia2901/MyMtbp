@@ -9,7 +9,7 @@ class Vision extends Model
 {
     use HasFactory;
 
-    protected $table = 'vision_missions'; // Sesuaikan dengan nama tabel di database
+    protected $table = 'vision_missions'; //  nama tabel di database
 
     protected $fillable = ['vision', 'mission'];
 }

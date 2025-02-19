@@ -48,7 +48,7 @@
             <h1>Kalender Kegiatan</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                     <li class="breadcrumb-item active">Kalender Kegiatan</li>
                 </ol>
             </nav>
@@ -60,35 +60,46 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Formulir Kalender Kegiatan</h5>
-                            <form
+                            <!-- <form
                                 action="{{ isset($item) ? route('kegiatan.update', $item->id) : route('kegiatan.store') }}"
-                                method="POST" id="activityForm">
+                                method="POST" id="activityForm"> -->
+                                <form action="{{ isset($item) ? route('kegiatan.update', $item->id) : route('kegiatan.store') }}"
+                                method="POST" enctype="multipart/form-data" id="activityForm">
                                 @csrf
                                 @if (isset($item))
                                     @method('PUT')
                                 @endif
                                 <div class="row mb-4">
-                                    <label for="shalat_name" class="col-sm-2 col-form-label">Nama Kegiatan</label>
+                                    <label for="activityName" class="col-sm-2 col-form-label">Nama Kegiatan</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="activityName" id="activityName"
                                             value="{{ old('activityName', $item->ActivityName ?? '') }}" required>
                                     </div>
                                 </div>
+                                
                                 <div class="row mb-4">
-                                    <label for="shalat_time" class="col-sm-2 col-form-label">Deskrisi kegiatan</label>
+                                    <label for="activityPhoto" class="col-sm-2 col-form-label">Foto Kegiatan</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" class="form-control" name="activityPhoto" id="activityPhoto"
+                                            value="{{ old('activityPhoto', $item->ActivityPhoto ?? '') }}" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <label for="activityDescription" class="col-sm-2 col-form-label">Deskripsi kegiatan</label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control" name="activityDescription" id="activityDescription" required>{{ old('activityDescription', $item->ActivityDescription ?? '') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <label for="shalat_time" class="col-sm-2 col-form-label">Tanggal Kegiatan</label>
+                                    <label for="activityDate" class="col-sm-2 col-form-label">Tanggal Kegiatan</label>
                                     <div class="col-sm-10">
                                         <input type="date" class="form-control" name="activityDate" id="activityDate"
                                             value="{{ old('activityDate', $item->ActivityDate ?? '') }}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <label for="shalat_time" class="col-sm-2 col-form-label">Waktu Kegiatan</label>
+                                    <label for="activityTime" class="col-sm-2 col-form-label">Waktu Kegiatan</label>
                                     <div class="col-sm-10">
                                         <input type="time" class="form-control" name="activityTime" id="activityTime"
                                             value="{{ old('activityTime', $item->ActivityTime ?? '') }}" required>
@@ -138,22 +149,27 @@
 
             if ($.trim($("#activityName").val()) == "") {
                 $('#activityName').addClass('is-invalid');
-                $('#activityName').after('<div class="invalid-feedback">Nama Jadwal Shalat wajib diisi.</div>');
+                $('#activityName').after('<div class="invalid-feedback">Nama Kegiatan wajib diisi.</div>');
+                valid = false;
+            }
+            if ($.trim($("#activityPhoto").val()) == "") {
+                $('#activityPhoto').addClass('is-invalid');
+                $('#activityPhoto').after('<div class="invalid-feedback">Foto kegiatan wajib diisi.</div>');
                 valid = false;
             }
             if ($.trim($("#activityDescription").val()) == "") {
                 $('#activityDescription').addClass('is-invalid');
-                $('#activityDescription').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                $('#activityDescription').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
                 valid = false;
             }
             if ($.trim($("#activityDate").val()) == "") {
                 $('#activityDate').addClass('is-invalid');
-                $('#activityDate').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                $('#activityDate').after('<div class="invalid-feedback">Tanggal Kegiatan wajib diisi.</div>');
                 valid = false;
             }
             if ($.trim($("#activityTime").val()) == "") {
                 $('#activityTime').addClass('is-invalid');
-                $('#activityTime').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                $('#activityTime').after('<div class="invalid-feedback">Jam Kegiatan wajib diisi.</div>');
                 valid = false;
             }
 
@@ -186,7 +202,7 @@
         };
 
         // Remove invalid class when user starts typing
-        $('#activityName, #activityDescription, #activityDate, #activityTime').on('input', function() {
+        $('#activityName, #activityPhoto, #activityDescription, #activityDate, #activityTime').on('input', function() {
             if ($.trim($(this).val()) !== "") {
                 $(this).removeClass('is-invalid');
                 $(this).next('.invalid-feedback').remove();

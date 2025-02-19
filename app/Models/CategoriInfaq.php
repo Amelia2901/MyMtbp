@@ -9,7 +9,13 @@ class CategoriInfaq extends Model
 {
     use HasFactory;
     
-    protected $table = 'categori_infaqs'; // Sesuaikan dengan nama tabel di database
+    protected $table = 'categori_infaqs'; // nama tabel di database
 
-    protected $fillable = ['kategori1', 'deskripsi1', 'kategori2','deskripsi2', 'kategori3', 'deskripsi3', 'kategori4', 'deskripsi4'];
+    protected $fillable = [
+        'kategori_1', 'deskripsi_1', 
+        'kategori_2', 'deskripsi_2', 
+        'kategori_3', 'deskripsi_3', 
+        'kategori_4', 'deskripsi_4'
+    ];
+    
 }

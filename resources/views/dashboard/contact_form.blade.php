@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Home | Kegiatan</title>
+    <title>Dashboard | Kegiatan</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -45,10 +45,10 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Kontao\k Masjid</h1>
+            <h1>Kontak Masjid</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                     <li class="breadcrumb-item active">Kontak Masjid</li>
                 </ol>
             </nav>
@@ -134,17 +134,17 @@
 
             if ($.trim($("#youtube_channel").val()) == "") {
                 $('#youtube_channel').addClass('is-invalid');
-                $('#youtube_channel').after('<div class="invalid-feedback">Nama Jadwal Shalat wajib diisi.</div>');
+                $('#youtube_channel').after('<div class="invalid-feedback">Channel Youtube wajib diisi.</div>');
                 valid = false;
             }
             if ($.trim($("#url_youtube").val()) == "") {
                 $('#url_youtube').addClass('is-invalid');
-                $('#url_youtube').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                $('#url_youtube').after('<div class="invalid-feedback">url url youtube wajib diisi.</div>');
                 valid = false;
             }
             if ($.trim($("#address_mosque").val()) == "") {
                 $('#address_mosque').addClass('is-invalid');
-                $('#address_mosque').after('<div class="invalid-feedback">Jam Shalat wajib diisi.</div>');
+                $('#address_mosque').after('<div class="invalid-feedback">Alamat masjid wajib diisi.</div>');
                 valid = false;
             }
 
@@ -162,13 +162,13 @@
             console.log(form);
 
             Swal.fire({
-                title: 'Confirmation?',
-                text: 'Are you sure you want to update the data?',
+                title: 'Konfirmasi',
+                text: 'Apakah anda yakin akan mengupdate data?',
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, Update Data',
+                confirmButtonText: 'Ya, Update data',
                 confirmButtonColor: '#253A82',
-                cancelButtonText: 'No, Cancel'
+                cancelButtonText: 'Tidak, Kembali'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#activityForm').submit();

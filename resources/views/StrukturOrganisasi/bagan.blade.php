@@ -173,9 +173,9 @@
                     text: 'Apakah anda yakin?',
                     icon: 'question',
                     showCancelButton: true,
-                    confirmButtonText: 'Tambah Data',
+                    confirmButtonText: 'Ya, Tambah Data',
                     confirmButtonColor: '#253A82',
-                    cancelButtonText: 'Batal'
+                    cancelButtonText: 'Tidak, Kembali'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#bagan_dashboard_form').submit();

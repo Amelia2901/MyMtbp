@@ -23,6 +23,7 @@ class updateActivitiesRequest extends FormRequest
     {
         return [
             'activityName' => 'required|string|max:255',
+            'activityPhoto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'activityDescription' => 'required|string|max:255',
             'activityDate' => 'required|date',
             'activityTime' => 'required|string|max:255',
@@ -36,6 +37,7 @@ class updateActivitiesRequest extends FormRequest
      {
         return [
             'activityName' => 'Nama kegiatan wajib diisi.',
+            // 'activityPhoto' => 'Photo kegiatan wajib diisi.',
             'activityDescription' => 'Deskripsi kegiatan wajib diisi.',
             'activityDate' => 'Tanggal kegiatan wajib diisi.',
             'activityTime' => 'Waku kegiatan wajib diisi.',

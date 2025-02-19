@@ -61,7 +61,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Formulir Kategori Infaq</h5>
-                            <form action="{{ route('CategoriInfaq.store') }}" method="POST"
+                            <form action="{{ route('CategoriInfaq.storeOrUpdate') }}" method="POST"
                                 enctype="multipart/form-data" id="categori_infaq">
                                 @csrf
                                 <!-- input type hidden -->
@@ -75,14 +75,14 @@
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="kategori_1"
                                             id="kategori_1"
-                                            value="{{ old('kategori_1', $data->Kategori_1 ?? '') }}">
+                                            value="{{ old('kategori_1', $kategori_1->Kategori_1 ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="deskripsi_1" id="deskripsi_1" required>{{ old('deskripsi_1', $deskripsi_1->Deskripsi_1 ?? '') }}</textarea>
+                                        <textarea class="form-control" name="deskripsi_1" id="deskripsi_1" required> {{ old('deskripsi_1', $deskripsi_1->deskripsi_1 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
@@ -93,14 +93,14 @@
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="kategori_2"
                                             id="kategori_2"
-                                            value="{{ old('kategori_2', $data->Kategori_2 ?? '') }}">
+                                            value="{{ old('kategori_2', $kategori_2->Kategori_2 ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="deskripsi_2" id="deskripsi_2" required>{{ old('deskripsi_2', $deskripsi_2->Deskripsi_2 ?? '') }}</textarea>
+                                    <textarea class="form-control" name="deskripsi_2" id="deskripsi_2" required> {{ old('deskripsi_2', $deskripsi_2->deskripsi_2 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
@@ -111,14 +111,14 @@
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="kategori_3"
                                             id="kategori_3"
-                                            value="{{ old('kategori_3', $data->Kategori_3 ?? '') }}">
+                                            value="{{ old('kategori_3', $kategori_3->Kategori_3 ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="deskripsi_3" id="deskripsi_3" required>{{ old('deskripsi_3', $deskripsi_3->Deskripsi_3 ?? '') }}</textarea>
+                                    <textarea class="form-control" name="deskripsi_3" id="deskripsi_3" required> {{ old('deskripsi_3', $deskripsi_3->deskripsi_3 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
@@ -129,14 +129,14 @@
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="kategori_4"
                                             id="kategori_4"
-                                            value="{{ old('kategori_4', $data->Kategori_4 ?? '') }}">
+                                            value="{{ old('kategori_4', $kategori_4->Kategori_4 ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="deskripsi_4" id="deskripsi_4" required>{{ old('deskripsi_4', $deskripsi_4->deskripsi_4 ?? '') }}</textarea>
+                                        <textarea class="form-control" name="deskripsi_4" id="deskripsi_4" required> {{ old('deskripsi_4', $deskripsi_4->deskripsi_4 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
@@ -205,57 +205,57 @@
 
             if ($.trim($("#kategori_1").val()) == "") {
                 $('#kategori_1').addClass('is-invalid');
-                $('#kategori_1').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
+                $('#kategori_1').after('<div class="invalid-feedback">Judul Kategori wajib diisi.</div>');
                 valid = false;
             }
             if ($.trim($("#deskripsi_1").val()) == "") {
                 $('#deskripsi_1').addClass('is-invalid');
-                $('#deskripsi_1').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
+                $('#deskripsi_1').after('<div class="invalid-feedback">Deskripsi Kategori wajib diisi.</div>');
                 valid = false;
             }
 
             if ($.trim($("#kategori_2").val()) == "") {
                 $('#kategori_2').addClass('is-invalid');
-                $('#kategori_2').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
+                $('#kategori_2').after('<div class="invalid-feedback">Judul Kategori wajib diisi.</div>');
                 valid = false;
             }
             if ($.trim($("#deskripsi_2").val()) == "") {
                 $('#deskripsi_2').addClass('is-invalid');
-                $('#deskripsi_2').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
+                $('#deskripsi_2').after('<div class="invalid-feedback">Deskripsi Kategori wajib diisi.</div>');
                 valid = false;
             }
 
             if ($.trim($("#kategori_3").val()) == "") {
                 $('#kategori_3').addClass('is-invalid');
-                $('#kategori_3').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
+                $('#kategori_3').after('<div class="invalid-feedback">Judul Kategori wajib diisi.</div>');
                 valid = false;
             }
             if ($.trim($("#deskripsi_3").val()) == "") {
                 $('#deskripsi_3').addClass('is-invalid');
-                $('#deskripsi_3').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
+                $('#deskripsi_3').after('<div class="invalid-feedback">Deskripsi Kategori wajib diisi.</div>');
                 valid = false;
             }
 
             if ($.trim($("#kategori_4").val()) == "") {
                 $('#kategori_4').addClass('is-invalid');
-                $('#kategori_4').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
+                $('#kategori_4').after('<div class="invalid-feedback">Judul Kategori wajib diisi.</div>');
                 valid = false;
             }
             if ($.trim($("#deskripsi_4").val()) == "") {
                 $('#deskripsi_4').addClass('is-invalid');
-                $('#deskripsi_4').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
+                $('#deskripsi_4').after('<div class="invalid-feedback">Deskripsi Kategori  wajib diisi.</div>');
                 valid = false;
             }
 
             if (valid) {
                 Swal.fire({
-                    title: 'Konfirmasi?',
-                    text: 'Apakah anda yakin?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Tambah Data',
-                    confirmButtonColor: '#253A82',
-                    cancelButtonText: 'Batal'
+                title: 'Konfirmasi?',
+                text: 'Apakah anda yakin akan mengupdate data?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Update Data',
+                confirmButtonColor: '#253A82',
+                cancelButtonText: 'Tidak, Kembali'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#categori_infaq').submit();

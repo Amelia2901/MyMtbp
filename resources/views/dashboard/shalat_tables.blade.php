@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard | Jadwal Sholat</title>
+    <title>Dashboard | Jadwal Shalat</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -41,7 +41,7 @@
             <h1>Jadwal Shalat</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                     <li class="breadcrumb-item active">Jadwal Shalat</li>
                 </ol>
             </nav>

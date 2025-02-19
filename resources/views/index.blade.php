@@ -93,7 +93,7 @@
                 <div class="box-medsos whatsapp" style="display: none;">
                     <i class="fa-brands fa-whatsapp"></i>
                 </div>
-                <a href="login.php" style="display: block; text-decoration: none;">
+                <a href="{{ url('/login') }}" style="display: block; text-decoration: none;">
                     <div class="box-medsos user">
                         <i class="fa-solid fa-user"></i>
                     </div>

@@ -14,6 +14,7 @@ class activities extends Model
 
     protected $fillable = [
         'ActivityName',
+        'ActivityPhoto',
         'ActivityDescription',
         'ActivityDate',
         'ActivityTime',

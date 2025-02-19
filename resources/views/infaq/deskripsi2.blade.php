@@ -72,9 +72,7 @@
                                 <div class="row mb-3">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi 2</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="description_2"
-                                            id="description_2"
-                                            value="{{ old('description_1', $data->Description_1 ?? '') }}">
+                                        <textarea class="form-control" name="description_2" id="description_2" required> {{ old('description_2', $data->Description_2 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
@@ -135,12 +133,12 @@
             if (valid) {
                 Swal.fire({
                     title: 'Konfirmasi?',
-                    text: 'Apakah anda yakin?',
+                    text: 'Apakah anda yakin akan mengupdate data?',
                     icon: 'question',
                     showCancelButton: true,
-                    confirmButtonText: 'Tambah Data',
+                    confirmButtonText: 'Ya, Update Data',
                     confirmButtonColor: '#253A82',
-                    cancelButtonText: 'Batal'
+                    cancelButtonText: 'Tidak, Kembali'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#infaq_description').submit();

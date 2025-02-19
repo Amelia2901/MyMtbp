@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 // use Illuminate\Http\Requests\storeActivitiesRequest;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\storeActivitiesRequest;
 use App\Http\Requests\updateActivitiesRequest;
 use App\Models\activities;
@@ -26,10 +27,20 @@ class ActivitiesController extends Controller
 
         activities::create([
             'ActivityName' => $data['activityName'],
+            // 'ActivityPhoto' => $data['activityPhoto'],
             'ActivityDescription'=> $data['activityDescription'],
             'ActivityDate'=> $data['activityDate'],
             'ActivityTime'=> $data['activityTime'],
         ]);
+
+        if ($request->hasFile('activityPhoto')) {
+            $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
+            $data['ActivityPhoto'] = $photoPath; // Menyimpan path gambar ke database
+        }
+        
+        activities::create($data);
+        
+        
 
         return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil ditambahkan!');
     }
@@ -44,6 +55,7 @@ class ActivitiesController extends Controller
     {
         $request->validate([
             'activityName' => 'required',
+            'activityPhoto' => 'required',
             'activityDescription' => 'required',
             'activityDate' => 'required',
             'activityTime' => 'required',
@@ -51,12 +63,25 @@ class ActivitiesController extends Controller
 
         // Update data berdasarkan ID
         $data = activities::findOrFail($id);
-        $data->update([
-            'ActivityName' => $request->activityName,
-            'ActivityDescription' => $request->activityDescription,
-            'ActivityDate' => $request->activityDate,
-            'ActivityTime' => $request->activityTime,
-        ]);
+            if ($request->hasFile('activityPhoto')) {
+                // Hapus gambar lama jika ada
+                if ($data->ActivityPhoto) {
+                    Storage::disk('public')->delete($data->ActivityPhoto);
+                }
+            
+                // Simpan gambar baru
+                $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
+                $data->ActivityPhoto = $photoPath;
+            }
+            
+            $data->update([
+                'ActivityName' => $request->activityName,
+                'ActivityDescription' => $request->activityDescription,
+                'ActivityDate' => $request->activityDate,
+                'ActivityTime' => $request->activityTime,
+            ]);
+            
+            $data->save();
 
         return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil diperbarui');
     }

@@ -122,8 +122,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/deskripsi-infaq2/update', [InfaqDescriptionController::class, 'store2'])->name('infaqDescription.store2');
 
     //route kategori infaq
-    Route::get('/kategori-infaq', [CategoriInfaqController::class, 'index'])->name('CategoriInfaq.index');
-    Route::post('/kategori-infaq/update', [CategoriInfaqController::class, 'store'])->name('CategoriInfaq.store');
+    // Route::post('/kategori-infaq/update', [CategoriInfaqController::class, 'store'])->name('CategoriInfaq.store');
+    Route::post('/kategori-infaq', [CategoriInfaqController::class, 'storeOrUpdate'])->name('CategoriInfaq.storeOrUpdate');
+    // Route::post('/kategori-infaq/update', [CategoriInfaqController::class, 'update'])->name('CategoriInfaq.update');
 
     // route metode pembayaran
     Route::get('/dashboard/payment-method', [methodPaymentController::class, 'index'])->name('payment.index');

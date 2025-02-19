@@ -55,6 +55,9 @@
                         <div class="card-body">
                             <h5 class="card-title">Data Jadwal Shalat</h5>
                             <div class="col-lg-12 text-end">
+                                <a style="margin-bottom: 10px;" type="button" class="btn btn-primary"
+                                    href="{{ route('shalat.fetch') }}"><i class="bi bi-plus-lg me-1"></i>
+                                    Perbarui Jadwal Shalat</a>
                             </div>
                             <!-- Table with stripped rows -->
                             <table class="table datatable">

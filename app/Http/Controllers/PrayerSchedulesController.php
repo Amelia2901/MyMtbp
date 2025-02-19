@@ -6,7 +6,8 @@ use App\Models\prayer_schedules;
 use App\Http\Requests\Storeprayer_schedulesRequest;
 use App\Http\Requests\Updateprayer_schedulesRequest;
 use App\Models\prayer_times;
-
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class PrayerSchedulesController extends Controller
 {
@@ -18,6 +19,14 @@ class PrayerSchedulesController extends Controller
         $data = prayer_times::all();
         return view('dashboard.shalat_tables', compact('data'));
     }
+    public function fetchData()
+    {
+        DB::table('prayer_times')->delete();
+        Artisan::call('prayer:fetch'); 
+        $data = prayer_times::all();
+        return redirect()->route('shalat.index')->with('success', 'Jadwal Shalat berhasil diperbarui');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -82,11 +91,11 @@ class PrayerSchedulesController extends Controller
         $maghrib = $request->maghrib;
         $isya = $request->isya;
         $shalat->update([
-            'subuh' => $subuh . " (WIB)",
-            'dzuhur' => $dzuhur . " (WIB)",
-            'ashar' => $ashar . " (WIB)",
-            'maghrib' =>$maghrib . " (WIB)",
-            'isya' =>$isya . " (WIB)",
+            'subuh' => $subuh,
+            'dzuhur' => $dzuhur,
+            'ashar' => $ashar,
+            'maghrib' =>$maghrib,
+            'isya' =>$isya,
         ]);
 
         return redirect()->route('shalat.index')->with('success', 'Jadwal Shalat berhasil diperbarui');

@@ -64,8 +64,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>Metode Pembayaran</span>
+                    <a href="{{ url('/dashboard/payment-method') }}">
+                        <i class="bi bi-circle"></i><span>Metode Infaq</span>
                     </a>
                 </li>
             </ul>

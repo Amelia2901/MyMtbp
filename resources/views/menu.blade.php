@@ -101,6 +101,31 @@
             </ul>
         </li><!-- End Icons Nav -->
 
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#zakats-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-box-seam"></i><span>Zakat</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="zakats-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ url('/banner-zakat') }}">
+                        <i class="bi bi-circle"></i><span>Banner</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/banner') }}">
+                        <i class="bi bi-circle"></i><span>Zakat Emas & Perak</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+
+
+
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('navbar.index') }}">
                 <i class="bi bi-list-task"></i>

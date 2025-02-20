@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactMosquesController;
 use App\Http\Controllers\BaganController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BannerZakatController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\Front\LandingController;
 use App\Http\Controllers\OrganizationalChartController;
@@ -69,7 +70,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/kegiatan/{id}', [ActivitiesController::class, 'update'])->name('kegiatan.update');
     Route::patch('/kegiatan/{id}/toggle', [ActivitiesController::class, 'toggle'])->name('kegiatan.toggle');
 
-
     //route contact
     Route::get('/dashboard/contact', [ContactMosquesController::class, 'index'])->name('contact.index');
     Route::get('/dashboard/contact/{id}/edit', [ContactMosquesController::class, 'edit'])->name('contact.edit');
@@ -120,11 +120,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/kategori-infaq/update', [CategoriInfaqController::class, 'storeOrUpdate'])->name('CategoriInfaq.storeOrUpdate');
     Route::get('/kategori-infaq', [CategoriInfaqController::class, 'index'])->name('CategoriInfaq.index');
 
-
     // route metode pembayaran
     Route::get('/dashboard/payment-method', [methodPaymentController::class, 'index'])->name('payment.index');
     Route::post('/dashboard/payment-method/updateBank', [methodPaymentController::class, 'store'])->name('payment.store');
     Route::post('/dashboard/payment-method/updateQRIS', [methodPaymentController::class, 'storeqris'])->name('payment.storeqris');
+
+    // <!Route Zakat -->
+    // banner zakat
+    Route::get('/banner-zakat', [BannerZakatController::class, 'index'])->name('banner-zakat.index'); // Menampilkan halaman banner
+    Route::post('/banner-zakat', [BannerZakatController::class, 'store'])->name('banner-zakat.store'); // Menyimpan data banner
+    Route::put('/banner-zakat/{id}', [BannerZakatController::class, 'update'])->name('banner-zakat.update'); // Mengupdate banner
 
 
     // Navbar Menu 

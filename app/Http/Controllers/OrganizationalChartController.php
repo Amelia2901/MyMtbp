@@ -20,22 +20,25 @@ class OrganizationalChartController extends Controller
         return view('StrukturOrganisasi.organizational_chart_form');
     }
 
-    public function store(StoreOrganizationalChartRequest $request){
-        
-        $data = $request->validated();
-        // echo $data; 
-        if ($request->hasFile('photo')) {
-            $filePath = $request->file('photo')->store('uploads/organizationStructures_photos', 'public');
-        }
+    public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'position' => 'required|string|max:255',
+        'photo' => 'required|image|max:2048',
+    ]);
 
-        OrganizationalChart::create([
-            'photo'=> $filePath,
-            'position'=> $data['position'],
-            'name' => $data['name'],
-        ]);
+    $photoPath = $request->file('photo')->store('organization', 'public');
 
-        return redirect()->route('organizational_chart.index')->with('success', 'Susunan Organisasi berhasil ditambahkan!');
-    }
+    OrganizationalChart::create([
+        'name' => $request->name,
+        'position' => $request->position,
+        'photo' => $photoPath,
+    ]);
+
+    return redirect()->route('organizational_chart.index')->with('success', 'Data berhasil ditambahkan!');
+}
+
 
     public function edit(OrganizationalChart $request, $id = null)
     {
@@ -43,25 +46,26 @@ class OrganizationalChartController extends Controller
         return view('StrukturOrganisasi.organizational_chart_form', compact('item'));
     }
 
-    public function update(UpdateOrganizationalChartRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $item = OrganizationalChart::findOrFail($id);
+    
         $request->validate([
-            'photo' ,
-            'position' => 'required',
-            'name' => 'required',
+            'name' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'photo' => 'nullable|image|max:2048',
         ]);
-
-        // Update data berdasarkan ID
-        $data = OrganizationalChart::findOrFail($id);
+    
         if ($request->hasFile('photo')) {
-            $filePath = $request->file('photo')->store('uploads/organizationStructures_photos', 'public');
+            $photoPath = $request->file('photo')->store('organization', 'public');
+            $item->photo = $photoPath;
         }
-        $data->update([
-            'photo' => $filePath,
-            'position' => $request->position,
-            'name' => $request->name,
-        ]);
-
-        return redirect()->route('organizational_chart.index')->with('success', 'Susunan Organisasi berhasil diperbarui');
+    
+        $item->name = $request->name;
+        $item->position = $request->position;
+        $item->save();
+    
+        return redirect()->route('organizational_chart.index')->with('success', 'Data berhasil diperbarui!');
     }
+    
 }

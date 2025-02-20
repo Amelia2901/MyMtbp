@@ -135,12 +135,12 @@
             if (valid) {
                 Swal.fire({
                     title: 'Konfirmasi?',
-                    text: 'Apakah anda yakin?',
+                    text: 'Apakah anda yakin akan mengupdate data?',
                     icon: 'question',
                     showCancelButton: true,
-                    confirmButtonText: 'Tambah Data',
+                    confirmButtonText: 'Ya, Update Data',
                     confirmButtonColor: '#253A82',
-                    cancelButtonText: 'Batal'
+                    cancelButtonText: 'Tidak, Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#infaq_description').submit();

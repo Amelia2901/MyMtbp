@@ -25,8 +25,11 @@ class updateActivitiesRequest extends FormRequest
             'activityName' => 'required|string|max:255',
             'activityPhoto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'activityDescription' => 'required|string|max:255',
+            'activityPerformers' => 'required|string|max:255',
             'activityDate' => 'required|date',
             'activityTime' => 'required|string|max:255',
+            'activityTime2' => 'required|string|max:255',
+            'activityPlace' => 'required|string|max:255',
         ];
     }
      /**
@@ -39,8 +42,11 @@ class updateActivitiesRequest extends FormRequest
             'activityName' => 'Nama kegiatan wajib diisi.',
             // 'activityPhoto' => 'Photo kegiatan wajib diisi.',
             'activityDescription' => 'Deskripsi kegiatan wajib diisi.',
+            'activityPerformers' => 'required|string|max:255',
             'activityDate' => 'Tanggal kegiatan wajib diisi.',
             'activityTime' => 'Waku kegiatan wajib diisi.',
+            'activityTime2' => 'required|string|max:255',
+            'activityPlace' => 'required|string|max:255',
         ];
     }
 }

@@ -25,18 +25,24 @@ class ActivitiesController extends Controller
         
         $data = $request->validated(); 
 
-        activities::create([
-            'ActivityName' => $data['activityName'],
-            // 'ActivityPhoto' => $data['activityPhoto'],
-            'ActivityDescription'=> $data['activityDescription'],
-            'ActivityDate'=> $data['activityDate'],
-            'ActivityTime'=> $data['activityTime'],
-        ]);
+        // activities::create([
+        //     'ActivityName' => $data['activityName'],
+        //     // 'ActivityPhoto' => $data['activityPhoto'],
+        //     'ActivityDescription'=> $data['activityDescription'],
+        //     'ActivityDate'=> $data['activityDate'],
+        //     'ActivityTime'=> $data['activityTime'],
+        //     'ActivityTime2'=> $data['activityTime2'],
+        //     'ActivityPlace'=> $data['activityPlace'],
+        //     'ActivityPerformers'=> $data['activityPerformers'],
+        // ]);
 
         if ($request->hasFile('activityPhoto')) {
             $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
             $data['ActivityPhoto'] = $photoPath; // Menyimpan path gambar ke database
         }
+    else {
+        $data['ActivityPhoto'] = 'default.jpg'; // Atur default jika tidak ada gambar
+    }
         
         activities::create($data);
         
@@ -57,8 +63,11 @@ class ActivitiesController extends Controller
             'activityName' => 'required',
             'activityPhoto' => 'required',
             'activityDescription' => 'required',
+            'activityPerformers' => 'required',
             'activityDate' => 'required',
             'activityTime' => 'required',
+            'activityTime2' => 'required',
+            'activityPlace' => 'required',
         ]);
 
         // Update data berdasarkan ID
@@ -77,8 +86,11 @@ class ActivitiesController extends Controller
             $data->update([
                 'ActivityName' => $request->activityName,
                 'ActivityDescription' => $request->activityDescription,
+                'ActivityPerformers' => $request->activityPerformers,
                 'ActivityDate' => $request->activityDate,
                 'ActivityTime' => $request->activityTime,
+                'ActivityTime2' => $request->activityTime2,
+                'ActivityPlace' => $request->activityPlace,
             ]);
             
             $data->save();

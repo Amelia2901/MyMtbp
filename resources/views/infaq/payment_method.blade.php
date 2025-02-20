@@ -47,7 +47,7 @@
             padding: 10px 20px;
             /* border-radius: 10px; */
             background: transparent;
-            border-bottom: 3px aqua solid;
+            border-bottom: 3px #0d6efd solid;
         }
     </style>
 </head>
@@ -104,7 +104,7 @@
                                             </option>
                                             <option value="BSI"
                                                 {{ isset($data) && $data->bank == 'BSI' ? 'selected' : '' }}>BSI (Bank
-                                                Syariah Indoneia)
+                                                Syariah Indonesia)
                                             </option>
                                             <option value="BRI"
                                                 {{ isset($data) && $data->bank == 'BRI' ? 'selected' : '' }}>BRI (Bank
@@ -267,10 +267,10 @@
             if (valid) {
                 Swal.fire({
                     title: 'Konfirmasi?',
-                    text: 'Apakah anda yakin?',
+                    text: 'Apakah anda yakin akan mengupdate data?',
                     icon: 'question',
                     showCancelButton: true,
-                    confirmButtonText: 'Tambah Data',
+                    confirmButtonText: 'Ya, Update Data',
                     confirmButtonColor: '#253A82',
                     cancelButtonText: 'Batal'
                 }).then((result) => {
@@ -304,10 +304,10 @@
             if (valid) {
                 Swal.fire({
                     title: 'Konfirmasi?',
-                    text: 'Apakah anda yakin?',
+                    text: 'Apakah anda yakin akan mengupdate data?',
                     icon: 'question',
                     showCancelButton: true,
-                    confirmButtonText: 'Perbarui QRIS',
+                    confirmButtonText: 'Ya, Perbarui QRIS',
                     confirmButtonColor: '#253A82',
                     cancelButtonText: 'Batal'
                 }).then((result) => {

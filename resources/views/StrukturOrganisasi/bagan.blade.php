@@ -170,10 +170,10 @@
             if (valid) {
                 Swal.fire({
                     title: 'Konfirmasi?',
-                    text: 'Apakah anda yakin?',
+                    text: 'Apakah anda yakin akan mengupdate data?',
                     icon: 'question',
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Tambah Data',
+                    confirmButtonText: 'Ya, Update Data',
                     confirmButtonColor: '#253A82',
                     cancelButtonText: 'Tidak, Kembali'
                 }).then((result) => {

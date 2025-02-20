@@ -69,8 +69,11 @@
                                         <th>Nama Kegiatan</th>
                                         <th>Foto</th>
                                         <th>Deskripsi</th>
+                                        <th>Pengisi Kegiatan</th>
                                         <th>Tanggal</th>
-                                        <th>Waktu</th>
+                                        <th>Waktu Mulai</th>
+                                        <th>Waktu Selesai</th>
+                                        <th>Tempat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -84,8 +87,11 @@
                                                 <img src="{{ asset('storage/'.$item->ActivityPhoto) }}" width="100" style="max-height: 80px;" alt="Activity Image">
                                             </td>
                                             <td>{{ $item->ActivityDescription }}</td>
+                                            <td>{{ $item->ActivityPerformers }}</td>
                                             <td>{{ $item->ActivityDate }}</td>
                                             <td>{{ $item->ActivityTime }}</td>
+                                            <td>{{ $item->ActivityTime2 }}</td>
+                                            <td>{{ $item->ActivityPlace }}</td>
                                             <td>
                                                 <a href="{{ route('kegiatan.edit', $item->id) }}"
                                                     class="btn btn-primary">

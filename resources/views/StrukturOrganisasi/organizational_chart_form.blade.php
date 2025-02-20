@@ -66,14 +66,18 @@
                                 @csrf
                                 @if (isset($item))
                                     @method('PUT')
+
                                     <div class="row mb-4">
                                         <label for="inputText" class="col-sm-2 col-form-label">Foto Sekarang</label>
                                         <div class="col-sm-10">
-                                            <img src="{{ asset('storage/' . $item->photo) }}"
+                                            <img src="{{ asset('storage/'. $item->photo) }}"
                                                 alt="foto-susunan-organisasi">
                                         </div>
                                     </div>
+
                                 @endif
+
+
                                 <div class="row mb-4">
                                     <label for="inputText" class="col-sm-2 col-form-label">Foto</label>
                                     <div class="col-sm-10">
@@ -100,10 +104,11 @@
                                             <input type="text" class="form-control" name="photo" id="photo" value="{{ old('photo', $item->photo ?? '') }}" required>
                                         </div>
                                     </div> -->
+                                    <input type="hidden" id="mode" value="tambah">
                                 <div class="row mb-4">
                                     <div class="col-sm-12">
-                                        <button type="button" onclick="simpan()" class="btn btn-primary">Submit
-                                            Form</button>
+                                        <button type="button" onclick="simpan()" class="btn btn-primary">
+                                            {{ isset($item) ? 'Update Data' : 'Tambah Data' }}</button>
                                     </div>
                                 </div>
                         </div>
@@ -165,29 +170,64 @@
         }
 
         // Display confirmation popup when form is submitted
+        // function simpan() {
+        //     if (!validateForm()) {
+        //         return false;
+        //     }
+
+        //     let form = document.querySelector('#form_organisasi');
+        //     console.log(form);
+
+        //     Swal.fire({
+        //         title: 'Konfirmasi?',
+        //         text: 'Apakah anda yakin akan mengupdate data?',
+        //         icon: 'question',
+        //         showCancelButton: true,
+        //         confirmButtonText: 'Ya, Update Data',
+        //         confirmButtonColor: '#253A82',
+        //         cancelButtonText: 'Tidak, Kembali'
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             $('#form_organisasi').submit();
+        //         }
+        //     });
+
+        // };
+
         function simpan() {
-            if (!validateForm()) {
-                return false;
-            }
+    if (!validateForm()) {
+        return false;
+    }
 
-            let form = document.querySelector('#form_organisasi');
-            console.log(form);
+    let mode = document.querySelector('#mode').value;
+    let title, text, confirmButtonText;
 
-            Swal.fire({
-                title: 'Konfirmasi?',
-                text: 'Apakah anda yakin akan mengupdate data?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, Update Data',
-                confirmButtonColor: '#253A82',
-                cancelButtonText: 'Tidak, Kembali'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#form_organisasi').submit();
-                }
-            });
+    if (mode === 'edit') {
+        title = 'Konfirmasi Edit';
+        text = 'Apakah anda yakin akan mengupdate data ini?';
+        confirmButtonText = 'Ya, Update Data';
+    } else {
+        title = 'Konfirmasi Tambah';
+        text = 'Apakah anda yakin akan menambahkan data baru?';
+        confirmButtonText = 'Ya, Tambah Data';
+    }
 
-        };
+    Swal.fire({
+        title: title,
+        text: text,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: confirmButtonText,
+        confirmButtonColor: '#253A82',
+        cancelButtonText: 'Tidak, Kembali'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.querySelector('#form_organisasi').submit();
+        }
+    });
+}
+
+
 
         // Remove invalid class when user starts typing
         $('#photo, #position, #name').on('input', function() {

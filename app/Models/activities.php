@@ -16,7 +16,10 @@ class activities extends Model
         'ActivityName',
         'ActivityPhoto',
         'ActivityDescription',
+        'ActivityPerformers',
         'ActivityDate',
         'ActivityTime',
+        'ActivityTime2',
+        'ActivityPlace',
     ];
 }

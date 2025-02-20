@@ -69,6 +69,8 @@
                                 @if (isset($item))
                                     @method('PUT')
                                 @endif
+
+                                <!-- Activity Name-->
                                 <div class="row mb-4">
                                     <label for="activityName" class="col-sm-2 col-form-label">Nama Kegiatan</label>
                                     <div class="col-sm-10">
@@ -77,6 +79,7 @@
                                     </div>
                                 </div>
                                 
+                                <!-- Activity Photo-->
                                 <div class="row mb-4">
                                     <label for="activityPhoto" class="col-sm-2 col-form-label">Foto Kegiatan</label>
                                     <div class="col-sm-10">
@@ -85,12 +88,24 @@
                                     </div>
                                 </div>
 
+                                <!-- Activity Description-->
                                 <div class="row mb-4">
                                     <label for="activityDescription" class="col-sm-2 col-form-label">Deskripsi kegiatan</label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control" name="activityDescription" id="activityDescription" required>{{ old('activityDescription', $item->ActivityDescription ?? '') }}</textarea>
                                     </div>
                                 </div>
+
+                                <!-- Activity Performers-->
+                                <div class="row mb-4">
+                                    <label for="activityPerformers" class="col-sm-2 col-form-label">Pengisi Kegiatan</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="activityPerformers" id="activityPerformers"
+                                            value="{{ old('activityPerformers', $item->ActivityPerformers ?? '') }}" required>
+                                    </div>
+                                </div>
+
+                                <!-- Activity Date-->
                                 <div class="row mb-4">
                                     <label for="activityDate" class="col-sm-2 col-form-label">Tanggal Kegiatan</label>
                                     <div class="col-sm-10">
@@ -98,13 +113,34 @@
                                             value="{{ old('activityDate', $item->ActivityDate ?? '') }}" required>
                                     </div>
                                 </div>
+
+                                <!-- Activity Time-->
                                 <div class="row mb-4">
-                                    <label for="activityTime" class="col-sm-2 col-form-label">Waktu Kegiatan</label>
+                                    <label for="activityTime" class="col-sm-2 col-form-label">Waktu Mulai</label>
                                     <div class="col-sm-10">
                                         <input type="time" class="form-control" name="activityTime" id="activityTime"
                                             value="{{ old('activityTime', $item->ActivityTime ?? '') }}" required>
                                     </div>
                                 </div>
+
+                                <!-- Activity Time2-->
+                                <div class="row mb-4">
+                                    <label for="activityTime2" class="col-sm-2 col-form-label">Waktu Selesai</label>
+                                    <div class="col-sm-10">
+                                        <input type="time" class="form-control" name="activityTime2" id="activityTime2"
+                                            value="{{ old('activityTime2', $item->ActivityTime2 ?? '') }}" required>
+                                    </div>
+                                </div>
+                                
+                                <!-- Activity Place-->
+                                <div class="row mb-4">
+                                    <label for="activityPlace" class="col-sm-2 col-form-label">Tempat Kegiatan</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="activityPlace" id="activityPlace"
+                                            value="{{ old('activityPlace', $item->ActivityPlace ?? '') }}" required>
+                                    </div>
+                                </div>
+
                                 <div class="row mb-4">
                                     <div class="col-sm-12">
                                         <button type="button" onclick="simpan()" class="btn btn-primary">Submit
@@ -162,6 +198,11 @@
                 $('#activityDescription').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
                 valid = false;
             }
+            if ($.trim($("#activityPerformers").val()) == "") {
+                $('#activityPerformers').addClass('is-invalid');
+                $('#activityPerformers').after('<div class="invalid-feedback">Pengisi kegiatan wajib diisi.</div>');
+                valid = false;
+            }
             if ($.trim($("#activityDate").val()) == "") {
                 $('#activityDate').addClass('is-invalid');
                 $('#activityDate').after('<div class="invalid-feedback">Tanggal Kegiatan wajib diisi.</div>');
@@ -172,6 +213,17 @@
                 $('#activityTime').after('<div class="invalid-feedback">Jam Kegiatan wajib diisi.</div>');
                 valid = false;
             }
+            if ($.trim($("#activityTime2").val()) == "") {
+                $('#activityTime2').addClass('is-invalid');
+                $('#activityTime2').after('<div class="invalid-feedback">Jam Selesai Kegiatan wajib diisi.</div>');
+                valid = false;
+            }
+            if ($.trim($("#activityPlace").val()) == "") {
+                $('#activityPlace').addClass('is-invalid');
+                $('#activityPlace').after('<div class="invalid-feedback">Tempat Kegiatan wajib diisi.</div>');
+                valid = false;
+            }
+            
 
             return valid;
         }
@@ -202,7 +254,7 @@
         };
 
         // Remove invalid class when user starts typing
-        $('#activityName, #activityPhoto, #activityDescription, #activityDate, #activityTime').on('input', function() {
+        $('#activityName, #activityPhoto, #activityDescription, #activityPerformers, #activityDate, #activityTime, #activityTime2, #activityPlace').on('input', function() {
             if ($.trim($(this).val()) !== "") {
                 $(this).removeClass('is-invalid');
                 $(this).next('.invalid-feedback').remove();

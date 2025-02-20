@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('ActivityName');
             $table->string('ActivityPhoto');
+            $table->text('ActivityDescription');
+            $table->text('ActivityPerformers');
             $table->date('ActivityDate');
             $table->string('ActivityTime');
-            $table->text('ActivityDescription');
+            $table->string('ActivityTime2');
+            $table->text('ActivityPlace');
             $table->timestamps();
         });
     }

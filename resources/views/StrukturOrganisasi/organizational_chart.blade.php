@@ -81,7 +81,7 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->position }}</td>
-                                            <td><img src="{{ asset('storage/' . $item->photo) }}" width="50"></td>
+                                            <td><img src="{{ asset('storage/' . $item->photo) }}" width="50" style="max-height: 70px;"></td>
                                             <td>
                                                 <a href="{{ route('organizational_chart.edit', $item->id) }}"
                                                     class="btn btn-primary">

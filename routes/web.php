@@ -91,20 +91,14 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/bagan', [BaganController::class, 'store'])->name('bagan.store');
 
     // route susunan organisasi dkm
-    Route::get('/organizational_chart', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
-    Route::get('/organizational_chart/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
-    Route::get('/organizational_chart/{id}/edit', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
-    Route::post('/organizational_chart/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
-    Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
+    // Route::get('/organizational_chart', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
+    // Route::get('/organizational_chart/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
+    // Route::get('/organizational_chart/{id}/edit', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
+    // Route::post('/organizational_chart/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
+    // Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
 
-    // Route::prefix('organizational_chart')->group(function () {
-    //     Route::get('/', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
-    //     Route::get('/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
-    //     Route::post('/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
-    //     Route::get('/edit/{id}', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
-    //     Route::put('/update/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
-    //     Route::delete('/delete/{id}', [OrganizationalChartController::class, 'destroy'])->name('organizational_chart.destroy');
-    // });
+    Route::resource('organizational_chart', OrganizationalChartController::class);
+
     
 
     // <!-- route infaq-->
@@ -122,9 +116,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/deskripsi-infaq2/update', [InfaqDescriptionController::class, 'store2'])->name('infaqDescription.store2');
 
     //route kategori infaq
-    // Route::post('/kategori-infaq/update', [CategoriInfaqController::class, 'store'])->name('CategoriInfaq.store');
-    Route::post('/kategori-infaq', [CategoriInfaqController::class, 'storeOrUpdate'])->name('CategoriInfaq.storeOrUpdate');
-    // Route::post('/kategori-infaq/update', [CategoriInfaqController::class, 'update'])->name('CategoriInfaq.update');
+    Route::post('/kategori-infaq/update', [CategoriInfaqController::class, 'storeOrUpdate'])->name('CategoriInfaq.storeOrUpdate');
+    Route::get('/kategori-infaq', [CategoriInfaqController::class, 'index'])->name('CategoriInfaq.index');
+
 
     // route metode pembayaran
     Route::get('/dashboard/payment-method', [methodPaymentController::class, 'index'])->name('payment.index');

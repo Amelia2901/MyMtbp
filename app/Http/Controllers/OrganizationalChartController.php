@@ -21,23 +21,23 @@ class OrganizationalChartController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'position' => 'required|string|max:255',
-        'photo' => 'required|image|max:2048',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'photo' => 'required|image|max:2048',
+        ]);
 
-    $photoPath = $request->file('photo')->store('organization', 'public');
+        $photoPath = $request->file('photo')->store('organization', 'public');
 
-    OrganizationalChart::create([
-        'name' => $request->name,
-        'position' => $request->position,
-        'photo' => $photoPath,
-    ]);
+        OrganizationalChart::create([
+            'name' => $request->name,
+            'position' => $request->position,
+            'photo' => $photoPath,
+        ]);
 
-    return redirect()->route('organizational_chart.index')->with('success', 'Data berhasil ditambahkan!');
-}
+        return redirect()->route('organizational_chart.index')->with('success', 'Data berhasil ditambahkan!');
+    }
 
 
     public function edit(OrganizationalChart $request, $id = null)

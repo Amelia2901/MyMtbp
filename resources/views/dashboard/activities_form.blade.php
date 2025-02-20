@@ -141,12 +141,14 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-4">
-                                    <div class="col-sm-12">
-                                        <button type="button" onclick="simpan()" class="btn btn-primary">Submit
-                                            Form</button>
+                                <!-- ======= Button ======= -->
+                                <input type="hidden" id="mode" value="{{ isset($item) ? 'edit' : 'tambah' }}">
+                                    <div class="row mb-4">
+                                        <div class="col-sm-12">
+                                            <button type="button" onclick="simpan()" class="btn btn-primary">
+                                                {{ isset($item) ? 'Update Data' : 'Tambah Data' }}</button>
+                                        </div>
                                     </div>
-                                </div>
                             </form>
                         </div>
                     </div>
@@ -228,30 +230,39 @@
             return valid;
         }
 
-        // Display confirmation popup when form is submitted
+
         function simpan() {
-            if (!validateForm()) {
-                return false;
+        if (!validateForm()) {
+            return false;
+        }
+
+        let mode = document.querySelector('#mode').value; // Ambil nilai mode
+        let title, text, confirmButtonText;
+
+        if (mode === 'edit') {
+            title = 'Konfirmasi Edit';
+            text = 'Apakah anda yakin akan mengupdate data ini?';
+            confirmButtonText = 'Ya, Update Data';
+        } else {
+            title = 'Konfirmasi Tambah';
+            text = 'Apakah anda yakin akan menambahkan data baru?';
+            confirmButtonText = 'Ya, Tambah Data';
+        }
+        
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: confirmButtonText,
+            confirmButtonColor: '#253A82',
+            cancelButtonText: 'Tidak, Kembali'
+    }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector('#activityForm').submit();
             }
-
-            let form = document.querySelector('#activityForm');
-            console.log(form);
-
-            Swal.fire({
-                title: 'Konfirmasi?',
-                text: 'Apakah anda yakin akan mengupdate data?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, Update Data',
-                confirmButtonColor: '#253A82',
-                cancelButtonText: 'Tidak, Kembali'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#activityForm').submit();
-                }
-            });
-
-        };
+    });
+}
 
         // Remove invalid class when user starts typing
         $('#activityName, #activityPhoto, #activityDescription, #activityPerformers, #activityDate, #activityTime, #activityTime2, #activityPlace').on('input', function() {
@@ -261,17 +272,6 @@
             }
         });
     </script>
-
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: 'Sukses!',
-                text: "{{ session('success') }}",
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    @endif
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>

@@ -32,21 +32,26 @@ class updateActivitiesRequest extends FormRequest
             'activityPlace' => 'required|string|max:255',
         ];
     }
-     /**
-     *  pesan kustom untuk error validasi
+
+    /**
+     * Pesan kustom untuk error validasi
      *
      * @return array
-     */ public function messages()
-     {
+     */
+    public function messages(): array
+    {
         return [
-            'activityName' => 'Nama kegiatan wajib diisi.',
-            // 'activityPhoto' => 'Photo kegiatan wajib diisi.',
-            'activityDescription' => 'Deskripsi kegiatan wajib diisi.',
-            'activityPerformers' => 'required|string|max:255',
-            'activityDate' => 'Tanggal kegiatan wajib diisi.',
-            'activityTime' => 'Waku kegiatan wajib diisi.',
-            'activityTime2' => 'required|string|max:255',
-            'activityPlace' => 'required|string|max:255',
+            'activityName.required' => 'Nama kegiatan wajib diisi.',
+            'activityDescription.required' => 'Deskripsi kegiatan wajib diisi.',
+            'activityPerformers.required' => 'Pelaksana kegiatan wajib diisi.',
+            'activityDate.required' => 'Tanggal kegiatan wajib diisi.',
+            'activityTime.required' => 'Waktu kegiatan wajib diisi.',
+            'activityTime2.required' => 'Waktu kegiatan (akhir) wajib diisi.',
+            'activityPlace.required' => 'Tempat kegiatan wajib diisi.',
+
+            'activityPhoto.image' => 'Foto harus berupa file gambar.',
+            'activityPhoto.mimes' => 'Foto harus dalam format jpeg, png, jpg, atau gif.',
+            'activityPhoto.max' => 'Ukuran foto tidak boleh lebih dari 2MB.',
         ];
     }
 }

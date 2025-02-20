@@ -67,6 +67,7 @@
                                 @if (isset($item))
                                     @method('PUT')
 
+                                    <!-- ======= Foto Sekarang ======= -->
                                     <div class="row mb-4">
                                         <label for="inputText" class="col-sm-2 col-form-label">Foto Sekarang</label>
                                         <div class="col-sm-10">
@@ -77,40 +78,40 @@
 
                                 @endif
 
-
-                                <div class="row mb-4">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Foto</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" type="file" id="photo" name="photo">
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label for="position" class="col-sm-2 col-form-label">Jabatan</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="position" id="position"
-                                            value="{{ old('position', $item->position ?? '') }}" required>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label for="name" class="col-sm-2 col-form-label">Nama</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="name" id="name"
-                                            value="{{ old('name', $item->name ?? '') }}" required>
-                                    </div>
-                                </div>
-                                <!-- <div class="row mb-4">
-                                        <label for="photo" class="col-sm-2 col-form-label">Foto</label>
+                                    <!-- ======= Foto ======= -->
+                                    <div class="row mb-4">
+                                        <label for="inputText" class="col-sm-2 col-form-label">Foto</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="photo" id="photo" value="{{ old('photo', $item->photo ?? '') }}" required>
+                                            <input class="form-control" type="file" id="photo" name="photo">
                                         </div>
-                                    </div> -->
-                                    <input type="hidden" id="mode" value="tambah">
-                                <div class="row mb-4">
-                                    <div class="col-sm-12">
-                                        <button type="button" onclick="simpan()" class="btn btn-primary">
-                                            {{ isset($item) ? 'Update Data' : 'Tambah Data' }}</button>
                                     </div>
-                                </div>
+
+                                    <!-- ======= Jabatan ======= -->
+                                    <div class="row mb-4">
+                                        <label for="position" class="col-sm-2 col-form-label">Jabatan</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="position" id="position"
+                                                value="{{ old('position', $item->position ?? '') }}" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- ======= Nama ======= -->
+                                    <div class="row mb-4">
+                                        <label for="name" class="col-sm-2 col-form-label">Nama</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="name" id="name"
+                                                value="{{ old('name', $item->name ?? '') }}" required>
+                                        </div>
+                                    </div>
+                                
+                                    <!-- ======= Button ======= -->
+                                    <input type="hidden" id="mode" value="{{ isset($item) ? 'edit' : 'tambah' }}">
+                                    <div class="row mb-4">
+                                        <div class="col-sm-12">
+                                            <button type="button" onclick="simpan()" class="btn btn-primary">
+                                                {{ isset($item) ? 'Update Data' : 'Tambah Data' }}</button>
+                                        </div>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -147,7 +148,6 @@
 
 
     <script>
-        // Validation for form before submission
         function validateForm() {
             let valid = true;
 
@@ -169,65 +169,38 @@
             return valid;
         }
 
-        // Display confirmation popup when form is submitted
-        // function simpan() {
-        //     if (!validateForm()) {
-        //         return false;
-        //     }
-
-        //     let form = document.querySelector('#form_organisasi');
-        //     console.log(form);
-
-        //     Swal.fire({
-        //         title: 'Konfirmasi?',
-        //         text: 'Apakah anda yakin akan mengupdate data?',
-        //         icon: 'question',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Ya, Update Data',
-        //         confirmButtonColor: '#253A82',
-        //         cancelButtonText: 'Tidak, Kembali'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             $('#form_organisasi').submit();
-        //         }
-        //     });
-
-        // };
-
         function simpan() {
-    if (!validateForm()) {
-        return false;
-    }
-
-    let mode = document.querySelector('#mode').value;
-    let title, text, confirmButtonText;
-
-    if (mode === 'edit') {
-        title = 'Konfirmasi Edit';
-        text = 'Apakah anda yakin akan mengupdate data ini?';
-        confirmButtonText = 'Ya, Update Data';
-    } else {
-        title = 'Konfirmasi Tambah';
-        text = 'Apakah anda yakin akan menambahkan data baru?';
-        confirmButtonText = 'Ya, Tambah Data';
-    }
-
-    Swal.fire({
-        title: title,
-        text: text,
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: confirmButtonText,
-        confirmButtonColor: '#253A82',
-        cancelButtonText: 'Tidak, Kembali'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            document.querySelector('#form_organisasi').submit();
+        if (!validateForm()) {
+            return false;
         }
+
+        let mode = document.querySelector('#mode').value; // Ambil nilai mode
+        let title, text, confirmButtonText;
+
+        if (mode === 'edit') {
+            title = 'Konfirmasi Edit';
+            text = 'Apakah anda yakin akan mengupdate data ini?';
+            confirmButtonText = 'Ya, Update Data';
+        } else {
+            title = 'Konfirmasi Tambah';
+            text = 'Apakah anda yakin akan menambahkan data baru?';
+            confirmButtonText = 'Ya, Tambah Data';
+        }
+
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: confirmButtonText,
+            confirmButtonColor: '#253A82',
+            cancelButtonText: 'Tidak, Kembali'
+    }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector('#form_organisasi').submit();
+            }
     });
 }
-
-
 
         // Remove invalid class when user starts typing
         $('#photo, #position, #name').on('input', function() {
@@ -237,9 +210,6 @@
             }
         });
     </script>
-
-
-
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>

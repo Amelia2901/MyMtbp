@@ -25,7 +25,6 @@ class StoreOrganizationalChartRequest extends FormRequest
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-             // Foto wajib diunggah
         ];
     }
 

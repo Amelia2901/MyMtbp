@@ -18,6 +18,9 @@ use App\Http\Controllers\Front\LandingController;
 use App\Http\Controllers\OrganizationalChartController;
 use App\Http\Controllers\InfaqDescriptionController;
 use App\Http\Controllers\methodPaymentController;
+use App\Http\Controllers\ZakatEmasController;
+use App\Http\Controllers\ZakatFitrahController;
+
 
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.index');
@@ -126,10 +129,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dashboard/payment-method/updateQRIS', [methodPaymentController::class, 'storeqris'])->name('payment.storeqris');
 
     // <!Route Zakat -->
-    // banner zakat
-    Route::get('/banner-zakat', [BannerZakatController::class, 'index'])->name('banner-zakat.index'); // Menampilkan halaman banner
-    Route::post('/banner-zakat', [BannerZakatController::class, 'store'])->name('banner-zakat.store'); // Menyimpan data banner
-    Route::put('/banner-zakat/{id}', [BannerZakatController::class, 'update'])->name('banner-zakat.update'); // Mengupdate banner
+    // Banner Zakat
+    Route::get('/banner-zakat', [BannerZakatController::class, 'index'])->name('banner-zakat.index');
+    Route::post('/banner-zakat', [BannerZakatController::class, 'store'])->name('banner-zakat.store'); 
+    Route::put('/banner-zakat/{id}', [BannerZakatController::class, 'update'])->name('banner-zakat.update'); 
+
+    //Route Zakat Emas
+    Route::get('/zakat-emas', [ZakatEmasController::class, 'index'])->name('ZakatEmas.index');
+    Route::post('/zakat-emas/update', [ZakatEmasController::class, 'storeOrUpdate'])->name('ZakatEmas.storeOrUpdate');
+
+    //Route Zakat Fitrah
+    Route::get('/zakat-fitrah', [ZakatFitrahController::class, 'index'])->name('ZakatFitrah.index');
+    Route::post('/zakat-fitrah/update', [ZakatFitrahController::class, 'storeOrUpdate'])->name('ZakatFitrah.storeOrUpdate');
 
 
     // Navbar Menu 

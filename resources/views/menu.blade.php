@@ -114,7 +114,22 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/banner') }}">
+                    <a href="{{ url('/zakat-fitrah') }}">
+                        <i class="bi bi-circle"></i><span>Zakat Fitrah</span>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="{{ url('/zakat-emas') }}"> -->
+                        <i class="bi bi-circle"></i><span>Zakat Emas & Perak</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/zakat-emas') }}">
+                        <i class="bi bi-circle"></i><span>Zakat Emas & Perak</span>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="{{ url('/zakat-emas') }}"> -->
                         <i class="bi bi-circle"></i><span>Zakat Emas & Perak</span>
                     </a>
                 </li>

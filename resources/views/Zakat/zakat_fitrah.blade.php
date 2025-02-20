@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Zakat | Banner</title>
+    <title>Zakat | Zakat Fitrah</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -31,13 +31,6 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -53,11 +46,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Banner</h1>
+            <h1> Zakat Fitrah</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Zakat</a></li>
-                    <li class="breadcrumb-item active">Banner</li>
+                    <li class="breadcrumb-item active">Zakat Fitrah</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -67,63 +60,37 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Formulir Banner Zakat</h5>
-                            <form action="{{ isset($banner) ? route('banner-zakat.update', $banner->id) : route('banner-zakat.store') }}" 
-                                method="POST" 
-                                enctype="multipart/form-data"
-                                id="banner_zakat_form">
+                            <h5 class="card-title">Formulir Zakat Fitrah</h5>
+                            <form action="{{ route('ZakatFitrah.storeOrUpdate') }}" method="POST"
+                                enctype="multipart/form-data" id="zakat_fitrahs">
                                 @csrf
-                                @if (isset($banner))
-                                    @method('PUT')
-                                @endif
-
-
                                 <!-- input type hidden -->
                                 <input type="hidden" name="id" id="id"
-                                    value="{{ isset($banner) && !is_array($banner) ? $banner->id : '' }}">
+                                    value="{{ old('id', $data->id ?? '') }}">
 
-                                {{-- Existing Image --}}
-                                @if (isset($banner))
-                                    <div class="row mb-3">
-                                        <label for="inputText" class="col-sm-2 col-form-label">Foto Banner
-                                            Sekarang</label>
-                                        <div class="col-sm-10">
-                                            <img src="{{ asset('storage/' . $banner['banner_photo']) }}"
-                                                alt="banner_photo" class="img-thumbnail">
-                                        </div>
-                                    </div>
-                                @endif
-
+                                {{-- Harga Beras --}}
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Foto Banner</label>
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Harga Beras Per Jiwa</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="file" id="banner_photo"
-                                            name="banner_photo">
-                                    </div>
-                                </div>
-
-                                {{-- Judul --}}
-                                <div class="row mb-3">
-                                    <label for="inputEmail" class="col-sm-2 col-form-label">Judul banner</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="banner_title" id="banner_title"
-                                            value="{{ isset($banner) ? $banner->banner_title : '' }}">
+                                        <input type="text" class="form-control" name="zakat"
+                                            id="zakat"
+                                            value="{{ old('zakat', $zakat->Zakat ?? '') }}">
                                     </div>
                                 </div>
 
                                 {{-- Deskripsi --}}
                                 <div class="row mb-3">
-                                    <label for="inputPassword" class="col-sm-2 col-form-label">Deskripsi banner</label>
+                                <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="banner_description"
-                                            id="banner_description"
-                                            value="{{ isset($banner) ? $banner->banner_description : '' }}">
+                                        <textarea class="form-control" name="deskripsi" id="deskripsi" required> {{ old('deskripsi', $deskripsi->deskripsi ?? '') }}</textarea>
                                     </div>
                                 </div>
+
+                                {{-- Simpan--}}
                                 <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <button type="button" onclick="simpan()" class="btn btn-primary">Submit
-                                            Form</button>
+                                    <div class="col-sm-12" style="display:flex; justify-content: right;">
+                                        <button type="button" onclick="simpan()"
+                                            class="btn btn-primary">Update</button>
                                     </div>
                                 </div>
                             </form><!-- End General Form Elements -->
@@ -159,12 +126,10 @@
 
     <script>
         function resetValidation() {
-            $('#banner_photo').removeClass('is-invalid');
-            $('#banner_title').removeClass('is-invalid');
-            $('#banner_description').removeClass('is-invalid');
-            $('#banner_photo').next('.invalid-feedback').remove();
-            $('#banner_title').next('.invalid-feedback').remove();
-            $('#banner_description').next('.invalid-feedback').remove();
+            $('#zakat').removeClass('is-invalid');
+            $('#zakat').next('.invalid-feedback').remove();
+            $('#deskripsi').removeClass('is-invalid');
+            $('#deskripsi').next('.invalid-feedback').remove();
         }
 
         function simpan() {
@@ -172,42 +137,47 @@
 
             let valid = true;
 
-            if ($.trim($("#banner_title").val()) == "") {
-                $('#banner_title').addClass('is-invalid');
-                $('#banner_title').after('<div class="invalid-feedback">Judul banner wajib diisi.</div>');
+            if ($.trim($("#zakat").val()) == "") {
+                $('#zakat').addClass('is-invalid');
+                $('#zakat').after('<div class="invalid-feedback">Harga beras per 2,5kg wajib diisi.</div>');
                 valid = false;
             }
-            if ($.trim($("#banner_description").val()) == "") {
-                $('#banner_description').addClass('is-invalid');
-                $('#banner_description').after('<div class="invalid-feedback">Deskripsi banner wajib diisi.</div>');
+            if ($.trim($("#deskripsi").val()) == "") {
+                $('#deskripsi').addClass('is-invalid');
+                $('#deskripsi').after('<div class="invalid-feedback">deskripsi wajib diisi.</div>');
                 valid = false;
             }
-
 
             if (valid) {
                 Swal.fire({
-                    title: 'Konfirmasi?',
-                    text: 'Apakah anda yakin?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Tambah Data',
-                    confirmButtonColor: '#253A82',
-                    cancelButtonText: 'Batal'
+                title: 'Konfirmasi?',
+                text: 'Apakah anda yakin akan mengupdate data?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Update Data',
+                confirmButtonColor: '#253A82',
+                cancelButtonText: 'Tidak, Kembali'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        $('#banner_zakat_form').attr("action", "{{ route('banner-zakat.store') }}");
-                        $('#banner_zakat_form').submit();
+                        $('#zakat_fitrahs').submit();
                     }
                 });
             }
         }
 
-        $('#banner_photo, #banner_title, #banner_description').on('input', function() {
+        $('#zakat').on('input', function() {
             if ($.trim($(this).val()) !== "") {
                 $(this).removeClass('is-invalid');
                 $(this).next('.invalid-feedback').remove();
             }
         });
+        $('#deskripsi').on('input', function() {
+            if ($.trim($(this).val()) !== "") {
+                $(this).removeClass('is-invalid');
+                $(this).next('.invalid-feedback').remove();
+            }
+        });
+
     </script>
 
     @if (session('success'))
@@ -223,8 +193,6 @@
             session()->forget('success');
         @endphp
     @endif
-
-
 
 
     <!-- Template Main JS File -->

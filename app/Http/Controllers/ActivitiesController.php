@@ -21,30 +21,27 @@ class ActivitiesController extends Controller
     }
 
     public function store(storeActivitiesRequest $request)
-{
-    // Cek apakah request menerima semua data
-    // dd($request->all()); // Hapus ini setelah pengecekan
+    {
+        // Buat instance baru untuk menyimpan data
+        $data = new Activities();
+        $data->ActivityName = $request->activityName;
+        $data->ActivityDescription = $request->activityDescription;
+        $data->ActivityPerformers = $request->activityPerformers;
+        $data->ActivityDate = $request->activityDate;
+        $data->ActivityTime = $request->activityTime;
+        $data->ActivityTime2 = $request->activityTime2;
+        $data->ActivityPlace = $request->activityPlace;
 
-    // Buat instance baru untuk menyimpan data
-    $data = new Activities();
-    $data->ActivityName = $request->activityName;
-    $data->ActivityDescription = $request->activityDescription;
-    $data->ActivityPerformers = $request->activityPerformers;
-    $data->ActivityDate = $request->activityDate;
-    $data->ActivityTime = $request->activityTime;
-    $data->ActivityTime2 = $request->activityTime2;
-    $data->ActivityPlace = $request->activityPlace;
+        // Cek jika ada file foto yang diupload
+        if ($request->hasFile('activityPhoto')) {
+            $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
+            $data->ActivityPhoto = $photoPath;
+        }
 
-    // Cek jika ada file foto yang diupload
-    if ($request->hasFile('activityPhoto')) {
-        $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
-        $data->ActivityPhoto = $photoPath;
+        $data->save();
+
+        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
     }
-
-    $data->save();
-
-    return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
-}
 
     public function edit($id)
     {
@@ -52,9 +49,6 @@ class ActivitiesController extends Controller
         return view('dashboard.activities_form', compact('item'));
     }
     
-
-
-
     public function update(updateActivitiesRequest $request, $id)
     {
         $data = $request->validated();
@@ -74,4 +68,14 @@ class ActivitiesController extends Controller
         $activity->update($data);
         return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil diperbarui');
     }
+
+    public function toggle($id)
+    {
+        $activities = Activities::findOrFail($id);
+        $activities->is_active = !$activities->is_active; // Toggle status
+        $activities->save();
+
+        return redirect()->back()->with('success', 'Status kegiatan berhasil diperbarui!');
+    }
+
 }

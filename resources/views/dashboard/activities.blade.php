@@ -30,6 +30,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -63,7 +64,7 @@
                             
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
-                                <thead>
+                                <thead align="center">
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Kegiatan</th>
@@ -81,7 +82,14 @@
                                     @foreach ($activities as $index => $item)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $item->ActivityName }}</td>
+                                            <td>{{ $item->ActivityName }}
+                                            <br>
+                                            @if($item->is_active)
+                                                    <span class="badge bg-success">Aktif</span>
+                                                @else
+                                                    <span class="badge bg-danger">Nonaktif</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <img src="{{ asset('storage/'.$item->ActivityPhoto) }}" width="100" style="max-height: 80px;" alt="Activity Image">
                                             </td>
@@ -91,11 +99,18 @@
                                             <td>{{ $item->ActivityTime }}</td>
                                             <td>{{ $item->ActivityTime2 }}</td>
                                             <td>{{ $item->ActivityPlace }}</td>
-                                            <td>
+                                            <td style="display:flex;">
                                                 <a href="{{ route('kegiatan.edit', $item->id) }}"
                                                     class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
+                                                <form action="{{ route('kegiatan.toggle', $item->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-secondary">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -142,3 +157,28 @@
             });
         </script>
     @endif
+
+    <script>
+    $(document).ready(function() {
+        $('.btn-secondary').on('click', function(event) {
+            event.preventDefault(); // Mencegah submit langsung
+            let form = $(this).closest('form'); // Ambil form terdekat
+
+            Swal.fire({
+                title: "Konfirmasi Non Aktif!",
+                text: "Apakah kamu yakin akan Non Aktifkan data ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#6c757d",
+                confirmButtonText: "Non Aktifkan",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit(); 
+                }
+            });
+        });
+        });
+    </script>
+

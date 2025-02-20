@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kegiatan/{id}/edit', [ActivitiesController::class, 'edit'])->name('kegiatan.edit');
     Route::post('/kegiatan/store', [ActivitiesController::class, 'store'])->name('kegiatan.store');
     Route::put('/kegiatan/{id}', [ActivitiesController::class, 'update'])->name('kegiatan.update');
+    Route::patch('/kegiatan/{id}/toggle', [ActivitiesController::class, 'toggle'])->name('kegiatan.toggle');
 
 
     //route contact

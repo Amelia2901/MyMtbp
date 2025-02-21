@@ -119,18 +119,18 @@
                     </a>
                 </li>
                 <li>
-                    <!-- <a href="{{ url('/zakat-emas') }}"> -->
-                        <i class="bi bi-circle"></i><span>Zakat Emas & Perak</span>
+                    <a href="{{ url('/zakat-penghasilan') }}">
+                        <i class="bi bi-circle"></i><span>Zakat Penghasilan</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/zakat-emas') }}">
-                        <i class="bi bi-circle"></i><span>Zakat Emas & Perak</span>
+                    <a href="{{ url('/zakat-ternak') }}">
+                        <i class="bi bi-circle"></i><span>Zakat Ternak</span>
                     </a>
                 </li>
                 <li>
-                    <!-- <a href="{{ url('/zakat-emas') }}"> -->
-                        <i class="bi bi-circle"></i><span>Zakat Emas & Perak</span>
+                    <a href="{{ url('/zakat-perdagangan') }}">
+                        <i class="bi bi-circle"></i><span>Zakat Perdagangan</span>
                     </a>
                 </li>
             </ul>

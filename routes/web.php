@@ -20,6 +20,9 @@ use App\Http\Controllers\InfaqDescriptionController;
 use App\Http\Controllers\methodPaymentController;
 use App\Http\Controllers\ZakatEmasController;
 use App\Http\Controllers\ZakatFitrahController;
+use App\Http\Controllers\ZakatPenghasilanController;
+use App\Http\Controllers\ZakatTernakPerdaganganController;
+
 
 
 
@@ -142,6 +145,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/zakat-fitrah', [ZakatFitrahController::class, 'index'])->name('ZakatFitrah.index');
     Route::post('/zakat-fitrah/update', [ZakatFitrahController::class, 'storeOrUpdate'])->name('ZakatFitrah.storeOrUpdate');
 
+    //Route Zakat Penghasilan
+    Route::get('/zakat-penghasilan', [ZakatPenghasilanController::class, 'index'])->name('ZakatPenghasilan.index');
+    Route::post('/zakat-penghasilan/update', [ZakatPenghasilanController::class, 'storeOrUpdate'])->name('ZakatPenghasilan.storeOrUpdate');
+
+    //Route Zakat ternak
+    Route::get('/zakat-ternak', [ZakatTernakPerdaganganController::class, 'index'])->name('ZakatTernakPerdagangan.index');
+    Route::post('/zakat-ternak/update', [ZakatTernakPerdaganganController::class, 'store'])->name('ZakatTernakPerdagangan.store');
+
+    // route deskripsi infaq 2
+    Route::get('/zakat-perdagangan', [ZakatTernakPerdaganganController::class, 'index2'])->name('ZakatTernakPerdagangan.index2');
+    Route::post('/zakat-perdagangan/update', [ZakatTernakPerdaganganController::class, 'store2'])->name('ZakatTernakPerdagangan.store2');
 
     // Navbar Menu 
     Route::resource('navbar', NavbarController::class)

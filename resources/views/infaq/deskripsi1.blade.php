@@ -72,9 +72,7 @@
                                 <div class="row mb-3">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi 1</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="description_1"
-                                            id="description_1"
-                                            value="{{ old('description_1', $data->Description_1 ?? '') }}">
+                                        <textarea class="form-control" name="description_1" id="description_1" required> {{ old('description_1', $data->Description_1 ?? '') }}</textarea>
                                     </div>
                                 </div>
 

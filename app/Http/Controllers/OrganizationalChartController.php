@@ -20,14 +20,8 @@ class OrganizationalChartController extends Controller
         return view('StrukturOrganisasi.organizational_chart_form');
     }
 
-    public function store(Request $request)
+    public function store(StoreOrganizationalChartRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'photo' => 'required|image|max:2048',
-        ]);
-
         $photoPath = $request->file('photo')->store('organization', 'public');
 
         OrganizationalChart::create([
@@ -40,32 +34,30 @@ class OrganizationalChartController extends Controller
     }
 
 
-    public function edit(OrganizationalChart $request, $id = null)
+
+    public function edit($id)
     {
-        $item = OrganizationalChart::findOrFail($id);
-        return view('StrukturOrganisasi.organizational_chart_form', compact('item'));
+        $organizational_chart = OrganizationalChart::findOrFail($id);
+        return view('StrukturOrganisasi.organizational_chart_form', compact('organizational_chart'));
     }
 
-    public function update(Request $request, $id)
+
+    public function update(UpdateOrganizationalChartRequest $request, $id)
     {
-        $item = OrganizationalChart::findOrFail($id);
-    
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'photo' => 'nullable|image|max:2048',
-        ]);
-    
+        $organizational_chart = OrganizationalChart::findOrFail($id);
+
         if ($request->hasFile('photo')) {
             $photoPath = $request->file('photo')->store('organization', 'public');
-            $item->photo = $photoPath;
+            $organizational_chart->photo = $photoPath;
         }
-    
-        $item->name = $request->name;
-        $item->position = $request->position;
-        $item->save();
-    
+
+        $organizational_chart->update([
+            'name' => $request->name,
+            'position' => $request->position,
+        ]);
+
         return redirect()->route('organizational_chart.index')->with('success', 'Data berhasil diperbarui!');
     }
+
     
 }

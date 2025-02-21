@@ -24,20 +24,26 @@ class BannerZakatController extends Controller
     {
         $data = $request->validated();
 
-        // Jika ada file yang diupload, simpan dan dapatkan path-nya
-        $filePath = $request->hasFile('banner_photo') 
-            ? $request->file('banner_photo')->store('uploads/banner_photos', 'public') 
-            : optional(BannerZakat::first())->banner_photo; // Gunakan gambar lama jika tidak ada file baru
+        if ($request->hasFile('banner_photo')) {
+            $filePath = $request->file('banner_photo')->store('uploads/banner_photos', 'public');
+        }
 
-        // Update atau buat baru jika tidak ada
-        BannerZakat::updateOrCreate(
-            [], // Tidak ada kondisi pencarian, karena hanya ada satu row
-            [
+        $banner = BannerZakat::first();
+
+
+        if ($banner) {
+            $banner->update([
+                'banner_photo' => $filePath ?? $banner->banner_photo,
+                'banner_title' => $data['banner_title'],
+                'banner_description' => $data['banner_description'],
+            ]);
+        } else {
+            BannerZakat::create([
                 'banner_photo' => $filePath,
                 'banner_title' => $data['banner_title'],
                 'banner_description' => $data['banner_description'],
-            ]
-        );
+            ]);
+        }
 
         return redirect()->route('banner-zakat.index')->with('success', 'Banner berhasil ditambahkan atau diperbarui!');
     }

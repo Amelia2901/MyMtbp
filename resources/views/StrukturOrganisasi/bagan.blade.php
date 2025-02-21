@@ -72,22 +72,30 @@
                                 id="bagan_dashboard_form">
                                 @csrf
                                 @method('PUT')
-                                @if (isset($bagan))
-                                    <div class="row mb-3">
-                                        <label for="inputText" class="col-sm-2 col-form-label">Foto Banner
-                                            Sekarang</label>
-                                        <div class="col-sm-10">
-                                            <img src="{{ asset('storage/' . $bagan['bagan_photo']) }}"
-                                                alt="banner_photo" class="img-thumbnail">
-                                        </div>
-                                    </div>
-                                @endif
+
+                                {{-- Existing Image --}}
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Foto bagan</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Foto Bagan</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="file" id="bagan_photo" name="bagan_photo">
+                                        <input type="file" class="form-control" name="bagan_photo" id="bagan_photo"
+                                            onchange="readURL(this)">
                                     </div>
                                 </div>
+
+                                {{-- Preview --}}
+                                <div class="row">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Preview</label>
+                                    <div class="col-sm-10">
+                                        @if ($bagan && $bagan->bagan_photo)
+                                            <img src="{{ asset('storage/' . $bagan->bagan_photo) }}" alt="bagan_photo" id="previewBagan" width="50%">
+                                        @else
+                                            <img src="" alt="" id="previewBagan" width="50%">
+                                        @endif
+                                    </div>
+                                </div>
+                                <br>
+
+                                {{-- Judul --}}
                                 <div class="row mb-3">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Judul bagan</label>
                                     <div class="col-sm-10">
@@ -95,6 +103,8 @@
                                             value="{{ old('bagan_title', $bagan->bagan_title ?? '') }}">
                                     </div>
                                 </div>
+
+                                {{-- Deskripsi --}}
                                 <div class="row mb-3">
                                     <label for="inputPassword" class="col-sm-2 col-form-label">Deskripsi bagan</label>
                                     <div class="col-sm-10">
@@ -103,6 +113,8 @@
                                             value="{{ old('bagan_description', $bagan->bagan_description ?? '') }}">
                                     </div>
                                 </div>
+
+                                {{-- Save --}}
                                 <div class="row mb-3">
                                     <div class="col-sm-12" style="display:flex; justify-content: right;">
                                         <button type="button" onclick="simpan()"
@@ -148,6 +160,17 @@
             $('#bagan_photo').next('.invalid-feedback').remove();
             $('#bagan_title').next('.invalid-feedback').remove();
             $('#bagan_description').next('.invalid-feedback').remove();
+        }
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#previewBagan').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
         function simpan() {

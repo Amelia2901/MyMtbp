@@ -104,7 +104,13 @@ Route::middleware(['auth'])->group(function () {
     // Route::post('/organizational_chart/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
     // Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
 
-    Route::resource('organizational_chart', OrganizationalChartController::class);
+    // Route::resource('organizational_chart', OrganizationalChartController::class);
+
+    Route::get('/organizational_chart', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
+Route::get('/organizational_chart/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
+Route::post('/organizational_chart', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
+Route::get('/organizational_chart/{id}/edit', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
+Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
 
     
 

@@ -47,7 +47,7 @@ class BannerDashboardController extends Controller
             ]);
         } else {
             BannerDashboard::create([
-                'banner_photo' => $filePath ?? '',
+                'banner_photo' => $filePath,
                 'banner_title' => $data['banner_title'],
                 'banner_description' => $data['banner_description'],
             ]);

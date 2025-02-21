@@ -83,10 +83,23 @@
                                 <div class="row mb-4">
                                     <label for="activityPhoto" class="col-sm-2 col-form-label">Foto Kegiatan</label>
                                     <div class="col-sm-10">
-                                        <input type="file" class="form-control" name="activityPhoto" id="activityPhoto"
+                                        <input type="file" class="form-control" name="activityPhoto" id="activityPhoto"  onchange="readURL(this)"
                                             value="{{ old('activityPhoto', $item->ActivityPhoto ?? '') }}" required>
                                     </div>
                                 </div>
+
+                                {{-- Preview --}}
+                                <div class="row">
+                                    <label for="activityPhoto" class="col-sm-2 col-form-label">Preview</label>
+                                    <div class="col-sm-10">
+                                        @if ($item && $item->ActivityPhoto)
+                                            <img src="{{ asset('storage/' . $item->ActivityPhoto) }}" alt="ActivityPhoto" id="previewActivity" width="35%">
+                                        @else
+                                            <img src="" alt="" id="previewActivity" width="35%">
+                                        @endif
+                                    </div>
+                                </div>
+                                <br>
 
                                 <!-- Activity Description-->
                                 <div class="row mb-4">
@@ -228,6 +241,16 @@
             
 
             return valid;
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#previewActivity').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
 

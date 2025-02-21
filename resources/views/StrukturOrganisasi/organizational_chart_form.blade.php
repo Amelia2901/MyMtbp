@@ -66,25 +66,36 @@
                                 @csrf
                                 @if (isset($item))
                                     @method('PUT')
-
                                     <!-- ======= Foto Sekarang ======= -->
-                                    <div class="row mb-4">
+                                    <!-- <div class="row mb-4">
                                         <label for="inputText" class="col-sm-2 col-form-label">Foto Sekarang</label>
                                         <div class="col-sm-10">
                                             <img src="{{ asset('storage/'. $item->photo) }}"
                                                 alt="foto-susunan-organisasi">
                                         </div>
-                                    </div>
-
+                                    </div> -->
                                 @endif
 
                                     <!-- ======= Foto ======= -->
                                     <div class="row mb-4">
                                         <label for="inputText" class="col-sm-2 col-form-label">Foto</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="file" id="photo" name="photo">
+                                            <input class="form-control" type="file" id="photo" name="photo" onchange="readURL(this)">
                                         </div>
                                     </div>
+
+                                    {{-- Preview --}}
+                                    <div class="row">
+                                        <label for="inputText" class="col-sm-2 col-form-label">Preview</label>
+                                        <div class="col-sm-10">
+                                            @if (!empty($item) && !empty($item->photo))
+                                                <img src="{{ asset('storage/' . $organizational_chart->photo) }}" alt="photo" id="previewPhoto" width="35%">
+                                            @else
+                                                <img src="" alt="" id="previewPhoto" width="35%">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <br>
 
                                     <!-- ======= Jabatan ======= -->
                                     <div class="row mb-4">
@@ -105,14 +116,14 @@
                                     </div>
                                 
                                     <!-- ======= Button ======= -->
-                                    <input type="hidden" id="mode" value="{{ isset($item) ? 'edit' : 'tambah' }}">
+                                    <input type="hidden" id="mode" value="{{ isset($organizational_chart) ? 'edit' : 'tambah' }}">
                                     <div class="row mb-4">
                                         <div class="col-sm-12">
                                             <button type="button" onclick="simpan()" class="btn btn-primary">
-                                                {{ isset($item) ? 'Update Data' : 'Tambah Data' }}</button>
+                                                {{ isset($organizational_chart) ? 'Update Data' : 'Tambah Data' }}
+                                            </button>
                                         </div>
                                     </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -167,6 +178,16 @@
                 valid = false;
             }
             return valid;
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#previewPhoto').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
         function simpan() {

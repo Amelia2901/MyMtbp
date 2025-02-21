@@ -99,7 +99,7 @@
                                             <td>{{ $item->ActivityTime }}</td>
                                             <td>{{ $item->ActivityTime2 }}</td>
                                             <td>{{ $item->ActivityPlace }}</td>
-                                            <td style="display:flex;">
+                                            <td  class="d-flex gap-1">
                                                 <a href="{{ route('kegiatan.edit', $item->id) }}"
                                                     class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
@@ -166,7 +166,7 @@
 
             Swal.fire({
                 title: "Konfirmasi Non Aktif!",
-                text: "Apakah kamu yakin akan Non Aktifkan data ini?",
+                text: "Apakah kamu yakin akan Aktifkan/Non Aktifkan data ini?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#d33",

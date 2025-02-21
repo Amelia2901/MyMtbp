@@ -73,9 +73,9 @@
                                 enctype="multipart/form-data"
                                 id="banner_zakat_form">
                                 @csrf
-                                @if (isset($banner))
+                                <!-- @if (isset($banner))
                                     @method('PUT')
-                                @endif
+                                @endif -->
 
 
                                 <!-- input type hidden -->
@@ -83,24 +83,26 @@
                                     value="{{ isset($banner) && !is_array($banner) ? $banner->id : '' }}">
 
                                 {{-- Existing Image --}}
-                                @if (isset($banner))
-                                    <div class="row mb-3">
-                                        <label for="inputText" class="col-sm-2 col-form-label">Foto Banner
-                                            Sekarang</label>
-                                        <div class="col-sm-10">
-                                            <img src="{{ asset('storage/' . $banner['banner_photo']) }}"
-                                                alt="banner_photo" class="img-thumbnail">
-                                        </div>
-                                    </div>
-                                @endif
-
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Foto Banner</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="file" id="banner_photo"
-                                            name="banner_photo">
+                                        <input type="file" class="form-control" name="banner_photo" id="banner_photo"
+                                            onchange="readURL(this)">
                                     </div>
                                 </div>
+
+                                {{-- Preview --}}
+                                <div class="row">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Preview</label>
+                                    <div class="col-sm-10">
+                                        @if ($banner && $banner->banner_photo)
+                                            <img src="{{ asset('storage/' . $banner->banner_photo) }}" alt="banner_photo" id="previewBanner" width="50%">
+                                        @else
+                                            <img src="" alt="" id="previewBanner" width="50%">
+                                        @endif
+                                    </div>
+                                </div>
+                                <br>
 
                                 {{-- Judul --}}
                                 <div class="row mb-3">
@@ -165,6 +167,16 @@
             $('#banner_photo').next('.invalid-feedback').remove();
             $('#banner_title').next('.invalid-feedback').remove();
             $('#banner_description').next('.invalid-feedback').remove();
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#previewBanner').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
         function simpan() {

@@ -17,8 +17,10 @@ class ActivitiesController extends Controller
     }
 
     public function create(){
-        return view('dashboard.activities_form');
+        $item = null; 
+        return view('dashboard.activities_form', compact('item'));
     }
+    
 
     public function store(storeActivitiesRequest $request)
     {
@@ -32,7 +34,6 @@ class ActivitiesController extends Controller
         $data->ActivityTime2 = $request->activityTime2;
         $data->ActivityPlace = $request->activityPlace;
 
-        // Cek jika ada file foto yang diupload
         if ($request->hasFile('activityPhoto')) {
             $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
             $data->ActivityPhoto = $photoPath;
@@ -50,29 +51,30 @@ class ActivitiesController extends Controller
     }
     
     public function update(updateActivitiesRequest $request, $id)
-    {
-        $data = $request->validated();
-        $activity = activities::findOrFail($id);
+{
+    $activities = activities::findOrFail($id);
+    $data = $request->validated();
 
-        if ($request->hasFile('activityPhoto')) {
-            // Hapus foto lama jika ada
-            if ($activity->ActivityPhoto && $activity->ActivityPhoto !== 'default.jpg') {
-                Storage::disk('public')->delete($activity->ActivityPhoto);
-            }
-
-            // Simpan foto baru
-            $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
-            $data['ActivityPhoto'] = $photoPath;
+    if ($request->hasFile('activityPhoto')) {
+        // Hapus foto lama jika ada
+        if ($activities->ActivityPhoto && $activities->ActivityPhoto !== 'default.jpg') {
+            Storage::disk('public')->delete($activities->ActivityPhoto);
         }
 
-        $activity->update($data);
-        return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil diperbarui');
+        // Simpan foto baru
+        $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
+        $data['ActivityPhoto'] = $photoPath; 
     }
+
+    $activities->update($data);
+    return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil diperbarui');
+}
+
 
     public function toggle($id)
     {
         $activities = Activities::findOrFail($id);
-        $activities->is_active = !$activities->is_active; // Toggle status
+        $activities->is_active = !$activities->is_active;
         $activities->save();
 
         return redirect()->back()->with('success', 'Status kegiatan berhasil diperbarui!');

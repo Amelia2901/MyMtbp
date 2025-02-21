@@ -32,7 +32,7 @@ class BaganController extends Controller
             ]);
         } else {
             Bagan::create([
-                'bagan_photo' => $filePath ?? null,
+            'bagan_photo' => $filePath ?? null,
             'bagan_title' => $data['bagan_title'],
             'bagan_description' => $data['bagan_description'],
             ]);

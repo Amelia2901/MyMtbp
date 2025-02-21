@@ -54,6 +54,50 @@
         ul li a.dropdown-filter {
             cursor: pointer;
         }
+
+
+        .slider::before {
+            content: '';
+            background: rgba(139, 69, 19, 0.5);
+        }
+
+        .slider::after {
+            content: '';
+            background: rgba(139, 69, 19, 0.5);
+        }
+
+        .kotak-2 {
+            box-shadow: 2px 2px 2px 2px #888888 !important;
+        }
+
+        .slider {
+            min-height: auto !important;
+            margin-bottom: 120px !important;
+        }
+
+        .slider-img {
+            min-height: 400px;
+            max-height: 400px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(50%) sepia(30%);
+            /* Gelapkan & beri efek kecoklatan */
+        }
+
+        .content {
+            position: absolute;
+            z-index: 2;
+            /* Pastikan teks di atas gambar */
+            color: white;
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .navbar {
+            z-index: 4;
+        }
     </style>
 </head>
 
@@ -65,7 +109,7 @@
                 <img src="{{ asset('assets/img/website/logo_masjid.svg') }}" alt="">
                 <ul>
                     @foreach ($data['navbar'] as $nav)
-                        <li><a href="{{ $nav->url }}">{{ $nav->name }}</a></li>
+                        <li><a href="{{ url($nav->url) }}">{{ $nav->name }}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -112,12 +156,10 @@
         </div>
     </div>
 
-
-
-
-    <div class="slider">
+    <div class="slider" style="background:rgba(139, 69, 19, 0.5); ">
         <img src="{{ $data['banner']['banner_photo'] ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
-            alt="">
+            alt="" class="slider-img">
+
         <div class="content">
             <div class="isi-content">
                 <h1>
@@ -182,47 +224,48 @@
                             <div class="box-sholat">
                                 <p style="font-size: 20px; font-weight: 800px; width:150px;">Shalat Shubuh </p>
                                 <p style="font-size: 15px; font-weight: 500px; color: white; margin-top:8px">
-                                    04.19 WIB
+                                    {{ $data['shalat']['subuh'] ?? '' }} WIB <input type="hidden" id="subuh"
+                                        value="{{ old('subuh', $data['shalat']['subuh'] ?? '') }}">
                                 </p>
                             </div>
                             <div class="box-sholat">
-                                <p style="font-size: 20px; font-weight: 600px; width:150px;">Shalat Dzuhur </p>
+                                <p style="font-size: 20px; font-weight: 600px; width:150px;">Syuruk/Terbit </p>
                                 <p style="font-size: 15px; font-weight: 500px; color: white; margin-top:8px">
-                                    11.58 WIB
+                                    {{ $data['shalat']['syuruk'] ?? '' }} WIB <input type="hidden" id="syuruk"
+                                        value="{{ old('syuruk', $data['shalat']['syuruk'] ?? '') }}">
                                 </p>
                             </div>
                             <div class="box-sholat">
-                                <p style="font-size: 20px; font-weight: 600px; width:150px;">Shalat Magrib</p>
+                                <p style="font-size: 20px; font-weight: 600px; width:150px;">Shalat Dzuhur</p>
                                 <p style="font-size: 15px; font-weight: 500px; color: white; margin-top:8px">
-                                    18.13 WIB
+                                    {{ $data['shalat']['dzuhur'] ?? '' }} WIB <input type="hidden" id="dzuhur"
+                                        value="{{ old('dzuhur', $data['shalat']['dzuhur'] ?? '') }}">
                                 </p>
                             </div>
                         </div>
                         <div class="shalat">
                             <div class="box-sholat">
-                                <p style="font-size: 20px; font-weight: 600px; width:150px;">Syuruk/Terbit </p>
+                                <p style="font-size: 20px; font-weight: 600px; width:150px;">Shalat Ashar </p>
                                 <p style="font-size: 15px; font-weight: 500px; color: white; margin-top:8px">
-                                    05.43 WIB
+                                    {{ $data['shalat']['ashar'] ?? '' }} WIB <input type="hidden" id="ashar"
+                                        value="{{ old('ashar', $data['shalat']['ashar'] ?? '') }}">
                                 </p>
                             </div>
                             <div class="box-sholat">
-                                <p style="font-size: 20px; font-weight: 600px; width:150px;">Shalat Ashar </p>
+                                <p style="font-size: 20px; font-weight: 600px; width:150px;">Shalat Maghrib </p>
                                 <p style="font-size: 15px; font-weight: 500px; color: white; margin-top:8px">
-                                    15.23 WIB
+                                    {{ $data['shalat']['maghrib'] ?? '' }} WIB <input type="hidden" id="maghrib"
+                                        value="{{ old('maghrib', $data['shalat']['maghrib'] ?? '') }}">
                                 </p>
                             </div>
                             <div class="box-sholat">
                                 <p style="font-size: 20px; font-weight: 600px; width:150px;">Shalat Isya </p>
                                 <p style="font-size: 15px; font-weight: 500px; color: white; margin-top:8px">
-                                    19.28 WIB
+                                    {{ $data['shalat']['isya'] ?? '' }} WIB <input type="hidden" id="isya"
+                                        value="{{ old('isya', $data['shalat']['isya'] ?? '') }}">
                                 </p>
                             </div>
                         </div>
-                        <!-- <div class="shalat">
-                    <p>Syuruk/Terbit <br> 05.43 WIB</p>
-                    <p>Shalat Ashar <br> 15.23 WIB</p>
-                    <p>Shalat Isya <br> 19.28 WIB</p>
-                </div> -->
                     </div>
                 </div>
             </div>
@@ -253,35 +296,31 @@
                         <div class="container-sholat">
                             <div class="box-sholat sudah-lewat">
                                 <p>Shalat Shubuh </p>
-                                <p>04.19 WIB</p>
+                                <p>{{ $data['shalat']['subuh'] ?? '' }} WIB</p>
                             </div>
                             <div class="box-sholat sudah-lewat">
-                                <p>Shalat Dzuhur </p>
-                                <p>11.58 WIB</p>
+                                <p>Syuruk/Terbit </p>
+                                <p>{{ $data['shalat']['syuruk'] ?? '' }} WIB</p>
                             </div>
                             <div class="box-sholat active">
-                                <p>Shalat Magrib</p>
+                                <p>Shalat Dzuhur</p>
                                 <p>18.13 WIB</p>
                             </div>
                             <div class="box-sholat">
-                                <p>Syuruk/Terbit </p>
-                                <p>05.43 WIB</p>
+                                <p>Shalat Ashar </p>
+                                <p>{{ $data['shalat']['ashar'] ?? '' }} WIB</p>
                             </div>
                             <div class="box-sholat">
-                                <p>Shalat Ashar </p>
-                                <p>15.23 WIB</p>
+                                <p>Shalat Maghrib </p>
+                                <p>{{ $data['shalat']['maghrib'] ?? '' }} WIB</p>
                             </div>
                             <div class="box-sholat">
                                 <p>Shalat Isya </p>
-                                <p>19.28 WIB</p>
+                                <p>{{ $data['shalat']['isya'] ?? '' }} WIB</p>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="shalat">
-                    <p>Syuruk/Terbit <br> 05.43 WIB</p>
-                    <p>Shalat Ashar <br> 15.23 WIB</p>
-                    <p>Shalat Isya <br> 19.28 WIB</p>
-                </div> -->
+
                 </div>
             </div>
         </section>
@@ -307,81 +346,76 @@
             </div>
         </div>
         <div class="Kalender-kegiatan">
-            <div class="row-kalender">
-                <img style="border-radius: 20px; width: 600px; height: 350px; object-fit: cover;"
-                    src="https://bengkuluekspress.disway.id/upload/1623f9ba1b64cadbbdf6658f7addedc0.jpg">
-                <h3 style="color: black; margin-top: 10px; margin-bottom: 20px; font-size:20px; font-weight: 600;">
-                    Seminar Keutamaan Shalat Subuh Berjamaah</h3>
-                <div class="keterangan">
-                    <div class="row-keterangan">
-                        <p style="color: black; font-size:14px; font-weight:450;"> <i style="color: #F2AB43;"
-                                class="fa-regular fa-clock"></i> Sabtu, 20
-                            Januari 2025,</p>
-                        <p style="color: black; font-size:14px; font-weight:450; margin-top:-15px; margin-left:18px;">
-                            pukul 05.00-07.00 WIB</p>
-                    </div>
+            @if (isset($data['activities']))
+                @foreach ($data['activities'] as $item)
+                    @if ($item['main_activity'] == 1)
+                        <div class="row-kalender">
+                            <img style="border-radius: 20px; width: 600px; height: 350px; object-fit: cover;"
+                                src="{{ asset('storage/' . $item['ActivityPhoto']) }}">
+                            <h3
+                                style="color: black; margin-top: 10px; margin-bottom: 20px; font-size:20px; font-weight: 600; margin-left: 20px;">
+                                {{ $item['ActivityName'] ?? '' }}</h3>
+                            <div class="keterangan">
+                                <div class="row-keterangan">
+                                    <p style="color: black; font-size:14px; font-weight:450;"> <i
+                                            style="color: #F2AB43;" class="fa-regular fa-clock"></i>
+                                        @php
+                                            \Carbon\Carbon::setLocale('id');
+                                            $tanggal = \Carbon\Carbon::parse($item['ActivityDate']);
+                                        @endphp
+                                        {{ $tanggal->translatedFormat('l') }},
+                                        {{ $tanggal->translatedFormat('d F Y') }},</p>
+                                    <p
+                                        style="color: black; font-size:14px; font-weight:450; margin-top:-15px; margin-left:18px;">
+                                        pukul
+                                        {{ $item['ActivityTime'] }}-{{ $item['ActivityTime2'] }}
+                                        WIB</p>
+                                </div>
 
-                    <div class="row-keterangan">
-                        <p style="color: black; font-size:14px; font-weight:450;"> <i style="color: #F2AB43"
-                                class="fa-solid fa-location-dot"></i> Aula
-                            Utama Masjid Al-Falah</p>
-                        <p style="color: black; font-size:14px; font-weight:450; margin-top:10px;"> <i
-                                style=" color: #F2AB43;" class="fa-regular fa-user"></i> Ustadz
-                            Dr.Ahmad Fauzan</p>
-                    </div>
+                                <div class="row-keterangan">
+                                    <p style="color: black; font-size:14px; font-weight:450;"> <i
+                                            style="color: #F2AB43" class="fa-solid fa-location-dot"></i>
+                                        {{ $item['ActivityPlace'] }}
+                                    </p>
+                                    <p style="color: black; font-size:14px; font-weight:450; margin-top:10px;"> <i
+                                            style=" color: #F2AB43;" class="fa-regular fa-user"></i>
+                                        {{ $item['ActivityPerformers'] }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
 
-                </div>
+            <div class="row-berita" style="max-height: 480px; overflow: auto; padding-top:40px;">
+                @if (isset($data['activities']))
+                    @foreach ($data['activities'] as $index => $item)
+                        @if ($item['main_activity'] == 0)
+                            <div class="content-berita">
+                                <div class="foto-berita">
+                                    <img src="{{ asset('storage/' . $item['ActivityPhoto']) }}">
+                                </div>
+                                <div class="isi-berita">
+                                    @php
+                                        \Carbon\Carbon::setLocale('id');
+                                        $tanggal = \Carbon\Carbon::parse($item['ActivityDate']);
+                                    @endphp
+                                    <p
+                                        style="color: rgb(85, 61, 61)9, 23, 23); font-size:13px; font-weight:600; margin-top:-15px;">
+                                        <i style=" color: #F2AB43;" class="fa-regular fa-clock"></i>
+                                        {{ $tanggal->translatedFormat('l') }},
+                                        {{ $tanggal->translatedFormat('d F Y') }}
+                                    </p>
+                                    <h3>{{ $item['ActivityName'] }}</h3>
+                                    <p>Deskripsi: {{ $item['ActivityDescription'] }}</p>
+                                </div>
+                            </div>
+                            <br>
+                        @endif
+                    @endforeach
+                @endif
+
             </div>
-            <div class="row-berita">
-                <div class="content-berita">
-                    <div class="foto-berita">
-                        <img src="https://sumbar.kemenag.go.id/v2/uploads/images/image_1920x_5c90b8225737e.jpg">
-                    </div>
-                    <div class="isi-berita">
-                        <p style="color: black; font-size:13px; font-weight:600; margin-top:-15px;"><i
-                                style=" color: #F2AB43;" class="fa-regular fa-clock"></i> Sabtu, 15 Februari
-                            2025</p>
-                        <h3>Kajian Muslimah: Peran Wanita dalam Membangun Generasi Qur'an.</h3>
-                        <p>Deskripsi: Kajian khusus muslimah membahas pentingnya peran perempuan dalam mendidik
-                            keluarga
-                            berlandaskan nilai-nilai Qur'an</p>
-                    </div>
-
-                </div>
-                <br>
-                <div class="content-berita">
-                    <div class="foto-berita">
-                        <img src="https://i.pinimg.com/736x/62/4d/23/624d2308e64439524b793d963e673bba.jpg">
-                    </div>
-                    <div class="isi-berita">
-                        <p style="color: black; font-size:13px; font-weight:600; margin-top:-15px;"><i
-                                style=" color: #F2AB43;" class="fa-regular fa-clock"></i> Sabtu, 15 Februari
-                            2025</p>
-                        <h3>Kajian Muslimah: Peran Wanita dalam Membangun Generasi Qur'an.</h3>
-                        <p>Deskripsi: Kajian khusus muslimah membahas pentingnya peran perempuan dalam mendidik
-                            keluarga
-                            berlandaskan nilai-nilai Qur'an</p>
-                    </div>
-
-                </div>
-                <br>
-                <div class="content-berita">
-                    <div class="foto-berita">
-                        <img src="https://th.bing.com/th/id/OIP.Pkzq6-jkHp1zMbde3ITifgHaES?rs=1&pid=ImgDetMain">
-                    </div>
-                    <div class="isi-berita">
-                        <p style="color: black; font-size:13px; font-weight:600; margin-top:-15px;"><i
-                                style="color: #F2AB43;" class="fa-regular fa-clock"></i> Sabtu, 15 Februari 2025
-                        </p>
-                        <h3>Kajian Muslimah: Peran Wanita dalam Membangun Generasi Qur'an.</h3>
-                        <p>Deskripsi: Kajian khusus muslimah membahas pentingnya peran perempuan dalam mendidik
-                            keluarga
-                            berlandaskan nilai-nilai Qur'an</p>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
 
         <div class="infaq">
@@ -422,31 +456,13 @@
                     </h1>
 
                     <div class="row-alamat" style="margin-left: 30px; margin-top: 30px; margin-right: 20px;">
-                        <div class="kotak-1" style="display:flex;">
-                            <div class="kotak-alamat">
-                                <div class="isi-kotak">
-                                    <p style="margin-bottom: 20px;"><i class="fa-solid fa-phone fa-2xl"></i></p>
-                                    <p style="font-weight: bold;">+62 813-2318-1970</p>
-                                    <p style="font-weight: 300px; font-size: 14px;">Telepon Masjid Bumi Prima
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="kotak-alamat" style="background: white; color: black;">
-                                <div class="isi-kotak">
-                                    <p style="margin-bottom: 20px;"><i class="fa-brands fa-instagram fa-2xl"></i></p>
-                                    <p style="font-weight: bold;">@masjidbumiprima</p>
-                                    <p style="font-weight: 300px; font-size: 14px;">Instagram Masjid Bumi Prima
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                         <div class="kotak-2" style="display:flex;">
-                            <a href="https://www.youtube.com/@MasjidBumiPrimaCimahi" style="color: black;">
+                            <a href="{{ $data['contact']['url_youtube'] }}" style="color: black;">
                                 <div class="kotak-alamat" style="background: white; color: black;">
                                     <div class="isi-kotak">
                                         <p style="margin-bottom: 20px;"><i class="fa-brands fa-youtube fa-2xl"></i>
                                         </p>
-                                        <p style="font-weight: bold;">masjidbumiprima</p>
+                                        <p style="font-weight: bold;">{{ $data['contact']['youtube_channel'] }}</p>
                                         <p style="font-weight: 300px; font-size: 14px;">Youtube Masjid Bumi Prima
                                         </p>
                                     </div>
@@ -455,15 +471,29 @@
                         <div class="kotak-alamat">
                             <div class="isi-kotak">
                                 <p style="margin-bottom: 20px;"><i class="fa-solid fa-location-dot fa-2xl"></i></p>
-                                <p style="font-weight: bold;">Cibabat, 40513</p>
-                                <p style="font-weight: 300px; font-size: 14px;">Jl Masjid Bumi Prima</p>
+                                @if (isset($data['contact']))
+                                    <p style="font-weight: bold;">
+                                        {{ explode(' ', $data['contact']['address_mosque'])[0] }}
+                                        {{ explode(' ', $data['contact']['address_mosque'])[1] }}
+                                        {{ explode(' ', $data['contact']['address_mosque'])[2] }}</p>
+                                    <p style="font-weight: 300px; font-size: 14px;">
+                                        {{ implode(' ', array_slice(explode(' ', $data['contact']['address_mosque']), 3)) }}
+                                    </p>
+                                @else
+                                    <p style="font-weight: bold;">
+                                        Jl. Bumi Prima</p>
+                                    <p style="font-weight: 300px; font-size: 14px;">
+                                        Blok I - 8, Cibabat, Cimahi Utara, Kota Cimahi
+                                    </p>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row-pesan">
-                <form action="tambah.php" method="post">
+                <form action="{{ route('landing.kirimpesan') }}" method="post" id="formKirimPesan">
+                    @csrf
                     <div class="form-float">
                         <input name="Name" class="form-control" id="Name" placeholder="Nama">
                     </div>
@@ -525,6 +555,7 @@
     </footer>
 
     <!-- bootstrap js -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
@@ -571,13 +602,19 @@
             function getPrayerTimes() {
                 let hariSekarang = new Date();
                 let tanggalHariIni = hariSekarang.toISOString().split("T")[0];
+                let subuh = $('#subuh').val();
+                let dzuhur = $('#dzuhur').val();
+                let ashar = $('#ashar').val();
+                let maghrib = $('#maghrib').val();
+                let isya = $('#isya').val();
+                console.log(isya);
 
                 return {
-                    shubuh: new Date(`${tanggalHariIni}T04:19:00`),
-                    dzuhur: new Date(`${tanggalHariIni}T11:58:00`),
-                    ashar: new Date(`${tanggalHariIni}T15:23:00`),
-                    maghrib: new Date(`${tanggalHariIni}T18:13:00`),
-                    isya: new Date(`${tanggalHariIni}T19:28:00`)
+                    shubuh: new Date(`${tanggalHariIni}T${subuh}:00`),
+                    dzuhur: new Date(`${tanggalHariIni}T${dzuhur}:00`),
+                    ashar: new Date(`${tanggalHariIni}T${ashar}:00`),
+                    maghrib: new Date(`${tanggalHariIni}T${maghrib}:00`),
+                    isya: new Date(`${tanggalHariIni}T${isya}:00`)
                 };
             }
 
@@ -664,15 +701,29 @@
         }
 
         function kirimpesan() {
-            let nama = $('#Name').val();
-            let email = $('#Email').val();
-            let telepon = $('#Telp').val();
-            let isi = $('#Isi').val();
-
-            let form = $('#button-kirim').parent('form');
-            form.submit();
+            // let nama = $('#Name').val();
+            // let email = $('#Email').val();
+            // let telepon = $('#Telp').val();
+            // let isi = $('#Isi').val();
+            $('#formKirimPesan').submit();
+            // let form = $('#button-kirim').parent('form');
+            // form.submit();
         }
     </script>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Sukses!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+        @php
+            session()->forget('success');
+        @endphp
+    @endif
 </body>
 
 </html>

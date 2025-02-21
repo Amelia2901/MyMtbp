@@ -66,14 +66,6 @@
                                 @csrf
                                 @if (isset($item))
                                     @method('PUT')
-                                    <!-- ======= Foto Sekarang ======= -->
-                                    <!-- <div class="row mb-4">
-                                        <label for="inputText" class="col-sm-2 col-form-label">Foto Sekarang</label>
-                                        <div class="col-sm-10">
-                                            <img src="{{ asset('storage/'. $item->photo) }}"
-                                                alt="foto-susunan-organisasi">
-                                        </div>
-                                    </div> -->
                                 @endif
 
                                     <!-- ======= Foto ======= -->

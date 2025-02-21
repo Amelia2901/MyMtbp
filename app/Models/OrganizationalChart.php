@@ -15,5 +15,6 @@ class OrganizationalChart extends Model
         'photo',
         'position',
         'name',
+        'is_active',
     ];
 }

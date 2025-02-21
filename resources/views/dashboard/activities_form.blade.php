@@ -60,9 +60,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Formulir Kalender Kegiatan</h5>
-                            <!-- <form
-                                action="{{ isset($item) ? route('kegiatan.update', $item->id) : route('kegiatan.store') }}"
-                                method="POST" id="activityForm"> -->
                                 <form action="{{ isset($item) ? route('kegiatan.update', $item->id) : route('kegiatan.store') }}"
                                 method="POST" enctype="multipart/form-data" id="activityForm">
                                 @csrf

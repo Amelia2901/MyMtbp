@@ -33,8 +33,6 @@ class OrganizationalChartController extends Controller
         return redirect()->route('organizational_chart.index')->with('success', 'Data berhasil ditambahkan!');
     }
 
-
-
     public function edit($id)
     {
         $organizational_chart = OrganizationalChart::findOrFail($id);
@@ -59,5 +57,12 @@ class OrganizationalChartController extends Controller
         return redirect()->route('organizational_chart.index')->with('success', 'Data berhasil diperbarui!');
     }
 
-    
+    public function toggle($id)
+    {
+        $organizational_chart = OrganizationalChart::findOrFail($id);
+        $organizational_chart->is_active = !$organizational_chart->is_active;
+        $organizational_chart->save();
+
+        return redirect()->back()->with('success', 'Status Susunan DKM berhasil diperbarui!');
+    }
 }

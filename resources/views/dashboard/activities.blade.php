@@ -161,17 +161,17 @@
     <script>
     $(document).ready(function() {
         $('.btn-secondary').on('click', function(event) {
-            event.preventDefault(); // Mencegah submit langsung
+            event.preventDefault(); 
             let form = $(this).closest('form'); // Ambil form terdekat
 
             Swal.fire({
-                title: "Konfirmasi Non Aktif!",
-                text: "Apakah kamu yakin akan Aktifkan/Non Aktifkan data ini?",
+                title: "Konfirmasi Status!",
+                text: "Apakah kamu yakin akan mengubah status data ini?",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#d33",
+                confirmButtonColor: "#253A82",
                 cancelButtonColor: "#6c757d",
-                confirmButtonText: "Non Aktifkan",
+                confirmButtonText: "Ya, Ubah",
                 cancelButtonText: "Batal"
             }).then((result) => {
                 if (result.isConfirmed) {

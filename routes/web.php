@@ -98,24 +98,16 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/bagan', [BaganController::class, 'store'])->name('bagan.store');
 
     // route susunan organisasi dkm
-    // Route::get('/organizational_chart', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
-    // Route::get('/organizational_chart/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
-    // Route::get('/organizational_chart/{id}/edit', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
-    // Route::post('/organizational_chart/store', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
-    // Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
-
-    // Route::resource('organizational_chart', OrganizationalChartController::class);
-
     Route::get('/organizational_chart', [OrganizationalChartController::class, 'index'])->name('organizational_chart.index');
-Route::get('/organizational_chart/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
-Route::post('/organizational_chart', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
-Route::get('/organizational_chart/{id}/edit', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
-Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
+    Route::get('/organizational_chart/create', [OrganizationalChartController::class, 'create'])->name('organizational_chart.create');
+    Route::post('/organizational_chart', [OrganizationalChartController::class, 'store'])->name('organizational_chart.store');
+    Route::get('/organizational_chart/{id}/edit', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
+    Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
+    Route::patch('/organizational_chart/{id}/toggle', [OrganizationalChartController::class, 'toggle'])->name('organizational_chart.toggle');
 
-    
+
 
     // <!-- route infaq-->
-
     // route banner
     Route::get('/banner-infaq', [BannerInfaqController::class, 'index'])->name('banner-infaq.index');
     Route::post('/banner-infaq', [BannerInfaqController::class, 'store'])->name('banner-infaq.store');
@@ -136,6 +128,7 @@ Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 
     Route::get('/dashboard/payment-method', [methodPaymentController::class, 'index'])->name('payment.index');
     Route::post('/dashboard/payment-method/updateBank', [methodPaymentController::class, 'store'])->name('payment.store');
     Route::post('/dashboard/payment-method/updateQRIS', [methodPaymentController::class, 'storeqris'])->name('payment.storeqris');
+
 
     // <!Route Zakat -->
     // Banner Zakat

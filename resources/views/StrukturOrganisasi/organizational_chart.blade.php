@@ -79,14 +79,28 @@
                                     @foreach ($organizational_chart as $index => $item)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->name }}
+                                            <br>
+                                            @if($item->is_active)
+                                                    <span class="badge bg-success">Aktif</span>
+                                                @else
+                                                    <span class="badge bg-danger">Nonaktif</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $item->position }}</td>
                                             <td><img src="{{ asset('storage/' . $item->photo) }}" width="50" style="max-height: 70px;"></td>
-                                            <td>
+                                            <td  class="d-flex gap-1">
                                                 <a href="{{ route('organizational_chart.edit', $item->id) }}"
                                                     class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
+                                                <form action="{{ route('organizational_chart.toggle', $item->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-secondary">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -140,3 +154,63 @@
             session()->forget('success');
         @endphp
     @endif
+
+    <script>
+    $(document).ready(function() {
+        $('.btn-secondary').on('click', function(event) {
+            event.preventDefault(); 
+            let form = $(this).closest('form'); // Ambil form terdekat
+
+            Swal.fire({
+                title: "Konfirmasi Status!",
+                text: "Apakah kamu yakin akan mengubah status data ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#253A82",
+                cancelButtonColor: "#6c757d",
+                confirmButtonText: "Ya, Ubah",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit(); 
+                }
+            });
+        });
+        });
+
+//     $('.btn-secondary').on('click', function(event) {
+//     event.preventDefault();
+//     let form = $(this).closest('form');
+//     let url = form.attr('action');
+
+//     Swal.fire({
+//         title: "Konfirmasi Status!",
+//         text: "Apakah kamu yakin akan mengubah status data ini?",
+//         icon: "warning",
+//         showCancelButton: true,
+//         confirmButtonColor: "#253A82",
+//         cancelButtonColor: "#6c757d",
+//         confirmButtonText: "Ya, Ubah",
+//         cancelButtonText: "Batal"
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             $.ajax({
+//                 url: url,
+//                 type: "POST",  // HARUS PAKAI POST, BUKAN PATCH
+//                 data: form.serialize() + "&_method=PATCH", // TAMBAHKAN _method=PATCH
+//                 success: function(response) {
+//                     Swal.fire("Sukses!", "Status berhasil diperbarui!", "success").then(() => {
+//                         location.reload(); 
+//                     });
+//                 },
+//                 error: function(error) {
+//                     Swal.fire("Gagal!", "Ada kesalahan saat mengubah status!", "error");
+//                 }
+//             });
+//         }
+//     });
+// });
+
+    // </script>
+
+

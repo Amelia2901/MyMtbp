@@ -76,8 +76,8 @@
         }
 
         .slider-img {
-            min-height: 400px;
-            max-height: 400px;
+            min-height: 500px;
+            max-height: 500px;
             width: 100%;
             object-fit: cover;
             object-position: center;
@@ -88,11 +88,13 @@
         .content {
             position: absolute;
             z-index: 2;
-            /* Pastikan teks di atas gambar */
             color: white;
             text-align: center;
+            align-items: center;
+            align-content: center;
             width: 100%;
             padding: 20px;
+            margin-top: -50px !important;
         }
 
         .navbar {
@@ -342,72 +344,66 @@
             </div>
         </div>
         <div class="Kalender-kegiatan">
-            @if (isset($data['activities']))
-                @foreach ($data['activities'] as $item)
-                    @if ($item['main_activity'] == 1)
-                        <div class="row-kalender">
-                            <img style="border-radius: 20px; width: 600px; height: 350px; object-fit: cover;"
-                                src="{{ asset('storage/' . $item['ActivityPhoto']) }}">
-                            <h3
-                                style="color: black; margin-top: 10px; margin-bottom: 20px; font-size:20px; font-weight: 600; margin-left: 20px;">
-                                {{ $item['ActivityName'] ?? '' }}</h3>
-                            <div class="keterangan">
-                                <div class="row-keterangan">
-                                    <p style="color: black; font-size:14px; font-weight:450;"> <i
-                                            style="color: #F2AB43;" class="fa-regular fa-clock"></i>
-                                        @php
-                                            \Carbon\Carbon::setLocale('id');
-                                            $tanggal = \Carbon\Carbon::parse($item['ActivityDate']);
-                                        @endphp
-                                        {{ $tanggal->translatedFormat('l') }},
-                                        {{ $tanggal->translatedFormat('d F Y') }},</p>
-                                    <p
-                                        style="color: black; font-size:14px; font-weight:450; margin-top:-15px; margin-left:18px;">
-                                        pukul
-                                        {{ $item['ActivityTime'] }}-{{ $item['ActivityTime2'] }}
-                                        WIB</p>
-                                </div>
-
-                                <div class="row-keterangan">
-                                    <p style="color: black; font-size:14px; font-weight:450;"> <i
-                                            style="color: #F2AB43" class="fa-solid fa-location-dot"></i>
-                                        {{ $item['ActivityPlace'] }}
-                                    </p>
-                                    <p style="color: black; font-size:14px; font-weight:450; margin-top:10px;"> <i
-                                            style=" color: #F2AB43;" class="fa-regular fa-user"></i>
-                                        {{ $item['ActivityPerformers'] }}</p>
-                                </div>
-                            </div>
+            @if (isset($data['main_activity']))
+                <div class="row-kalender">
+                    <img style="border-radius: 20px; width: 600px; height: 350px; object-fit: cover;"
+                        src="{{ asset('storage/' . $data['main_activity']['ActivityPhoto']) }}">
+                    <h3
+                        style="color: black; margin-top: 10px; margin-bottom: 20px; font-size:20px; font-weight: 600; margin-left: 20px;">
+                        {{ $data['main_activity']['ActivityName'] ?? '' }}</h3>
+                    <div class="keterangan">
+                        <div class="row-keterangan">
+                            <p style="color: black; font-size:14px; font-weight:450;"> <i style="color: #F2AB43;"
+                                    class="fa-regular fa-clock"></i>
+                                @php
+                                    \Carbon\Carbon::setLocale('id');
+                                    $tanggal = \Carbon\Carbon::parse($data['main_activity']['ActivityDate']);
+                                @endphp
+                                {{ $tanggal->translatedFormat('l') }},
+                                {{ $tanggal->translatedFormat('d F Y') }},</p>
+                            <p
+                                style="color: black; font-size:14px; font-weight:450; margin-top:-15px; margin-left:18px;">
+                                pukul
+                                {{ $data['main_activity']['ActivityTime'] }}-{{ $data['main_activity']['ActivityTime2'] }}
+                                WIB</p>
                         </div>
-                    @endif
-                @endforeach
+
+                        <div class="row-keterangan">
+                            <p style="color: black; font-size:14px; font-weight:450;"> <i style="color: #F2AB43"
+                                    class="fa-solid fa-location-dot"></i>
+                                {{ $data['main_activity']['ActivityPlace'] }}
+                            </p>
+                            <p style="color: black; font-size:14px; font-weight:450; margin-top:10px;"> <i
+                                    style=" color: #F2AB43;" class="fa-regular fa-user"></i>
+                                {{ $data['main_activity']['ActivityPerformers'] }}</p>
+                        </div>
+                    </div>
+                </div>
             @endif
 
             <div class="row-berita" style="max-height: 480px; overflow: auto; padding-top:40px;">
                 @if (isset($data['activities']))
                     @foreach ($data['activities'] as $index => $item)
-                        @if ($item['main_activity'] == 0)
-                            <div class="content-berita">
-                                <div class="foto-berita">
-                                    <img src="{{ asset('storage/' . $item['ActivityPhoto']) }}">
-                                </div>
-                                <div class="isi-berita">
-                                    @php
-                                        \Carbon\Carbon::setLocale('id');
-                                        $tanggal = \Carbon\Carbon::parse($item['ActivityDate']);
-                                    @endphp
-                                    <p
-                                        style="color: rgb(85, 61, 61)9, 23, 23); font-size:13px; font-weight:600; margin-top:-15px;">
-                                        <i style=" color: #F2AB43;" class="fa-regular fa-clock"></i>
-                                        {{ $tanggal->translatedFormat('l') }},
-                                        {{ $tanggal->translatedFormat('d F Y') }}
-                                    </p>
-                                    <h3>{{ $item['ActivityName'] }}</h3>
-                                    <p>Deskripsi: {{ $item['ActivityDescription'] }}</p>
-                                </div>
+                        <div class="content-berita">
+                            <div class="foto-berita">
+                                <img src="{{ asset('storage/' . $item['ActivityPhoto']) }}">
                             </div>
-                            <br>
-                        @endif
+                            <div class="isi-berita">
+                                @php
+                                    \Carbon\Carbon::setLocale('id');
+                                    $tanggal = \Carbon\Carbon::parse($item['ActivityDate']);
+                                @endphp
+                                <p
+                                    style="color: rgb(85, 61, 61)9, 23, 23); font-size:13px; font-weight:600; margin-top:-15px;">
+                                    <i style=" color: #F2AB43;" class="fa-regular fa-clock"></i>
+                                    {{ $tanggal->translatedFormat('l') }},
+                                    {{ $tanggal->translatedFormat('d F Y') }}
+                                </p>
+                                <h3>{{ $item['ActivityName'] }}</h3>
+                                <p>Deskripsi: {{ $item['ActivityDescription'] }}</p>
+                            </div>
+                        </div>
+                        <br>
                     @endforeach
                 @endif
 

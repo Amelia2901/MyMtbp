@@ -32,6 +32,35 @@
         background: #583e31 !important;
         color: white !important;
     } */
+
+        .slider {
+            min-height: auto !important;
+            margin-bottom: -20px !important;
+            padding-bottom: 0 !important;
+        }
+
+        .slider-img {
+            max-height: 400px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(50%) sepia(30%);
+            /* Gelapkan & beri efek kecoklatan */
+        }
+
+        .content {
+            position: absolute;
+            z-index: 2;
+            /* Pastikan teks di atas gambar */
+            color: white;
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .navbar {
+            z-index: 2;
+        }
     </style>
 </head>
 
@@ -42,12 +71,9 @@
             <div class="link">
                 <img src="{{ asset('assets/img/website/logo_masjid.svg') }}" alt="">
                 <ul>
-                    <li><a href="{{ url('/') }}">Beranda</a></li>
-                    <li><a href="{{ url('/about') }}"> Tentang Kami</a></li>
-                    <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
-                    <li><a href="{{ url('/infaq') }}">Donasi</a></li>
-                    <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
-                    <li><a href="{{ url('/zakat') }}">Zakat</a></li>
+                    @foreach ($data['navbar'] as $nav)
+                        <li><a href="{{ url($nav->url) }}">{{ $nav->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
 
@@ -85,19 +111,17 @@
         </div>
         <div class="d-block d-md-none">
             <div class="floating-sidebar">
-                <a href="index.php"><i class="fa-solid fa-house"></i> <span>Home</span></a>
-                <a href="#"><i class="fa-solid fa-users"></i> <span>Tentang Kami</span></a>
-                <a href="../#JadwalShalat"><i class="fa-solid fa-calendar"></i> <span>Jadwal Shalat</span></a>
-                <a href="infaq.php"><i class="fa-solid fa-hand-holding-heart"> </i> <span>Donasi</span></a>
-                <a href="../#Kontak"><i class="fa-solid fa-hand-holding-heart"></i> <span>Kontak</span></a>
-                <a href="#"><i class="fa-solid fa-hand-holding-heart"></i> <span>Zakat</span></a>
+                @foreach ($data['navbar'] as $nav)
+                    <a href="{{ $nav->url }}">{{ $nav->name }}</a>
+                @endforeach
             </div>
         </div>
     </div>
 
 
     <div class="slider" style="min-height: auto !important; padding-bottom: 52px;">
-        <img src="{{ asset('assets/img/website/slider.jpg') }}" alt="" style="z-index: 2 !important;">
+        <img src="{{ asset('assets/img/website/slider.jpg') }}" alt="" style="z-index: 2 !important;"
+            class="slider-img">
         <div class="content">
             <div class="isi-content">
                 <h1>
@@ -135,8 +159,7 @@
         <div class="d-block d-md-none">
             <div class="title" style="display: flex; height: auto; margin-top: -10px;">
                 <div class="title-text" style="width: 60%;">
-                    <h1 align="left"
-                        style="margin: 40px 0 20px 20px !important; font-size: 25px; font-weight: 400;">
+                    <h1 align="left" style="margin: 40px 0 20px 20px !important; font-size: 25px; font-weight: 400;">
                         Zakat Jamaah</h1>
                 </div>
                 <div class="title-image" style="width: 40%;">
@@ -211,12 +234,12 @@
             <h1 style="text-align:center; font-size: 40px; font-weight: 400px;">Zakat Fitrah</h1>
 
             <div class="isi-zakat-emas" style="margin-top: 40px; margin-right: 15px;">
-                <p style="font-size: 22px; color: #583E31;">Besaran pada Zakat Fitrah adalah beras atau makanan pokok
-                    seberat 2,5 kg atau 3,5 liter per jiwa. </p>
+                <p style="font-size: 22px; color: #583E31;">{{ $data['fitrah']['deskripsi'] }}</p>
                 <p style="font-size: 22px; color: #583E31;">Untuk perhitungan Zakat Fitrah :
                 </p>
                 <p style="font-size: 22px; color: #583E31;"> • Setara dengan 1 sha’ gandum, kurma atau beras. </p>
-                <p style="font-size: 22px; color: #583E31;"> • Nilai zakat setara dengan uang sebesar Rp. 40.000/jiwa
+                <p style="font-size: 22px; color: #583E31;"> • Nilai zakat setara dengan uang sebesar Rp.
+                    {{ number_format($data['fitrah']['zakat'], 0, ',', '.') }}/jiwa
                     (SK Ketua BAZNAS No.7 Tahun 2021). </p>
             </div>
             <div class="jumlah-jiwa">
@@ -225,6 +248,7 @@
                     <p style="font-size: 25px; font-family: montserrat; margin-top: 20px; margin-left:50px;">Jumlah
                         jiwa</p>
                     <div class="box-jumlah-jiwa">
+                        <input type="hidden" id="hargazakatfitrah" value="{{ $data['fitrah']['zakat'] }}">
                         <input type="number" class="form-control" id="jumlahJiwa" min="1"
                             placeholder="Masukkan jumlah jiwa" oninput="hitungZakat()">
                         <p>Jiwa</p>
@@ -260,13 +284,15 @@
         <div class="jenis-zakat zakat-penghasilan" id="zakat-penghasilan" style="margin-left: 50px; display: none;">
             <h1 style="text-align:center; font-size: 40px; font-weight: 400px;">Zakat Penghasilan</h1>
             <div class="isi-zakat-penghasilan" style="margin-top: 40px; margin-right: 15px;">
-                <p style="font-size:22px; color: #583E31; margin-right:50px;">Zakat penghasilan adalah bagian dari
-                    zakat maal yang wajib
-                    dikeluarkan atas harta yang berasal dari pendapatan / penghasilan rutin dari pekerjaan.</p>
+                <p style="font-size:22px; color: #583E31; margin-right:50px;">{{ $data['penghasilan']['deskripsi'] }}
+                </p>
                 <p style="font-size:22px; color: #583E31;"> • Kadar zakat penghasilan senilai 2,5%.</p>
                 <p style="font-size:22px; color: #583E31;"> • Nishab zakat perbulan setara dengan Rp7.140.498,00</p>
                 <p style="font-size:22px; color: #583E31;"> • Nishab zakat penghasilan sebesar 85 gram emas per tahun
-                    atau setara dengan Rp85.685.972,00 (SK Ketua BAZNAS No. 13 tahun 2025).</p>
+                    atau setara dengan Rp. {{ number_format(intval($data['emas']['emas']) * 85, 2, ',', '.') }} (SK
+                    Ketua BAZNAS No. 13
+                    tahun
+                    2025).</p>
             </div>
             <div class="form-zakat-penghasilan">
                 <h1 style="font-size: 36px; font-family: Alata; margin-top:60px;">Penghasilan</h1>
@@ -323,10 +349,7 @@
         <div class="jenis-zakat zakat-emas" id="zakat-emas" style="margin-left: 50px; display: none;">
             <h1 style="text-align:center; font-size: 40px; font-weight: 400px;">Zakat Emas & Perak</h1>
             <div class=" isi-zakat-emas" style="margin-top: 40px; margin-right: 15px;">
-                <p style="font-size: 22px; color: #583E31; margin-right:50px;">Untuk menghitung zakat emas dan perak
-                    yang telah tersimpan
-                    selama 1 tahun hijriyah.
-                    Zakat yang dikeluarkan adalah sebesar 2,5%.
+                <p style="font-size: 22px; color: #583E31; margin-right:50px;">{{ $data['emas']['deskripsi'] }}
                 </p>
                 <p style="font-size: 22px; color: #583E31;"> • Nishab emas adalah 85 gram. </p>
                 <p style="font-size: 22px; color: #583E31;"> • Nishab perak adalah 595 gram. </p>
@@ -336,6 +359,8 @@
                 <div class="content-zakat-penghasilan" style="display: flex; justify-content: space-between;">
                     <p style="font-size: 25px; font-family: montserrat; margin-top: 20px; margin-left:50px;">Emas</p>
                     <div class="box-zakat-penghasilan">
+                        <input type="hidden" id="hargaemas" value="{{ $data['emas']['emas'] }}">
+                        <input type="hidden" id="hargaperak" value="{{ $data['emas']['perak'] }}">
                         <input type="number" class="form-control" id="JumlahEmas" min="85"
                             placeholder="Masukkan jumlah emas" oninput="HitungZakatEmas()">
                         <p>Gram</p>
@@ -389,7 +414,7 @@
                             Perak</p>
                         <div class="box-hasil-zakat">
                             <p style="color: white">Rp.</p>
-                            <input type="text" class="form-control" id="hitungZakatPerakUang" >
+                            <input type="text" class="form-control" id="hitungZakatPerakUang">
                         </div>
                     </div>
                 </div>
@@ -413,9 +438,8 @@
         <div class="jenis-zakat zakat-ternak" id="zakat-ternak" style="margin-left: 50px; display: none;">
             <h1 style="text-align:center; font-size: 40px; font-weight: 400px;">Zakat Hewan Ternak</h1>
             <div class="isi-zakat-emas" style="margin-top: 40px; margin-right: 15px;">
-                <p style="font-size: 22px; color: #583E31; margin-right:50px;">Zakat hewan ternak adalah zakat yang
-                    wajib dibayarkan oleh
-                    umat islam atas kepemilikan hewan ternak tertentu. </p>
+                <p style="font-size: 22px; color: #583E31; margin-right:50px;">{{ $data['ternak']['deskripsi1'] }}
+                </p>
                 <p style="font-size: 22px; color: #583E31;">Untuk zakat kambing :
                     </4>
                 <p style="font-size:22px; color: #583E31;"> • Nishab-nya adalah 40 ekor. </p>
@@ -462,8 +486,7 @@
         <div class="jenis-zakat zakat-perdagangan" id="zakat-perdagangan" style="margin-left: 50px; display: none;">
             <h1 style="text-align:center; font-size: 40px; font-weight: 400px;">Zakat Perdagangan</h1>
             <div class=" isi-zakat-emas" style="margin-top: 40px; margin-right: 15px;">
-                <p style="font-size: 22px; color: #583E31;">Barang dagangan di sini termasuk tanah, rumah, kendaraan,
-                    ternak(selain kambing, sapi/kerbau dan unta), perhiasan dll yang diniatkan untuk dijual.
+                <p style="font-size: 22px; color: #583E31;">{{ $data['ternak']['deskripsi2'] }}
                 </p>
                 </p>
                 <p style="font-size: 22px; color: #583E31;"> • Nishab-nya senilai 85 gram emas. </p>
@@ -591,66 +614,65 @@
                 return;
             }
 
-            const zakatPerJiwa = 40000;
+            const zakatPerJiwa = parseInt($('#hargazakatfitrah').val());
             let totalZakat = jumlahJiwa * zakatPerJiwa;
 
             document.getElementById("hasilZakat").value = totalZakat.toLocaleString("id-ID");
         }
 
-        // perhitungan zakat emas dan perak
-        const hargaEmasPerGram = 108070; // Harga emas per gram dalam Rupiah
-        const hargaPerakPerGram = 17000; // Harga perak per gram dalam Rupiah
-        const nishabEmas = 85; // Nishab emas dalam gram
-        const nishabPerak = 595; // Nishab perak dalam gram
+        const hargaEmasPerGram = parseInt($('#hargaemas').val());
+        const hargaPerakPerGram = parseInt($('#hargaperak').val());
+        const nishabEmas = 85;
+        const nishabPerak = 595;
 
         function HitungZakatEmas() {
             let jumlahEmas = parseFloat(document.getElementById("JumlahEmas").value) || 0;
             let hasilZakatEmas = document.getElementById("HasilZakatEmas");
             let hasilZakatEmasUang = document.getElementById("hitungZakatEmasUang");
 
-        if (jumlahEmas == 0) {
-            hasilZakatEmas.value = 0;
-            hasilZakatEmasUang.value = 0;
-        return;
-        } else if (jumlahEmas >= nishabEmas) {
+            if (jumlahEmas == 0) {
+                hasilZakatEmas.value = 0;
+                hasilZakatEmasUang.value = 0;
+                return;
+            } else if (jumlahEmas >= nishabEmas) {
 
-        // Hitung zakat emas
-        let zakatEmas = (jumlahEmas * 2.5) / 100;
-        hasilZakatEmas.value = zakatEmas.toFixed(2); 
+                // Hitung zakat emas
+                let zakatEmas = (jumlahEmas * 2.5) / 100;
+                hasilZakatEmas.value = zakatEmas.toFixed(2);
 
-        // Hitung jika dibayar dengan uang
-        let zakatEmasUang = zakatEmas * hargaEmasPerGram;
-        hasilZakatEmasUang.value = zakatEmasUang.toLocaleString("id-ID");
-        
-        } else {
-            hasilZakatEmas.value = "Anda belum mencapai nishab";
-            hasilZakatEmasUang.value = "Anda belum mencapai nishab";
-        }   
+                // Hitung jika dibayar dengan uang
+                let zakatEmasUang = zakatEmas * hargaEmasPerGram;
+                hasilZakatEmasUang.value = zakatEmasUang.toLocaleString("id-ID");
+
+            } else {
+                hasilZakatEmas.value = "Anda belum mencapai nishab";
+                hasilZakatEmasUang.value = "Anda belum mencapai nishab";
+            }
         }
 
         function HitungZakatPerak() {
-        let jumlahPerak = parseFloat(document.getElementById("JumlahPerak").value) || 0;
-        let hasilZakatPerak = document.getElementById("HasilZakatPerak");
-        let hasilZakatPerakUang = document.getElementById("hitungZakatPerakUang");
+            let jumlahPerak = parseFloat(document.getElementById("JumlahPerak").value) || 0;
+            let hasilZakatPerak = document.getElementById("HasilZakatPerak");
+            let hasilZakatPerakUang = document.getElementById("hitungZakatPerakUang");
 
-        if (jumlahPerak == 0) {
-            hasilZakatPerak.value = 0;
-            hasilZakatPerakUang.value = 0;
-        return;
-        } else if (jumlahPerak >= nishabPerak) {
-        
-        // Hitung zakat perak 
-        let zakatPerak = (jumlahPerak * 2.5) / 100;
-        hasilZakatPerak.value = zakatPerak.toFixed(2) ; 
+            if (jumlahPerak == 0) {
+                hasilZakatPerak.value = 0;
+                hasilZakatPerakUang.value = 0;
+                return;
+            } else if (jumlahPerak >= nishabPerak) {
 
-        // Hitung jika dibayar dengan uang
-        let zakatPerakUang = zakatPerak * hargaPerakPerGram;
-        hasilZakatPerakUang.value = zakatPerakUang.toLocaleString("id-ID");
-        
-        } else {
-            hasilZakatPerak.value = "Anda belum mencapai nishab";
-            hasilZakatPerakUang.value = "Anda belum mencapai nishab";
-        }
+                // Hitung zakat perak 
+                let zakatPerak = (jumlahPerak * 2.5) / 100;
+                hasilZakatPerak.value = zakatPerak.toFixed(2);
+
+                // Hitung jika dibayar dengan uang
+                let zakatPerakUang = zakatPerak * hargaPerakPerGram;
+                hasilZakatPerakUang.value = zakatPerakUang.toLocaleString("id-ID");
+
+            } else {
+                hasilZakatPerak.value = "Anda belum mencapai nishab";
+                hasilZakatPerakUang.value = "Anda belum mencapai nishab";
+            }
         }
 
         // zakat penghasilan

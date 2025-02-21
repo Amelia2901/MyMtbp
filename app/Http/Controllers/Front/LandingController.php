@@ -19,6 +19,11 @@ use App\Models\payment_method;
 use App\Models\CategoriInfaq;
 use App\Models\infaq_descriptions;
 use App\Models\activities;
+use App\Models\BannerZakat;
+use App\Models\ZakatFitrah;
+use App\Models\ZakatPenghasilan;
+use App\Models\ZakatEmas;
+use App\Models\ZakatTernakPerdagangan;
 
 
 class LandingController extends Controller
@@ -36,7 +41,8 @@ class LandingController extends Controller
             'banner' => BannerDashboard::first(),
             'shalat' => prayer_times::where('Tanggal', $today)->first(),
             'contact' => contact_mosques::first(),
-            'activities' => activities::where('is_active', 1)->get()
+            'main_activity' => activities::where('is_active', 1)->where('main_activity', 1)->first(),
+            'activities' => activities::where('is_active', 1)->where('main_activity', 0)->get()
         );
         return view('index', compact('data'));
     }
@@ -89,10 +95,11 @@ class LandingController extends Controller
             'title' => 'Home',
             'description' => 'Selamat datang di website kami',
             'navbar' => Navbar::orderBy('order', 'asc')->get(),
-            'banner' => Bannerinfaq::first(),
-            'payment' => payment_method::first(),
-            'description' => infaq_descriptions::first(),
-            'category' => CategoriInfaq::first()
+            'banner' => BannerZakat::first(),
+            'fitrah' => ZakatFitrah::first(),
+            'penghasilan' => ZakatPenghasilan::first(),
+            'emas' => ZakatEmas::first(),
+            'ternak' => ZakatTernakPerdagangan::first()
         );
         return view('zakat', compact('data'));
     }

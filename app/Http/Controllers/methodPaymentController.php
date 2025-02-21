@@ -21,14 +21,38 @@ class methodPaymentController extends Controller
             'atas_nama' =>'required',
         ]);
 
+        $namabank = 'ga masuk bro';
+
+        if($data['bank']=='BCA'){
+            $namabank = 'Bank Central Asia';
+        }else if($data['bank']=='BNI'){
+            $namabank = 'Bank Negara Indonesia';
+        }else if($data['bank']=='BSI'){
+            $namabank = 'Bank Syariah Indonesia';
+        }else if($data['bank']=='BRI'){
+            $namabank = 'Bank Rakyat Indonesia';
+        }else if($data['bank']=='MANDIRI'){
+            $namabank = 'Bank Mandiri';
+        }else if($data['bank']=='BTN'){
+            $namabank = 'Bank Tabungan Negara';
+        }else if($data['bank']=='MEGA'){
+            $namabank = 'Bank Mega';
+        }else if($data['bank']=='DANAMON'){
+            $namabank = 'Danamon';
+        } else{
+            $namabank = '-';
+        }
+
         $bank_method = payment_method::first();
 
+        echo $namabank;
         if($bank_method){
             $bank_method->update([
                 'bank' => $data['bank'],
                 'rekening' => $data['rekening'],
                 'qris' => $bank_method->qris,
                 'atas_nama' => $data['atas_nama'],
+                'bank_name' => $namabank,
             ]);
         }else{
             payment_method::create([
@@ -36,6 +60,7 @@ class methodPaymentController extends Controller
                 'rekening' => $data['rekening'],
                 'qris' => '',
                 'atas_nama' =>$data['atas_nama'],
+                'bank_name' => $namabank,
             ]);
         }
 
@@ -54,6 +79,7 @@ class methodPaymentController extends Controller
                 'rekening' => $bank_method->rekening,
                 'qris' => $filePath ?? $bank_method->qris,
                 'atas_nama' => $bank_method->atas_nama,
+                'bank_name' => $bank_method->bank_name,
             ]);
         }else{
             payment_method::create([
@@ -61,6 +87,7 @@ class methodPaymentController extends Controller
                 'rekening' => '',
                 'qris' => $filePath,
                 'atas_nama' =>'',
+                'bank_name' => $bank_method->bank_name,
             ]);
         }
 

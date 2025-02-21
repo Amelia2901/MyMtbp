@@ -22,7 +22,34 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
-        @media (max-width: 480px) {}
+        .slider {
+            min-height: auto !important;
+            margin-bottom: 20px !important;
+        }
+
+        .slider-img {
+            min-height: 400px;
+            max-height: 400px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(50%) sepia(30%);
+            /* Gelapkan & beri efek kecoklatan */
+        }
+
+        .content {
+            position: absolute;
+            z-index: 2;
+            /* Pastikan teks di atas gambar */
+            color: white;
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .navbar {
+            z-index: 2;
+        }
     </style>
 
 </head>
@@ -33,16 +60,11 @@
             <div class="link">
                 <img src="{{ asset('assets/img/website/logo_masjid.svg') }}" alt="">
                 <ul>
-                    <li><a href="{{ url('/') }}">Beranda</a></li>
-                    <li><a href="{{ url('/about') }}"> Tentang Kami</a></li>
-                    <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
-                    <li><a href="{{ url('/infaq') }}">Donasi</a></li>
-                    <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
-                    <li><a href="{{ url('/zakat') }}">Zakat</a></li>
+                    @foreach ($data['navbar'] as $nav)
+                        <li><a href="{{ url($nav->url) }}">{{ $nav->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
-
-
 
             <div class="medsos" style="display: flex;">
                 <div class="d-none d-md-block">
@@ -76,26 +98,25 @@
         </div>
         <div class="d-block d-md-none">
             <div class="floating-sidebar">
-                <a href="#"><i class="fa-solid fa-house"></i> <span>Home</span></a>
-                <a href="struktur-organisasi"><i class="fa-solid fa-users"></i> <span>Tentang Kami</span></a>
-                <a href="#JadwalShalat"><i class="fa-solid fa-calendar"></i> <span>Jadwal Shalat</span></a>
-                <a href="infaq.php"><i class="fa-solid fa-hand-holding-heart"> </i> <span>Donasi</span></a>
-                <a href="#Kontak"><i class="fa-solid fa-hand-holding-heart"></i> <span>Kontak</span></a>
-                <a href="zakat.php"><i class="fa-solid fa-hand-holding-heart"></i> <span>Zakat</span></a>
+                <div class="floating-sidebar">
+                    @foreach ($data['navbar'] as $nav)
+                        <a href="{{ $nav->url }}">{{ $nav->name }}</a>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
 
     <div class="slider">
-        <img src="{{ asset('assets/img/website/slider.jpg') }}" alt="">
+        <img src="{{ $data['banner']['banner_photo'] ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
+            alt="" class="slider-img">
         <div class="content">
             <div class="isi-content" style="justify-content: center;">
                 <h1>
-                    Infaq Masjid
+                    {{ $data['banner']['banner_title'] ?? 'Infaq Masjid' }}
                 </h1>
                 <p>
-                    "Tidaklah berkurang rezeki seseorang karena
-                    <br>bersedekah."
+                    {{ $data['banner']['banner_description'] ?? '"Tidaklah berkurang rezeki seseorang karena bersedekah."' }}
                 </p>
                 <div style="display: flex; justify-content: center;">
                     <a class="btn button-selengkapnya" onclick="scrollKebawah()" style="text-align: center; margin: 0;"
@@ -122,8 +143,10 @@
                 <div class="d-none d-md-block">
                     <h1>Infaq Jama'ah</h1>
                 </div>
-                <p>Masjid Bumi Prima Menerima Infaq dan Shodaqoh Jamaa'ah untuk kebutuhan operasional,kegiatan dan
-                    program Masjid Bumi Prima agar senantiasa berjalan dan untuk Kemakmuran Masjid.</p>
+                <p>{{ $data['description']['Description_1'] ??
+                    "Masjid Bumi Prima Menerima Infaq dan Shodaqoh Jama'ah untuk kebutuhan operasional,kegiatan dan
+                                                                                                                    program Masjid Bumi Prima agar senantiasa berjalan dan untuk Kemakmuran Masjid." }}
+                </p>
             </div>
             <img style="width: 300px; height:300px; margin-top: -30px; margin-left:250px;"
                 src="{{ asset('assets/img/website/infaq orang.png') }}">
@@ -132,9 +155,12 @@
 
     <div class="infaq-love">
         <!-- <img style="height: 400px;" src="images/infaq love.png" alt=""> -->
-        <p style="font-size: 25px; font-family: Montserrat, serif;">Masjid Bumi Prima Menerima Infaq dan Shodaqoh
-            Jama’ah untuk kebutuhan operasional,
-            kegiatan dan program Masjid Bumi Prima agar senantiasa berjalan dan untuk kemakmuran Masjid.</p>
+        <p style="font-size: 25px; font-family: Montserrat, serif;">
+            {{ $data['description']['Description_2'] ??
+                "Masjid Bumi Prima Menerima Infaq dan Shodaqoh
+                                                                                    Jama’ah untuk kebutuhan operasional,
+                                                                                    kegiatan dan program Masjid Bumi Prima agar senantiasa berjalan dan untuk kemakmuran Masjid." }}
+        </p>
     </div>
     </div>
 
@@ -153,9 +179,12 @@
                             <img src="{{ asset('assets/img/website/icon 1.png') }}">
                         </div>
                     </div>
-                    <p class="text-infaq">Infaq operasional</p>
-                    <p style="font-size: 14px; text-align: center; margin: 20px;">Digunakan untuk keperluan kebutuhan
-                        operasional dan program untuk Masjid. </p>
+                    <p class="text-infaq">{{ $data['category']['kategori_1'] ?? 'Infaq operasional' }}</p>
+                    <p style="font-size: 14px; text-align: center; margin: 20px;">
+                        {{ $data['category']['deskripsi_1'] ??
+                            'Digunakan untuk keperluan kebutuhan
+                                                                                                                                                                        operasional dan program untuk Masjid.' }}
+                    </p>
                     <div>
                         <a class="button-infaq" onclick="qris()">
                             Infaq Sekarang
@@ -169,9 +198,12 @@
                             <img src="{{ asset('assets/img/website/icon 2.png') }}">
                         </div>
                     </div>
-                    <p class="text-infaq"> Infaq Sosial </p>
-                    <p style="font-size: 14px; margin: 0 10px 23px 20px;"> Santunan kepada anak yatim atau
-                        yang membutuhkan untuk kesejahteraan umat. </p>
+                    <p class="text-infaq">{{ $data['category']['kategori_2'] ?? 'Infaq Sosial' }}</p>
+                    <p style="font-size: 14px; text-align: center; margin: 20px;">
+                        {{ $data['category']['deskripsi_2'] ??
+                            'Santunan kepada anak yatim atau
+                                                                                                                                                                        yang membutuhkan untuk kesejahteraan umat.' }}
+                    </p>
                     <div>
                         <a class="button-infaq" onclick="qris()">
                             Infaq Sekarang
@@ -184,10 +216,12 @@
                             <img src="{{ asset('assets/img/website/icon 3.png') }}">
                         </div>
                     </div>
-                    <p class="text-infaq"> Infaq Pembangunan </p>
-                    <p style="font-size: 14px; margin: 0 10px 23px 20px;">Kebutuhan Perawatan dan pemeliharaan
-                        bangunan
-                        fisik Masjid dan sarana penunjang.</p>
+                    <p class="text-infaq">{{ $data['category']['kategori_3'] ?? 'Infaq Pembangunan' }}</p>
+                    <p style="font-size: 14px; text-align: center; margin: 20px;">
+                        {{ $data['category']['deskripsi_3'] ??
+                            'Kebutuhan Perawatan dan pemeliharaan
+                                                                                                                                                                        bangunan fisik Masjid dan sarana penunjang.' }}
+                    </p>
                     <div>
                         <a class="button-infaq" onclick="qris()">
                             Infaq Sekarang
@@ -200,9 +234,11 @@
                             <img src="{{ asset('assets/img/website/icon 42.png') }}">
                         </div>
                     </div>
-                    <p class="text-infaq">Infaq Kurban</p>
-                    <p style="font-size: 14px; margin: 0 10px 23px 20px">Program patungan untuk membeli hewan qurban
-                        yang akan diserahkan kepada umat.</p>
+                    <p class="text-infaq">{{ $data['category']['kategori_4'] ?? 'Infaq Kurban' }}</p>
+                    <p style="font-size: 14px; text-align: center; margin: 20px;">
+                        {{ $data['category']['deskripsi_4'] ??
+                            'Program patungan untuk membeli hewan qurban yang akan diserahkan kepada umat.' }}
+                    </p>
                     <div>
                         <a class="button-infaq" onclick="qris()">
                             Infaq Sekarang
@@ -225,16 +261,16 @@
 
                             <div class="bank">
                                 <div style="display: flex; justify-content: center; align-items: center;">
-                                    <img style="width: 200px; height: 200px; border-radius: 20px; margin-bottom: 50px;"
-                                        src="{{ asset('assets/img/website/11.png') }}">
+                                    <img style="width: 240px; height: 200px; border-radius: 20px; margin-bottom: 50px;"
+                                        src="{{ asset('assets/img/website/' . $data['payment']['bank'] . '.png') }}">
                                 </div>
                                 <div class="kalimat-bank-flex">
                                     <div class="kalimat-bank" style="display: block;">
-                                        <h2>BANK SYARIAH INDONESIA</h2>
+                                        <h2>{{ $data['payment']['bank_name'] }}</h2>
                                         <br>
-                                        <h2>No. Rekening : 123 - 456 - 789</h2>
+                                        <h2>No. Rekening : {{ $data['payment']['rekening'] }}</h2>
                                         <br>
-                                        <h2 style="font-weight: 300;">A/N : MASJID BUMI PRIMA</h2>
+                                        <h2 style="font-weight: 300;">A/N : {{ $data['payment']['atas_nama'] }}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +278,7 @@
                         </div>
                         <div class="image-transfer" style="width: 30%; display:flex; margin-top: 150px;">
                             <img style="align-items:center; display: flex; margin-top: 0; margin-bottom: 30px; background-color: #583E31; padding: 28px 60px; width: 550px; height: 600px;"
-                                src="{{ asset('assets/img/website/Qris.png') }}">
+                                src="{{ asset('storage/' . $data['payment']['qris']) }}">
                         </div>
                     </div>
                 </div>

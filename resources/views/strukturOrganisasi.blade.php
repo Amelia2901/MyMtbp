@@ -55,7 +55,7 @@
         }
 
         .image-organisasi img {
-            width: 100%;
+            width: 122px;
             height: 150px;
             border-radius: 20px;
             object-fit: cover;
@@ -77,6 +77,34 @@
         .image-organisasi {
             padding: 30px !important;
         }
+
+        .slider {
+            min-height: auto !important;
+            margin-bottom: 120px !important;
+        }
+
+        .slider-img {
+            max-height: 400px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(50%) sepia(30%);
+            /* Gelapkan & beri efek kecoklatan */
+        }
+
+        .content {
+            position: absolute;
+            z-index: 2;
+            /* Pastikan teks di atas gambar */
+            color: white;
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .navbar {
+            z-index: 2;
+        }
     </style>
 </head>
 
@@ -87,12 +115,9 @@
             <div class="link">
                 <img src="{{ asset('assets/img/website/logo_masjid.svg') }}" alt="">
                 <ul>
-                    <li><a href="{{ url('/') }}">Beranda</a></li>
-                    <li><a href="{{ url('/about') }}"> Tentang Kami</a></li>
-                    <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
-                    <li><a href="{{ url('/infaq') }}">Donasi</a></li>
-                    <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
-                    <li><a href="{{ url('/zakat') }}">Zakat</a></li>
+                    @foreach ($data['navbar'] as $nav)
+                        <li><a href="{{ url($nav->url) }}">{{ $nav->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
 
@@ -128,26 +153,24 @@
         </div>
         <div class="d-block d-md-none">
             <div class="floating-sidebar">
-                <a href="index.php"><i class="fa-solid fa-house"></i> <span>Home</span></a>
-                <a href="#"><i class="fa-solid fa-users"></i> <span>Tentang Kami</span></a>
-                <a href="../#JadwalShalat"><i class="fa-solid fa-calendar"></i> <span>Jadwal Shalat</span></a>
-                <a href="infaq.php"><i class="fa-solid fa-hand-holding-heart"> </i> <span>Donasi</span></a>
-                <a href="../#Kontak"><i class="fa-solid fa-hand-holding-heart"></i> <span>Kontak</span></a>
-                <a href="zakat.php"><i class="fa-solid fa-hand-holding-heart"></i> <span>Zakat</span></a>
+                @foreach ($data['navbar'] as $nav)
+                    <a href="{{ $nav->url }}">{{ $nav->name }}</a>
+                @endforeach
             </div>
         </div>
     </div>
 
 
     <div class="slider">
-        <img src="{{ asset('assets/img/website/slider.jpg') }}" alt="">
+        <img src="{{ $data['banner']['banner_photo'] ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
+            alt="" class="slider-img">
         <div class="content">
             <div class="isi-content">
                 <h1>
-                    Struktur Organisasi
+                    {{ $data['banner']['banner_title'] ?? ' Struktur Organisasi' }}
                 </h1>
                 <p>
-                    "Merajut Iman, Membangun Umat"
+                    {{ $data['banner']['banner_description'] ?? '"Merajut Iman, Membangun Umat"' }}
                 </p>
                 <div style="display: flex; justify-content: center;">
                     <a class="btn button-selengkapnya" onclick="scrollKebawah()" style="text-align: center; margin: 0;"
@@ -168,8 +191,8 @@
                     Visi</h1>
                 <p
                     style="font-family: Montserrat, serif; color: white;  margin-top: 20px; font-size: 18px; margin-left:50px; margin-bottom:20px;">
-                    Memakmurkan masjid sebagai Rumah Allah untuk meningkatkan Hablum Minallah dan Hablum
-                    Minannas<br>(2-H).
+                    {{ $data['VisiMisi']['vision'] ??
+                        'Memakmurkan masjid sebagai Rumah Allah untuk meningkatkan Hablum Minallah dan Hablum Minannas' }}
                 </p>
             </div>
             <div class="vl"></div>
@@ -179,8 +202,9 @@
                     Misi</h1>
                 <p
                     style="font-family: Montserrat, serif; color: white;  margin-top: 20px; font-size: 18px; margin-left:50px; margin-bottom:20px;">
-                    Menjaga efektifitas pelayanan masjid untuk jamaah dalam penyelenggaraan Ibadah Mahdhoh dan Ibadah
-                    Ghoiro Mahdhoh <br>(2-I).</p>
+                    {{ $data['VisiMisi']['mission'] ??
+                        'Menjaga efektifitas pelayanan masjid untuk jamaah dalam penyelenggaraan Ibadah Mahdhoh dan Ibadah' }}
+                </p>
             </div>
         </div>
 
@@ -191,7 +215,8 @@
                 <br>
                 <p></p>
                 <div style="display: flex; justify-content:center; margin-top: 40px;">
-                    <img src="{{ asset('assets/img/website/stuktur.png') }}" style="height: 750px; width: 3000px;">
+                    <img src="{{ $data['Bagan']['bagan_photo'] ? asset('storage/' . $data['Bagan']['bagan_photo']) : asset('assets/img/website/stuktur.png') }}"
+                        style="height: 750px; width: 95%; object-fit: fill;">
                     <br>
                 </div>
         </div>
@@ -204,7 +229,8 @@
                 <p></p>
 
                 <div style="display: flex; justify-content:center; margin-top: 20px;">
-                    <img src="{{ asset('assets/img/website/stuktur.png') }}" style="height: 217px; width: 80%;">
+                    <img src="{{ $data['Bagan']['bagan_photo'] ? asset('storage/' . $data['Bagan']['bagan_photo']) : asset('assets/img/website/stuktur.png') }}"
+                        style="height: 217px; width: 80%;">
                 </div>
         </div>
 
@@ -234,13 +260,16 @@
                 <button class="icon" id="prevButton">&#8592;</button>
                 <div class="slider-wrapper">
                     <div class="slider-container" id="slider">
-                        <div class="frame-image-organisasi" id="template">
-                            <div class="image-organisasi">
-                                <img src="{{ asset('assets/img/website/13.jpeg') }}">
-                                <p class="jabatan-organisasi">Jabatan</p>
-                                <p class="nama-jabatan-organisasi">Nama</p>
+                        @foreach ($data['struktur'] as $item)
+                            <div class="frame-image-organisasi" id="template">
+                                <div class="image-organisasi">
+                                    <img class="foto-organisasi" src="{{ asset('storage/' . $item['photo']) }}">
+                                    <p class="jabatan-organisasi">{{ $item['position'] }}</p>
+                                    <p class="nama-jabatan-organisasi">{{ $item['name'] }}</p>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
                 <button class="icon" id="nextButton"> &#8594; </button>
@@ -256,14 +285,14 @@
                         <i class="fa-solid fa-arrow-left" style="font-size: 20px; color: white;"></i>
                     </button>
                 </div>
-                <div class="frame-image-organisasi" id="frame-image-organisasi">
+                <div class="" id="frame-image-organisasi">
                     <div class="image-organisasi">
                         <img src="/images/13.jpeg">
                         <p class="jabatan-organisasi">Koordinator</p>
                         <p class="nama-jabatan-organisasi">Bambang Trisno</p>
                     </div>
                 </div>
-                <div class="frame-image-organisasi" id="frame-image-organisasi">
+                <div class="" id="frame-image-organisasi">
                     <div class="image-organisasi">
                         <img src="/images/13.jpeg">
                         <p class="jabatan-organisasi">Wakil
@@ -323,53 +352,25 @@
 
         $(document).ready(function() {
             let index = 0;
-            let data = [{
-                    jabatan: "Koordinator",
-                    nama: "Bambang Trisno"
-                },
-                {
-                    jabatan: "Wakil Koordinator",
-                    nama: "Totok Gunarto"
-                },
-                {
-                    jabatan: "Ketua",
-                    nama: "Sukana"
-                },
-                {
-                    jabatan: "Wakil Ketua I",
-                    nama: "Wiweko"
-                },
-                {
-                    jabatan: "Sekretaris",
-                    nama: "Dwi Hartono"
-                },
-                {
-                    jabatan: "Bendahara",
-                    nama: "Rina Sari"
-                },
-                {
-                    jabatan: "Anggota",
-                    nama: "Joko Santoso"
-                },
-                {
-                    jabatan: "Anggota",
-                    nama: "Lestari Wati"
-                }
-            ];
+            let maxIndex = 4;
+            // let data = @json($data['struktur'] ?? []);
+            // console.log(data);
+            // data.forEach(item => {
+            //     let clone = $('#template').clone().removeAttr('id');
+            //     let photoUrl = "{{ asset('storage') }}/" + item.photo;
+            //     clone.find('.foto-organisasi').attr('src', photoUrl);
+            //     clone.find('.jabatan-organisasi').text(item.position);
+            //     clone.find('.nama-jabatan-organisasi').text(item.name);
+            //     $('#slider').append(clone);
+            // });
+            // $('#template').remove();
 
-            data.forEach(item => {
-                let clone = $('#template').clone().removeAttr('id');
-                clone.find('.jabatan-organisasi').text(item.jabatan);
-                clone.find('.nama-jabatan-organisasi').text(item.nama);
-                $('#slider').append(clone);
-            });
-            $('#template').remove();
-
-            const totalSlides = $('.frame-image-organisasi').length;
-            const maxIndex = totalSlides - 1;
-
+            let totalSlides = $('.frame-image-organisasi').length;
+            console.log(totalSlides);
             $('#nextButton').click(function() {
-                if (index < maxIndex) {
+                console.log(totalSlides);
+                if (totalSlides > maxIndex) {
+                    totalSlides--;
                     index++;
                     $('#slider').css('transform', `translateX(-${index * 189}px)`);
                 }
@@ -377,6 +378,7 @@
 
             $('#prevButton').click(function() {
                 if (index > 0) {
+                    totalSlides++;
                     index--;
                     $('#slider').css('transform', `translateX(-${index * 189}px)`);
                 }

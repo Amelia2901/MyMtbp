@@ -113,10 +113,6 @@
                     @endforeach
                 </ul>
             </div>
-
-
-
-
             <div class="medsos" style="display: flex;">
                 <div class="d-none d-md-block">
                     <div class="searchbar position-relative">

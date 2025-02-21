@@ -17,5 +17,6 @@ class payment_method extends Model
         'rekening',
         'atas_nama',
         'qris',
+        'bank_name',
     ];
 }

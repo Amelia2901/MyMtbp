@@ -22,31 +22,17 @@ use App\Http\Controllers\ZakatEmasController;
 use App\Http\Controllers\ZakatFitrahController;
 use App\Http\Controllers\ZakatPenghasilanController;
 use App\Http\Controllers\ZakatTernakPerdaganganController;
+use App\Http\Controllers\DashboardController;
+
 
 
 
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.index');
-
-Route::get('/about', function () {
-    return view('strukturOrganisasi');
-});
-
-// Route::get('/schedule', function () {
-//     return view('index');
-// });
-
-Route::get('/infaq', function () {
-    return view('infaq');
-});
-
-// Route::get('/contact', function () {
-//     return view('index');
-// });
-
-Route::get('/zakat', function () {
-    return view('zakat');
-});
+Route::post('/kirim-pesan', [LandingController::class, 'kirimpesan'])->name('landing.kirimpesan');
+Route::get('/Infaq', [LandingController::class, 'infaq']);
+Route::get('/Struktur-Organisasi', [LandingController::class, 'struktur']);
+Route::get('/Zakat', [LandingController::class, 'zakat']);
 
 // Authentication
 Route::get('/login', [AuthController::class, 'index'])->name('login.index');
@@ -54,8 +40,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () { 
-    Route::get('/dashboard', Dashboard::class);
-    Route::get('/dashboard2', Dashboard::class);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard/pesan', [DashboardController::class, 'pesan'])->name('dashboard.lihatpesan');
     Route::get('dashboard/login', [Dashboard::class, 'login'])->name('dashboard.login');
     Route::get('/banner', [BannerDashboardController::class, 'index'])->name('banner.index');
     Route::post('/banner', [BannerDashboardController::class, 'store'])->name('banner.store');

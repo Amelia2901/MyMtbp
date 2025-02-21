@@ -70,77 +70,73 @@
 
                                 {{-- Kategori 1 --}}
                                 <div class="row mb-3">
-                                <h3 class="card-title" style="margin-left: 10px;">Kategori 1</h3>
+                                    <h3 class="card-title" style="margin-left: 10px;">Kategori 1</h3>
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Judul</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="kategori_1"
-                                            id="kategori_1"
-                                            value="{{ old('kategori_1', $kategori_1->Kategori_1 ?? '') }}">
+                                        <input type="text" class="form-control" name="kategori_1" id="kategori_1"
+                                            value="{{ old('kategori_1', $kategori->kategori_1 ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="deskripsi_1" id="deskripsi_1" required> {{ old('deskripsi_1', $deskripsi_1->deskripsi_1 ?? '') }}</textarea>
+                                        <textarea class="form-control" name="deskripsi_1" id="deskripsi_1" required> {{ old('deskripsi_1', $kategori->deskripsi_1 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
                                 {{-- Kategori 2 --}}
                                 <div class="row mb-3">
-                                <h3 class="card-title" style="margin-left: 10px;">Kategori 2</h3>
+                                    <h3 class="card-title" style="margin-left: 10px;">Kategori 2</h3>
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Judul</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="kategori_2"
-                                            id="kategori_2"
-                                            value="{{ old('kategori_2', $kategori_2->Kategori_2 ?? '') }}">
+                                        <input type="text" class="form-control" name="kategori_2" id="kategori_2"
+                                            value="{{ old('kategori_2', $kategori->kategori_2 ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-sm-10">
-                                    <textarea class="form-control" name="deskripsi_2" id="deskripsi_2" required> {{ old('deskripsi_2', $deskripsi_2->deskripsi_2 ?? '') }}</textarea>
+                                        <textarea class="form-control" name="deskripsi_2" id="deskripsi_2" required> {{ old('deskripsi_2', $kategori->deskripsi_2 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
                                 {{-- Kategori 3 --}}
                                 <div class="row mb-3">
-                                <h3 class="card-title" style="margin-left: 10px;">Kategori 3</h3>
+                                    <h3 class="card-title" style="margin-left: 10px;">Kategori 3</h3>
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Judul</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="kategori_3"
-                                            id="kategori_3"
-                                            value="{{ old('kategori_3', $kategori_3->Kategori_3 ?? '') }}">
+                                        <input type="text" class="form-control" name="kategori_3" id="kategori_3"
+                                            value="{{ old('kategori_3', $kategori->kategori_3 ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-sm-10">
-                                    <textarea class="form-control" name="deskripsi_3" id="deskripsi_3" required> {{ old('deskripsi_3', $deskripsi_3->deskripsi_3 ?? '') }}</textarea>
+                                        <textarea class="form-control" name="deskripsi_3" id="deskripsi_3" required> {{ old('deskripsi_3', $kategori->deskripsi_3 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
-                                {{-- Kategori 4--}}
+                                {{-- Kategori 4 --}}
                                 <div class="row mb-3">
-                                <h3 class="card-title" style="margin-left: 10px;">Kategori 4</h3>
+                                    <h3 class="card-title" style="margin-left: 10px;">Kategori 4</h3>
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Judul</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="kategori_4"
-                                            id="kategori_4"
-                                            value="{{ old('kategori_4', $kategori_4->Kategori_4 ?? '') }}">
+                                        <input type="text" class="form-control" name="kategori_4" id="kategori_4"
+                                            value="{{ old('kategori_4', $kategori->kategori_4 ?? '') }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="deskripsi_4" id="deskripsi_4" required> {{ old('deskripsi_4', $deskripsi_4->deskripsi_4 ?? '') }}</textarea>
+                                        <textarea class="form-control" name="deskripsi_4" id="deskripsi_4" required> {{ old('deskripsi_4', $kategori->deskripsi_4 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
-                                {{-- Simpan--}}
+                                {{-- Simpan --}}
                                 <div class="row mb-3">
                                     <div class="col-sm-12" style="display:flex; justify-content: right;">
                                         <button type="button" onclick="simpan()"
@@ -249,13 +245,13 @@
 
             if (valid) {
                 Swal.fire({
-                title: 'Konfirmasi?',
-                text: 'Apakah anda yakin akan mengupdate data?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, Update Data',
-                confirmButtonColor: '#253A82',
-                cancelButtonText: 'Tidak, Kembali'
+                    title: 'Konfirmasi?',
+                    text: 'Apakah anda yakin akan mengupdate data?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Update Data',
+                    confirmButtonColor: '#253A82',
+                    cancelButtonText: 'Tidak, Kembali'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#categori_infaq').submit();

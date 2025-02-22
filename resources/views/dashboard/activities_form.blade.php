@@ -48,7 +48,7 @@
             <h1>Kalender Kegiatan</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Kalender Kegiatan</li>
                 </ol>
             </nav>
@@ -71,7 +71,7 @@
                                 <div class="row mb-4">
                                     <label for="activityName" class="col-sm-2 col-form-label">Nama Kegiatan</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="activityName" id="activityName"
+                                        <input type="text" class="form-control" name="ActivityName" id="activityName"
                                             value="{{ old('activityName', $item->ActivityName ?? '') }}" required>
                                     </div>
                                 </div>

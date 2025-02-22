@@ -49,7 +49,7 @@
             <h1>Kategori Infaq</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Infaq</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Infaq</a></li>
                     <li class="breadcrumb-item active">Kategori Infaq</li>
                 </ol>
             </nav>

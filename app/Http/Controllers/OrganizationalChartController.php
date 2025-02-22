@@ -35,8 +35,8 @@ class OrganizationalChartController extends Controller
 
     public function edit($id)
     {
-        $organizational_chart = OrganizationalChart::findOrFail($id);
-        return view('StrukturOrganisasi.organizational_chart_form', compact('organizational_chart'));
+        $item = OrganizationalChart::findOrFail($id);
+        return view('StrukturOrganisasi.organizational_chart_form', compact('item'));
     }
 
 

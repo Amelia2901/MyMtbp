@@ -449,7 +449,7 @@
 
                     <div class="row-alamat" style="margin-left: 30px; margin-top: 30px; margin-right: 20px;">
                         <div class="kotak-2" style="display:flex;">
-                            <a href="{{ $data['contact']['url_youtube'] }}" style="color: black;">
+                            <a href="{{ $data['contact']['url_youtube'] ?? '#' }}" style="color: black;">
                                 <div class="kotak-alamat" style="background: white; color: black;">
                                     <div class="isi-kotak">
                                         <p style="margin-bottom: 20px;"><i class="fa-brands fa-youtube fa-2xl"></i>

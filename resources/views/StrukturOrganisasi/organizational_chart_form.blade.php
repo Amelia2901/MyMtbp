@@ -48,7 +48,7 @@
             <h1>Susunan Organisasi DKM</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Struktur Organisasi</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Struktur Organisasi</a></li>
                     <li class="breadcrumb-item active">Susunan Organisasi DKM</li>
                 </ol>
             </nav>
@@ -81,7 +81,7 @@
                                         <label for="inputText" class="col-sm-2 col-form-label">Preview</label>
                                         <div class="col-sm-10">
                                             @if (!empty($item) && !empty($item->photo))
-                                                <img src="{{ asset('storage/' . $organizational_chart->photo) }}" alt="photo" id="previewPhoto" width="35%">
+                                                <img src="{{ asset('storage/' . $item->photo) }}" alt="photo" id="previewPhoto" width="35%">
                                             @else
                                                 <img src="" alt="" id="previewPhoto" width="35%">
                                             @endif
@@ -108,11 +108,11 @@
                                     </div>
                                 
                                     <!-- ======= Button ======= -->
-                                    <input type="hidden" id="mode" value="{{ isset($organizational_chart) ? 'edit' : 'tambah' }}">
+                                    <input type="hidden" id="mode" value="{{ isset($item) ? 'edit' : 'tambah' }}">
                                     <div class="row mb-4">
                                         <div class="col-sm-12">
                                             <button type="button" onclick="simpan()" class="btn btn-primary">
-                                                {{ isset($organizational_chart) ? 'Update Data' : 'Tambah Data' }}
+                                                {{ isset($item) ? 'Update Data' : 'Tambah Data' }}
                                             </button>
                                         </div>
                                     </div>

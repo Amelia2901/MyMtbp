@@ -48,7 +48,7 @@
             <h1>Kontak Masjid</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Kontak Masjid</li>
                 </ol>
             </nav>

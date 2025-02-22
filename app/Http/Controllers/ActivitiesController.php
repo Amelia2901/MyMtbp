@@ -51,25 +51,25 @@ class ActivitiesController extends Controller
     }
     
     public function update(updateActivitiesRequest $request, $id)
-{
-    $activities = activities::findOrFail($id);
-    $data = $request->validated();
+    {
+        $activities = activities::findOrFail($id);
+        $data = $request->validated();
 
-    if ($request->hasFile('activityPhoto')) {
-        // Hapus foto lama jika ada
-        if ($activities->ActivityPhoto && $activities->ActivityPhoto !== 'default.jpg') {
-            Storage::disk('public')->delete($activities->ActivityPhoto);
+        if ($request->hasFile('activityPhoto')) {
+            // Hapus foto lama jika ada
+            if ($activities->ActivityPhoto && $activities->ActivityPhoto !== 'default.jpg') {
+                Storage::disk('public')->delete($activities->ActivityPhoto);
+            }
+
+            // Simpan foto baru
+            $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
+            $data['ActivityPhoto'] = $photoPath; 
         }
 
-        // Simpan foto baru
-        $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
-        $data['ActivityPhoto'] = $photoPath; 
+
+        $activities->update($data);
+        return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil diperbarui');
     }
-
-    $activities->update($data);
-    return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil diperbarui');
-}
-
 
     public function toggle($id)
     {

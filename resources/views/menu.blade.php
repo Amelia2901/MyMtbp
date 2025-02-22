@@ -35,6 +35,11 @@
                         <i class="bi bi-circle"></i><span>Kontak</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/dashboard/pesan') }}">
+                        <i class="bi bi-circle"></i><span>Pesan Masuk</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End Tables Nav -->
 

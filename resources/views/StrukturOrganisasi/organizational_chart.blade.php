@@ -47,7 +47,7 @@
             <h1>Susunan Organisasi DKM</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Struktur Organisasi</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Struktur Organisasi</a></li>
                     <li class="breadcrumb-item active">Susunan Organisasi DKM</li>
                 </ol>
             </nav>

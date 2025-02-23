@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Struktur Organisasi | Susunan Organisasi DKM</title>
+    <title>Struktur Organisasi | Jabatan Organisasi</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -45,11 +45,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Susunan Organisasi DKM</h1>
+            <h1>Jabatan Organisasi</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Struktur Organisasi</a></li>
-                    <li class="breadcrumb-item active">Susunan Organisasi DKM</li>
+                    <li class="breadcrumb-item active">Jabatan Organisasi</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -59,61 +59,25 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Formulir Susunan Organisasi DKM</h5>
+                            <h5 class="card-title">Formulir Jabatan Organisasi</h5>
                             <form
-                                action="{{ isset($item) ? route('organizational_chart.update', $item->id) : route('organizational_chart.store') }}"
+                                action="{{ isset($item) ? route('organizational_chart.updatePosition', $item->id) : route('organizational_chart.createPosition') }}"
                                 method="POST" id="form_organisasi" enctype="multipart/form-data">
                                 @csrf
                                 @if (isset($item))
                                     @method('PUT')
                                 @endif
 
-                                <!-- ======= Foto ======= -->
-                                <div class="row mb-4">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Foto</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" type="file" id="photo" name="photo"
-                                            onchange="readURL(this)">
-                                    </div>
-                                </div>
-
-                                {{-- Preview --}}
-                                <div class="row">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Preview</label>
-                                    <div class="col-sm-10">
-                                        @if (!empty($item) && !empty($item->photo))
-                                            <img src="{{ asset('storage/' . $item->photo) }}" alt="photo"
-                                                id="previewPhoto" width="35%">
-                                        @else
-                                            <img src="" alt="" id="previewPhoto" width="35%">
-                                        @endif
-                                    </div>
-                                </div>
-                                <br>
 
                                 <!-- ======= Jabatan ======= -->
                                 <div class="row mb-4">
                                     <label for="position" class="col-sm-2 col-form-label">Jabatan</label>
                                     <div class="col-sm-10">
-                                        <select name="position" id="position" class="form-control">
-                                            <option value="" selected>--Pilih Jabatan--</option>
-                                            @foreach ($position as $p)
-                                                <option value="{{ $p->id }}"
-                                                    {{ $item->position == $p->id ? 'selected' : '' }}>
-                                                    {{ $p->position }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" class="form-control" name="position" id="position"
+                                            value="{{ old('position', $item->position ?? '') }}" required>
                                     </div>
                                 </div>
 
-                                <!-- ======= Nama ======= -->
-                                <div class="row mb-4">
-                                    <label for="name" class="col-sm-2 col-form-label">Nama</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="name" id="name"
-                                            value="{{ old('name', $item->name ?? '') }}" required>
-                                    </div>
-                                </div>
 
                                 <!-- ======= Button ======= -->
                                 <input type="hidden" id="mode" value="{{ isset($item) ? 'edit' : 'tambah' }}">
@@ -162,13 +126,6 @@
         function validateForm() {
             let valid = true;
             let mode = document.querySelector('#mode').value; // Ambil nilai mode
-            if (mode != 'edit') {
-                if ($.trim($("#photo").val()) == "") {
-                    $('#photo').addClass('is-invalid');
-                    $('#photo').after('<div class="invalid-feedback">Photo wajib diisi</div>');
-                    valid = false;
-                }
-            }
 
 
             if ($.trim($("#position").val()) == "") {
@@ -176,23 +133,9 @@
                 $('#position').after('<div class="invalid-feedback">Jabatan wajib diisi.</div>');
                 valid = false;
             }
-            if ($.trim($("#name").val()) == "") {
-                $('#name').addClass('is-invalid');
-                $('#name').after('<div class="invalid-feedback">nama wajib diisi.</div>');
-                valid = false;
-            }
             return valid;
         }
 
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#previewPhoto').attr('src', e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
 
         function simpan() {
             if (!validateForm()) {
@@ -228,7 +171,7 @@
         }
 
         // Remove invalid class when user starts typing
-        $('#photo, #position, #name').on('input', function() {
+        $('#name').on('input', function() {
             if ($.trim($(this).val()) !== "") {
                 $(this).removeClass('is-invalid');
                 $(this).next('.invalid-feedback').remove();

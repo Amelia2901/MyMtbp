@@ -90,6 +90,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/organizational_chart/{id}/edit', [OrganizationalChartController::class, 'edit'])->name('organizational_chart.edit');
     Route::put('/organizational_chart/{id}', [OrganizationalChartController::class, 'update'])->name('organizational_chart.update');
     Route::patch('/organizational_chart/{id}/toggle', [OrganizationalChartController::class, 'toggle'])->name('organizational_chart.toggle');
+    Route::get('/organizational_chart/positions', [OrganizationalChartController::class, 'position'])->name('organizational_chart.position');
+    Route::get('/dashboard/organizational_chart/addPosition', [OrganizationalChartController::class, 'addPosition'])->name('organizational_chart.addPosition');
+    Route::get('/dashboard/organizational_chart/{id}/editPosition', [OrganizationalChartController::class, 'editPosition'])->name('organizational_chart.editPosition');
+    Route::post('/dashboard/organizational_chart/createPosition', [OrganizationalChartController::class, 'createPosition'])->name('organizational_chart.createPosition');
+    Route::put('/dashboard/organizational_chart/updatePosition/{id}', [OrganizationalChartController::class, 'updatePosition'])->name('organizational_chart.updatePosition');
 
 
 

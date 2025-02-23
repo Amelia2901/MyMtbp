@@ -103,14 +103,19 @@
                         <i class="bi bi-circle"></i><span>Susunan Organisasi DKM</span>
                     </a>
                 </li>
+                <li>
+                    <!-- <a href="icons-boxicons.html"> -->
+                    <a href="{{ url('/organizational_chart/positions') }}">
+                        <i class="bi bi-circle"></i><span>Jabatan Organisasi</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End Icons Nav -->
 
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#zakats-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-box-seam"></i><span>Zakat</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-box-seam"></i><span>Zakat</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="zakats-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>

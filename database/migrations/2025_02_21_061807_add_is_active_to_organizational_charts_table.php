@@ -13,8 +13,6 @@ return new class extends Migration {
 
     public function down(): void {
         Schema::table('organizational_charts', function (Blueprint $table) {
-            $table->dropColumn('is_active');
         });
     }
 };
-

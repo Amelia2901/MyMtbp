@@ -60,6 +60,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Data Susunan Organisasi DKM</h5>
                             <div class="col-lg-12 text-end">
+                                <a href="{{ route('organizational_chart.addPosition') }}" class="btn btn-primary">+
+                                    Tambah opsi jabatan</a>
                                 <a href="{{ route('organizational_chart.create') }}" class="btn btn-primary">+
                                     Tambah</a>
                             </div>
@@ -80,21 +82,23 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $item->name }}
-                                            <br>
-                                            @if($item->is_active)
+                                                <br>
+                                                @if ($item->is_active)
                                                     <span class="badge bg-success">Aktif</span>
                                                 @else
                                                     <span class="badge bg-danger">Nonaktif</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $item->position }}</td>
-                                            <td><img src="{{ asset('storage/' . $item->photo) }}" width="50" style="max-height: 70px;"></td>
-                                            <td  class="d-flex gap-1">
+                                            <td>{{ $item->jabatannya }}</td>
+                                            <td><img src="{{ asset('storage/' . $item->photo) }}" width="50"
+                                                    style="max-height: 70px;"></td>
+                                            <td>
                                                 <a href="{{ route('organizational_chart.edit', $item->id) }}"
                                                     class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <form action="{{ route('organizational_chart.toggle', $item->id) }}" method="POST" style="display:inline;">
+                                                <form action="{{ route('organizational_chart.toggle', $item->id) }}"
+                                                    method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('PATCH')
                                                     <button type="submit" class="btn btn-secondary">
@@ -156,61 +160,60 @@
     @endif
 
     <script>
-    $(document).ready(function() {
-        $('.btn-secondary').on('click', function(event) {
-            event.preventDefault(); 
-            let form = $(this).closest('form'); // Ambil form terdekat
+        $(document).ready(function() {
+            $('.btn-secondary').on('click', function(event) {
+                event.preventDefault();
+                let form = $(this).closest('form'); // Ambil form terdekat
 
-            Swal.fire({
-                title: "Konfirmasi Status!",
-                text: "Apakah kamu yakin akan mengubah status data ini?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#253A82",
-                cancelButtonColor: "#6c757d",
-                confirmButtonText: "Ya, Ubah",
-                cancelButtonText: "Batal"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit(); 
-                }
+                Swal.fire({
+                    title: "Konfirmasi Status!",
+                    text: "Apakah kamu yakin akan mengubah status data ini?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#253A82",
+                    cancelButtonColor: "#6c757d",
+                    confirmButtonText: "Ya, Ubah",
+                    cancelButtonText: "Batal"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             });
         });
-        });
 
-//     $('.btn-secondary').on('click', function(event) {
-//     event.preventDefault();
-//     let form = $(this).closest('form');
-//     let url = form.attr('action');
+        //     $('.btn-secondary').on('click', function(event) {
+        //     event.preventDefault();
+        //     let form = $(this).closest('form');
+        //     let url = form.attr('action');
 
-//     Swal.fire({
-//         title: "Konfirmasi Status!",
-//         text: "Apakah kamu yakin akan mengubah status data ini?",
-//         icon: "warning",
-//         showCancelButton: true,
-//         confirmButtonColor: "#253A82",
-//         cancelButtonColor: "#6c757d",
-//         confirmButtonText: "Ya, Ubah",
-//         cancelButtonText: "Batal"
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             $.ajax({
-//                 url: url,
-//                 type: "POST",  // HARUS PAKAI POST, BUKAN PATCH
-//                 data: form.serialize() + "&_method=PATCH", // TAMBAHKAN _method=PATCH
-//                 success: function(response) {
-//                     Swal.fire("Sukses!", "Status berhasil diperbarui!", "success").then(() => {
-//                         location.reload(); 
-//                     });
-//                 },
-//                 error: function(error) {
-//                     Swal.fire("Gagal!", "Ada kesalahan saat mengubah status!", "error");
-//                 }
-//             });
-//         }
-//     });
-// });
+        //     Swal.fire({
+        //         title: "Konfirmasi Status!",
+        //         text: "Apakah kamu yakin akan mengubah status data ini?",
+        //         icon: "warning",
+        //         showCancelButton: true,
+        //         confirmButtonColor: "#253A82",
+        //         cancelButtonColor: "#6c757d",
+        //         confirmButtonText: "Ya, Ubah",
+        //         cancelButtonText: "Batal"
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             $.ajax({
+        //                 url: url,
+        //                 type: "POST",  // HARUS PAKAI POST, BUKAN PATCH
+        //                 data: form.serialize() + "&_method=PATCH", // TAMBAHKAN _method=PATCH
+        //                 success: function(response) {
+        //                     Swal.fire("Sukses!", "Status berhasil diperbarui!", "success").then(() => {
+        //                         location.reload(); 
+        //                     });
+        //                 },
+        //                 error: function(error) {
+        //                     Swal.fire("Gagal!", "Ada kesalahan saat mengubah status!", "error");
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
 
-    // </script>
-
-
+        // 
+    </script>

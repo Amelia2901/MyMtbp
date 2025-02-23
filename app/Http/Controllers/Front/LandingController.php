@@ -72,7 +72,7 @@ class LandingController extends Controller
             'banner' => BannerAbout::first(),
             'VisiMisi' => Vision::first(),
             'Bagan' =>  Bagan::first(),
-            'struktur' => OrganizationalChart::all(),
+            'struktur' => OrganizationalChart::where('is_active', 1)->get(),
         );
         return view('strukturOrganisasi', compact('data'));
     }

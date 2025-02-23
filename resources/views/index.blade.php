@@ -327,95 +327,98 @@
 
 
         <br>
-        <div class="headerkegiatan">
-            <h1 style="margin-left: 35px; color: black; font-family: 'Montserrat', serif; font-size: 30px;">
-                Kalender
-                Kegiatan</h1>
-            <!-- <button><i class="fa-solid fa-filter"></i> Terbaru</button> -->
-            <div class="dropdown-center">
-                <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-filter"></i> <span id="buttonFilter">Terbaru</span>
-                </button>
-                <ul class="dropdown-menu" style="width: 108px !important;">
-                    <li style="display:flex; justify-content: center;">
-                        <a class="dropdown-item dropdown-filter active"
-                            onclick="setFilter('Terbaru', this)">Terbaru</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item dropdown-filter" onclick="setFilter('Terlama', this)">Terlama</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="Kalender-kegiatan">
-            @if (isset($data['main_activity']))
-                <div class="row-kalender">
-                    <img style="border-radius: 20px; width: 600px; height: 350px; object-fit: cover;"
-                        src="{{ asset('storage/' . $data['main_activity']['ActivityPhoto']) }}">
-                    <h3
-                        style="color: black; margin-top: 10px; margin-bottom: 20px; font-size:20px; font-weight: 600; margin-left: 20px;">
-                        {{ $data['main_activity']['ActivityName'] ?? '' }}</h3>
-                    <div class="keterangan">
-                        <div class="row-keterangan">
-                            <p style="color: black; font-size:14px; font-weight:450;"> <i style="color: #F2AB43;"
-                                    class="fa-regular fa-clock"></i>
-                                @php
-                                    \Carbon\Carbon::setLocale('id');
-                                    $tanggal = \Carbon\Carbon::parse($data['main_activity']['ActivityDate']);
-                                @endphp
-                                {{ $tanggal->translatedFormat('l') }},
-                                {{ $tanggal->translatedFormat('d F Y') }},</p>
-                            <p
-                                style="color: black; font-size:14px; font-weight:450; margin-top:-15px; margin-left:18px;">
-                                pukul
-                                {{ $data['main_activity']['ActivityTime'] }}-{{ $data['main_activity']['ActivityTime2'] }}
-                                WIB</p>
-                        </div>
-
-                        <div class="row-keterangan">
-                            <p style="color: black; font-size:14px; font-weight:450;"> <i style="color: #F2AB43"
-                                    class="fa-solid fa-location-dot"></i>
-                                {{ $data['main_activity']['ActivityPlace'] }}
-                            </p>
-                            <p style="color: black; font-size:14px; font-weight:450; margin-top:10px;"> <i
-                                    style=" color: #F2AB43;" class="fa-regular fa-user"></i>
-                                {{ $data['main_activity']['ActivityPerformers'] }}</p>
-                        </div>
-                    </div>
+        <div>
+            <div class="headerkegiatan">
+                <h1 style="margin-left: 35px; color: black; font-family: 'Montserrat', serif; font-size: 30px;">
+                    Kalender
+                    Kegiatan</h1>
+                <!-- <button><i class="fa-solid fa-filter"></i> Terbaru</button> -->
+                <div class="dropdown-center">
+                    <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-filter"></i> <span id="buttonFilter">Terbaru</span>
+                    </button>
+                    <ul class="dropdown-menu" style="width: 108px !important;">
+                        <li style="display:flex; justify-content: center;">
+                            <a class="dropdown-item dropdown-filter active"
+                                onclick="setFilter('Terbaru', this)">Terbaru</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item dropdown-filter" onclick="setFilter('Terlama', this)">Terlama</a>
+                        </li>
+                    </ul>
                 </div>
-            @endif
-
-            <div class="row-berita" style="max-height: 480px; overflow: auto; padding-top:40px;">
-                <div id="newsContainer">
-                    @if (isset($data['activities']))
-                        @php
-                            $sortedActivities = collect($data['activities'])->sortByDesc('ActivityDate');
-                        @endphp
-
-                        @foreach ($sortedActivities as $index => $item)
-                            <div class="content-berita" style="margin-bottom: 20px;"
-                                data-date="{{ $item['ActivityDate'] }}">
-                                <div class="foto-berita">
-                                    <img src="{{ asset('storage/' . $item['ActivityPhoto']) }}">
-                                </div>
-                                <div class="isi-berita">
+            </div>
+            <div class="Kalender-kegiatan">
+                @if (isset($data['main_activity']))
+                    <div class="row-kalender">
+                        <img style="border-radius: 20px; width: 600px; height: 350px; object-fit: cover;"
+                            src="{{ asset('storage/' . $data['main_activity']['ActivityPhoto']) }}">
+                        <h3
+                            style="color: black; margin-top: 10px; margin-bottom: 20px; font-size:20px; font-weight: 600; margin-left: 20px;">
+                            {{ $data['main_activity']['ActivityName'] ?? '' }}</h3>
+                        <div class="keterangan">
+                            <div class="row-keterangan">
+                                <p style="color: black; font-size:14px; font-weight:450;"> <i style="color: #F2AB43;"
+                                        class="fa-regular fa-clock"></i>
                                     @php
                                         \Carbon\Carbon::setLocale('id');
-                                        $tanggal = \Carbon\Carbon::parse($item['ActivityDate']);
+                                        $tanggal = \Carbon\Carbon::parse($data['main_activity']['ActivityDate']);
                                     @endphp
-                                    <p
-                                        style="color: rgb(85, 61, 61); font-size:13px; font-weight:600; margin-top:-15px;">
-                                        <i style="color: #F2AB43;" class="fa-regular fa-clock"></i>
-                                        {{ $tanggal->translatedFormat('l') }},
-                                        {{ $tanggal->translatedFormat('d F Y') }}
-                                    </p>
-                                    <h3>{{ $item['ActivityName'] }}</h3>
-                                    <p>Deskripsi: {{ $item['ActivityDescription'] }}</p>
-                                </div>
-
+                                    {{ $tanggal->translatedFormat('l') }},
+                                    {{ $tanggal->translatedFormat('d F Y') }},</p>
+                                <p
+                                    style="color: black; font-size:14px; font-weight:450; margin-top:-15px; margin-left:18px;">
+                                    pukul
+                                    {{ $data['main_activity']['ActivityTime'] }}-{{ $data['main_activity']['ActivityTime2'] }}
+                                    WIB</p>
                             </div>
-                        @endforeach
-                    @endif
+
+                            <div class="row-keterangan">
+                                <p style="color: black; font-size:14px; font-weight:450;"> <i style="color: #F2AB43"
+                                        class="fa-solid fa-location-dot"></i>
+                                    {{ $data['main_activity']['ActivityPlace'] }}
+                                </p>
+                                <p style="color: black; font-size:14px; font-weight:450; margin-top:10px;"> <i
+                                        style=" color: #F2AB43;" class="fa-regular fa-user"></i>
+                                    {{ $data['main_activity']['ActivityPerformers'] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                <div class="row-berita" style="max-height: 480px; overflow: auto; padding-top:40px;">
+                    <div id="newsContainer">
+                        @if (isset($data['activities']))
+                            @php
+                                $sortedActivities = collect($data['activities'])->sortByDesc('ActivityDate');
+                            @endphp
+
+                            @foreach ($sortedActivities as $index => $item)
+                                <div class="content-berita" style="margin-bottom: 20px;"
+                                    data-date="{{ $item['ActivityDate'] }}">
+                                    <div class="foto-berita">
+                                        <img src="{{ asset('storage/' . $item['ActivityPhoto']) }}">
+                                    </div>
+                                    <div class="isi-berita">
+                                        @php
+                                            \Carbon\Carbon::setLocale('id');
+                                            $tanggal = \Carbon\Carbon::parse($item['ActivityDate']);
+                                        @endphp
+                                        <p
+                                            style="color: rgb(85, 61, 61); font-size:13px; font-weight:600; margin-top:-15px;">
+                                            <i style="color: #F2AB43;" class="fa-regular fa-clock"></i>
+                                            {{ $tanggal->translatedFormat('l') }},
+                                            {{ $tanggal->translatedFormat('d F Y') }}
+                                        </p>
+                                        <h3>{{ $item['ActivityName'] }}</h3>
+                                        <p>Deskripsi: {{ $item['ActivityDescription'] }}</p>
+                                    </div>
+
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -507,10 +510,10 @@
                         <input name="Telp" class="form-control" id="Telp" placeholder="Telepon">
                     </div>
                     <div class="form-float">
-                        <textarea name="Isi" class="form-control" id="Isi" placeholder="Isi"></textarea>
+                        <textarea name="Isi" class="form-control" id="Isi" placeholder="Isi" style="color: white;"></textarea>
                     </div>
                     <button type="button" class="btn button-submit" onclick="kirimpesan()" id="button-kirim"> <i
-                            class="fas fa-arrow-down">
+                            class="fas fa-arrow-up">
                         </i> Kirim Pesan</button>
                 </form>
             </div>

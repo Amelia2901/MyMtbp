@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link href="{{ asset('assets/img/website/logo_masjid.svg') }}" rel="icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Struktur Organisasi</title>
+    <title>Struktur Organisasi | Masjid Bumi Prima</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/websiteStyle.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,7 +84,8 @@
         }
 
         .slider-img {
-            max-height: 400px;
+            min-height: 500px;
+            max-height: 500px;
             width: 100%;
             object-fit: cover;
             object-position: center;

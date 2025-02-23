@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link href="{{ asset('assets/img/website/logo_masjid.svg') }}" rel="icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infaq</title>
+    <title>Infaq | Masjid Bumi Prima</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/websiteStyle.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,8 +28,8 @@
         }
 
         .slider-img {
-            min-height: 400px;
-            max-height: 400px;
+            min-height: 500px;
+            max-height: 500px;
             width: 100%;
             object-fit: cover;
             object-position: center;
@@ -130,119 +130,121 @@
         </div>
     </div>
 
-    <div class="contain-infaq">
-        <div class="infaq-infaq" style="margin-top: -100px">
-            <div class="isi-infaq">
-                <div class="d-block d-md-none">
-                    <div class="judul-infaqjamaah">
-                        <img src="{{ asset('assets/img/website/10.png') }}" alt=""
-                            style="display: block; margin-top: -40px;">
+    <div class="container-page" id="container-page">
+        <div class="contain-infaq">
+            <div class="infaq-infaq" style="margin-top: -100px">
+                <div class="isi-infaq">
+                    <div class="d-block d-md-none">
+                        <div class="judul-infaqjamaah">
+                            <img src="{{ asset('assets/img/website/10.png') }}" alt=""
+                                style="display: block; margin-top: -40px;">
+                            <h1>Infaq Jama'ah</h1>
+                        </div>
+                    </div>
+                    <div class="d-none d-md-block">
                         <h1>Infaq Jama'ah</h1>
                     </div>
+                    <p>{{ $data['description']['Description_1'] ??
+                        "Masjid Bumi Prima Menerima Infaq dan Shodaqoh Jama'ah untuk kebutuhan operasional,kegiatan dan
+                                                                                                                                                                                                                                                                                                                        program Masjid Bumi Prima agar senantiasa berjalan dan untuk Kemakmuran Masjid." }}
+                    </p>
                 </div>
-                <div class="d-none d-md-block">
-                    <h1>Infaq Jama'ah</h1>
-                </div>
-                <p>{{ $data['description']['Description_1'] ??
-                    "Masjid Bumi Prima Menerima Infaq dan Shodaqoh Jama'ah untuk kebutuhan operasional,kegiatan dan
-                                                                                                                                                    program Masjid Bumi Prima agar senantiasa berjalan dan untuk Kemakmuran Masjid." }}
-                </p>
+                <img style="width: 300px; height:300px; margin-top: -30px; margin-left:250px;"
+                    src="{{ asset('assets/img/website/infaq orang.png') }}">
             </div>
-            <img style="width: 300px; height:300px; margin-top: -30px; margin-left:250px;"
-                src="{{ asset('assets/img/website/infaq orang.png') }}">
         </div>
-    </div>
 
-    <div class="infaq-love">
-        <!-- <img style="height: 400px;" src="images/infaq love.png" alt=""> -->
-        <p style="font-size: 25px; font-family: Montserrat, serif;">
-            {{ $data['description']['Description_2'] ??
-                "Masjid Bumi Prima Menerima Infaq dan Shodaqoh
-                                                                                                            Jama’ah untuk kebutuhan operasional,
-                                                                                                            kegiatan dan program Masjid Bumi Prima agar senantiasa berjalan dan untuk kemakmuran Masjid." }}
-        </p>
-    </div>
-    </div>
+        <div class="infaq-love">
+            <!-- <img style="height: 400px;" src="images/infaq love.png" alt=""> -->
+            <p style="font-size: 25px; font-family: Montserrat, serif;">
+                {{ $data['description']['Description_2'] ??
+                    "Masjid Bumi Prima Menerima Infaq dan Shodaqoh
+                                                                                                                                                                                                                                                Jama’ah untuk kebutuhan operasional,
+                                                                                                                                                                                                                                                kegiatan dan program Masjid Bumi Prima agar senantiasa berjalan dan untuk kemakmuran Masjid." }}
+            </p>
+        </div>
 
 
-    <div class="d-none d-md-block">
-        <h1 style="color: #1E1E1E; margin-left:50px; font-size: 45px; font-family: Montserrat, serif;">Infaq Jama’ah
-        </h1>
-        <div>
-            <div class="kategori-infaq">
-                <br>
-                <br>
-                <br>
-                <div class="kotak-kategori" style=" margin-left: 50px;">
-                    <div class="icon-infaq">
-                        <div class="bulet-icon">
-                            <img src="{{ asset('assets/img/website/icon 1.png') }}">
+        <div class="d-none d-md-block">
+            <h1 style="color: #1E1E1E; margin-left:50px; font-size: 45px; font-family: Montserrat, serif;">Infaq
+                Jama’ah
+            </h1>
+            <div>
+                <div class="kategori-infaq">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="kotak-kategori" style=" margin-left: 50px;">
+                        <div class="icon-infaq">
+                            <div class="bulet-icon">
+                                <img src="{{ asset('assets/img/website/icon 1.png') }}">
+                            </div>
+                        </div>
+                        <p class="text-infaq">{{ $data['category']['kategori_1'] ?? 'Infaq operasional' }}</p>
+                        <p style="font-size: 14px; text-align: center; margin: 20px;">
+                            {{ $data['category']['deskripsi_1'] ??
+                                'Digunakan untuk keperluan kebutuhan
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        operasional dan program untuk Masjid.' }}
+                        </p>
+                        <div>
+                            <a class="button-infaq" onclick="qris()">
+                                Infaq Sekarang
+                            </a>
                         </div>
                     </div>
-                    <p class="text-infaq">{{ $data['category']['kategori_1'] ?? 'Infaq operasional' }}</p>
-                    <p style="font-size: 14px; text-align: center; margin: 20px;">
-                        {{ $data['category']['deskripsi_1'] ??
-                            'Digunakan untuk keperluan kebutuhan
-                                                                                                                                                                                                                        operasional dan program untuk Masjid.' }}
-                    </p>
-                    <div>
-                        <a class="button-infaq" onclick="qris()">
-                            Infaq Sekarang
-                        </a>
-                    </div>
-                </div>
 
-                <div class="kotak-kategori">
-                    <div class="icon-infaq">
-                        <div class="bulet-icon">
-                            <img src="{{ asset('assets/img/website/icon 2.png') }}">
+                    <div class="kotak-kategori">
+                        <div class="icon-infaq">
+                            <div class="bulet-icon">
+                                <img src="{{ asset('assets/img/website/icon 2.png') }}">
+                            </div>
+                        </div>
+                        <p class="text-infaq">{{ $data['category']['kategori_2'] ?? 'Infaq Sosial' }}</p>
+                        <p style="font-size: 14px; text-align: center; margin: 20px;">
+                            {{ $data['category']['deskripsi_2'] ??
+                                'Santunan kepada anak yatim atau
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        yang membutuhkan untuk kesejahteraan umat.' }}
+                        </p>
+                        <div>
+                            <a class="button-infaq" onclick="qris()">
+                                Infaq Sekarang
+                            </a>
                         </div>
                     </div>
-                    <p class="text-infaq">{{ $data['category']['kategori_2'] ?? 'Infaq Sosial' }}</p>
-                    <p style="font-size: 14px; text-align: center; margin: 20px;">
-                        {{ $data['category']['deskripsi_2'] ??
-                            'Santunan kepada anak yatim atau
-                                                                                                                                                                                                                        yang membutuhkan untuk kesejahteraan umat.' }}
-                    </p>
-                    <div>
-                        <a class="button-infaq" onclick="qris()">
-                            Infaq Sekarang
-                        </a>
-                    </div>
-                </div>
-                <div class="kotak-kategori">
-                    <div class="icon-infaq">
-                        <div class="bulet-icon">
-                            <img src="{{ asset('assets/img/website/icon 3.png') }}">
+                    <div class="kotak-kategori">
+                        <div class="icon-infaq">
+                            <div class="bulet-icon">
+                                <img src="{{ asset('assets/img/website/icon 3.png') }}">
+                            </div>
+                        </div>
+                        <p class="text-infaq">{{ $data['category']['kategori_3'] ?? 'Infaq Pembangunan' }}</p>
+                        <p style="font-size: 14px; text-align: center; margin: 20px;">
+                            {{ $data['category']['deskripsi_3'] ??
+                                'Kebutuhan Perawatan dan pemeliharaan
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        bangunan fisik Masjid dan sarana penunjang.' }}
+                        </p>
+                        <div>
+                            <a class="button-infaq" onclick="qris()">
+                                Infaq Sekarang
+                            </a>
                         </div>
                     </div>
-                    <p class="text-infaq">{{ $data['category']['kategori_3'] ?? 'Infaq Pembangunan' }}</p>
-                    <p style="font-size: 14px; text-align: center; margin: 20px;">
-                        {{ $data['category']['deskripsi_3'] ??
-                            'Kebutuhan Perawatan dan pemeliharaan
-                                                                                                                                                                                                                        bangunan fisik Masjid dan sarana penunjang.' }}
-                    </p>
-                    <div>
-                        <a class="button-infaq" onclick="qris()">
-                            Infaq Sekarang
-                        </a>
-                    </div>
-                </div>
-                <div class="kotak-kategori" style=" margin-right: 40px ">
-                    <div class="icon-infaq">
-                        <div class="bulet-icon">
-                            <img src="{{ asset('assets/img/website/icon 42.png') }}">
+                    <div class="kotak-kategori" style=" margin-right: 40px ">
+                        <div class="icon-infaq">
+                            <div class="bulet-icon">
+                                <img src="{{ asset('assets/img/website/icon 42.png') }}">
+                            </div>
                         </div>
-                    </div>
-                    <p class="text-infaq">{{ $data['category']['kategori_4'] ?? 'Infaq Kurban' }}</p>
-                    <p style="font-size: 14px; text-align: center; margin: 20px;">
-                        {{ $data['category']['deskripsi_4'] ??
-                            'Program patungan untuk membeli hewan qurban yang akan diserahkan kepada umat.' }}
-                    </p>
-                    <div>
-                        <a class="button-infaq" onclick="qris()">
-                            Infaq Sekarang
-                        </a>
+                        <p class="text-infaq">{{ $data['category']['kategori_4'] ?? 'Infaq Kurban' }}</p>
+                        <p style="font-size: 14px; text-align: center; margin: 20px;">
+                            {{ $data['category']['deskripsi_4'] ??
+                                'Program patungan untuk membeli hewan qurban yang akan diserahkan kepada umat.' }}
+                        </p>
+                        <div>
+                            <a class="button-infaq" onclick="qris()">
+                                Infaq Sekarang
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -257,7 +259,7 @@
                             </h1>
                             <!-- <h3 class="garistengah" -->
                             <!-- style="color: #E19132; font-family: Montserrat, serif;  font-size: 40px;">
-                        Transfer Melalui</h3> -->
+                            Transfer Melalui</h3> -->
 
                             <div class="bank">
                                 <div style="display: flex; justify-content: center; align-items: center;">
@@ -270,7 +272,8 @@
                                         <br>
                                         <h2>No. Rekening : {{ $data['payment']['rekening'] }}</h2>
                                         <br>
-                                        <h2 style="font-weight: 300;">A/N : {{ $data['payment']['atas_nama'] }}</h2>
+                                        <h2 style="font-weight: 300;">A/N : {{ $data['payment']['atas_nama'] }}
+                                        </h2>
                                     </div>
                                 </div>
                             </div>
@@ -290,7 +293,8 @@
     <br>
     <br>
     <div class="d-block d-md-none">
-        <h1 style="color: #1E1E1E; margin-left:20px; font-size: 25px; font-family: Montserrat, serif;">Kategori Infaq
+        <h1 style="color: #1E1E1E; margin-left:20px; font-size: 25px; font-family: Montserrat, serif;">Kategori
+            Infaq
         </h1>
         <div class="kategori-infaq">
             <br>
@@ -371,7 +375,7 @@
                         </h1>
                         <!-- <h3 class="garistengah" -->
                         <!-- style="color: #E19132; font-family: Montserrat, serif;  font-size: 40px;">
-                        Transfer Melalui</h3> -->
+                            Transfer Melalui</h3> -->
 
                         <div class="bank">
                             <img style="width: 98px; height: 98px; border-radius: 20px; margin-bottom: 50px;"
@@ -395,6 +399,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <br>
     <br>
@@ -430,6 +435,24 @@
         $('.floating-sidebar a').on('click', function() {
             $('.floating-sidebar').removeClass('active');
         })
+
+        function PencarianKonten() {
+            var term = $('#searchbar').val().toLowerCase();
+            var items = $('#container-page').children();
+
+            if (term !== '') {
+                items.each(function() {
+                    var text = $(this).text().toLowerCase();
+                    if (text.includes(term)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            } else {
+                items.show();
+            }
+        }
 
         function scrollKebawah() {
             window.scrollTo({

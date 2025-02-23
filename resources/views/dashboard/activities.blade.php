@@ -61,55 +61,68 @@
                             <div class="col-lg-12 text-end">
                                 <!-- Formulir atau konten lainnya di sini -->
                             </div>
-                            
+
                             <!-- Table with stripped rows -->
-                            <table class="table datatable">
+                            <table class="table datatable" style=" table-layout: fixed; width: 100%;">
                                 <thead align="center">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Kegiatan</th>
-                                        <th>Foto</th>
-                                        <th>Deskripsi</th>
-                                        <th>Pengisi Kegiatan</th>
-                                        <th>Tanggal</th>
-                                        <th>Waktu Mulai</th>
-                                        <th>Waktu Selesai</th>
-                                        <th>Tempat</th>
-                                        <th>Aksi</th>
-                                    </tr>
+                                    <th>No</th>
+                                    <th>Nama Kegiatan</th>
+                                    <th>Foto</th>
+                                    <th style="width:150px !important;">Deskripsi</th>
+                                    <th>Pengisi Kegiatan</th>
+                                    <th>Tempat, Tanggal</th>
+                                    <th>Waktu</th>
+                                    <th>Aksi</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($activities as $index => $item)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $item->ActivityName }}
-                                            <br>
-                                            @if($item->is_active)
+                                                <br>
+                                                @if ($item->is_active)
                                                     <span class="badge bg-success">Aktif</span>
                                                 @else
                                                     <span class="badge bg-danger">Nonaktif</span>
                                                 @endif
+
+                                                @if ($item->main_activity == 1)
+                                                    <span class="badge bg-primary">kegiatan utama</span>
+                                                @endif
                                             </td>
                                             <td>
-                                                <img src="{{ asset('storage/'.$item->ActivityPhoto) }}" width="100" style="max-height: 80px;" alt="Activity Image">
+                                                <img src="{{ asset('storage/' . $item->ActivityPhoto) }}"
+                                                    width="100" style="max-height: 80px; object-fit: contain;"
+                                                    alt="Activity Image">
                                             </td>
                                             <td>{{ $item->ActivityDescription }}</td>
                                             <td>{{ $item->ActivityPerformers }}</td>
-                                            <td>{{ $item->ActivityDate }}</td>
-                                            <td>{{ $item->ActivityTime }}</td>
-                                            <td>{{ $item->ActivityTime2 }}</td>
-                                            <td>{{ $item->ActivityPlace }}</td>
-                                            <td  class="d-flex gap-1">
+                                            <td>
+                                                @php
+                                                    \Carbon\Carbon::setLocale('id');
+                                                    $tanggal = \Carbon\Carbon::parse($item->ActivityDate);
+                                                @endphp
+                                                {{ $item->ActivityPlace }},
+                                                {{ $tanggal->translatedFormat('l, d F Y') }}</td>
+                                            <td>{{ $item->ActivityTime }} - {{ $item->ActivityTime2 }}</td>
+                                            <td>
                                                 <a href="{{ route('kegiatan.edit', $item->id) }}"
                                                     class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <form action="{{ route('kegiatan.toggle', $item->id) }}" method="POST" style="display:inline;">
+                                                <form action="{{ route('kegiatan.toggle', $item->id) }}" method="POST"
+                                                    style="display:inline;">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <button type="submit" class="btn btn-secondary">
-                                                        <i class="bi bi-x-lg"></i>
-                                                    </button>
+                                                    @if ($item->is_active)
+                                                        <button type="submit" class="btn btn-secondary btn-active">
+                                                            <i class="bi bi-x-lg"></i>
+                                                        </button>
+                                                    @else
+                                                        <button type="submit" class="btn btn-primary btn-active">
+                                                            <i class="bi bi-check-lg"></i>
+                                                        </button>
+                                                    @endif
                                                 </form>
                                             </td>
                                         </tr>
@@ -159,26 +172,25 @@
     @endif
 
     <script>
-    $(document).ready(function() {
-        $('.btn-secondary').on('click', function(event) {
-            event.preventDefault(); 
-            let form = $(this).closest('form'); // Ambil form terdekat
+        $(document).ready(function() {
+            $('.btn-active').on('click', function(event) {
+                event.preventDefault();
+                let form = $(this).closest('form'); // Ambil form terdekat
 
-            Swal.fire({
-                title: "Konfirmasi Status!",
-                text: "Apakah kamu yakin akan mengubah status data ini?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#253A82",
-                cancelButtonColor: "#6c757d",
-                confirmButtonText: "Ya, Ubah",
-                cancelButtonText: "Batal"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit(); 
-                }
+                Swal.fire({
+                    title: "Konfirmasi Status!",
+                    text: "Apakah kamu yakin akan mengubah status data ini?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#253A82",
+                    cancelButtonColor: "#6c757d",
+                    confirmButtonText: "Ya, Ubah",
+                    cancelButtonText: "Batal"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             });
         });
-        });
     </script>
-

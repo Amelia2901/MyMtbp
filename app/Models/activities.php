@@ -22,5 +22,6 @@ class activities extends Model
         'ActivityTime2',
         'ActivityPlace',
         'is_active',
+        'main_activity'
     ];
 }

@@ -64,7 +64,7 @@ class methodPaymentController extends Controller
             ]);
         }
 
-        return redirect()->route('payment.index')->with('success', 'Metode Infaq telah diperbarui');
+        return redirect()->route('payment.index')->with('success', 'Metode Infaq telah diupdate');
     }
 
     public function storeqris(Request $request){
@@ -91,6 +91,6 @@ class methodPaymentController extends Controller
             ]);
         }
 
-        return redirect()->route('payment.index')->with('success', 'Metode Infaq telah diperbarui');
+        return redirect()->route('payment.index')->with('success', 'Metode Infaq telah diupdate');
     }
 }

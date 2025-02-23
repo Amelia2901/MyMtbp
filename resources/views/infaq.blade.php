@@ -108,7 +108,7 @@
     </div>
 
     <div class="slider">
-        <img src="{{ $data['banner']['banner_photo'] ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
+        <img src="{{ isset($data['banner']['banner_photo']) ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
             alt="" class="slider-img">
         <div class="content">
             <div class="isi-content" style="justify-content: center;">
@@ -145,7 +145,7 @@
                 </div>
                 <p>{{ $data['description']['Description_1'] ??
                     "Masjid Bumi Prima Menerima Infaq dan Shodaqoh Jama'ah untuk kebutuhan operasional,kegiatan dan
-                                                                                                                    program Masjid Bumi Prima agar senantiasa berjalan dan untuk Kemakmuran Masjid." }}
+                                                                                                                                                    program Masjid Bumi Prima agar senantiasa berjalan dan untuk Kemakmuran Masjid." }}
                 </p>
             </div>
             <img style="width: 300px; height:300px; margin-top: -30px; margin-left:250px;"
@@ -158,8 +158,8 @@
         <p style="font-size: 25px; font-family: Montserrat, serif;">
             {{ $data['description']['Description_2'] ??
                 "Masjid Bumi Prima Menerima Infaq dan Shodaqoh
-                                                                                    Jama’ah untuk kebutuhan operasional,
-                                                                                    kegiatan dan program Masjid Bumi Prima agar senantiasa berjalan dan untuk kemakmuran Masjid." }}
+                                                                                                            Jama’ah untuk kebutuhan operasional,
+                                                                                                            kegiatan dan program Masjid Bumi Prima agar senantiasa berjalan dan untuk kemakmuran Masjid." }}
         </p>
     </div>
     </div>
@@ -183,7 +183,7 @@
                     <p style="font-size: 14px; text-align: center; margin: 20px;">
                         {{ $data['category']['deskripsi_1'] ??
                             'Digunakan untuk keperluan kebutuhan
-                                                                                                                                                                        operasional dan program untuk Masjid.' }}
+                                                                                                                                                                                                                        operasional dan program untuk Masjid.' }}
                     </p>
                     <div>
                         <a class="button-infaq" onclick="qris()">
@@ -202,7 +202,7 @@
                     <p style="font-size: 14px; text-align: center; margin: 20px;">
                         {{ $data['category']['deskripsi_2'] ??
                             'Santunan kepada anak yatim atau
-                                                                                                                                                                        yang membutuhkan untuk kesejahteraan umat.' }}
+                                                                                                                                                                                                                        yang membutuhkan untuk kesejahteraan umat.' }}
                     </p>
                     <div>
                         <a class="button-infaq" onclick="qris()">
@@ -220,7 +220,7 @@
                     <p style="font-size: 14px; text-align: center; margin: 20px;">
                         {{ $data['category']['deskripsi_3'] ??
                             'Kebutuhan Perawatan dan pemeliharaan
-                                                                                                                                                                        bangunan fisik Masjid dan sarana penunjang.' }}
+                                                                                                                                                                                                                        bangunan fisik Masjid dan sarana penunjang.' }}
                     </p>
                     <div>
                         <a class="button-infaq" onclick="qris()">
@@ -399,29 +399,26 @@
     <br>
     <br>
     <footer class="footer">
-        <div style="display: block;">
-            <p style="margin: 10px 15px" ;>&copy; Footprint Solutions 2025. All rights reserved.</p>
-            <br>
-            <p style="margin: 10px 15px"> <u class="underlined">Address</u>: Taman Bumi Prima, Jl.Pesantren Blk. H3
-                No.4
+        <div style="display: block; width:70%;">
+            <p style="margin: 10px 15px;" class="copyright">&copy; Footprint Solutions 2025. All rights reserved.
             </p>
-            <p style="margin: 10px 15px"> Cibabat, Kec.Cimahi Utara, Kabupaten Bandung, Jawa Barat 40513</p>
-            <p style="margin: 10px 15px">Phone: <u class="underlined"> 0813-2069-1810 </u> </p>
+            <br>
+            <div style="display: flex;">
+                <u style="margin: 10px 15px" class="underlined">Address </u>
+                <p style="margin: 10px 15px" class="footer-adress">
+                    {{ $data['contact']['address_mosque'] ??
+                        'Taman Bumi Prima, Jl.Pesantren Blk. H3 No.4 Cibabat, Kec.Cimahi Utara, Kabupaten Bandung, Jawa Barat 40513' }}
+                </p>
+            </div>
+
         </div>
 
-        <div class="footer-kanan">
-            <!-- <a href="#">Beranda</a> -->
-            <!-- <a href="#">Tentang Kami</a> -->
-            <!-- <a href="#">Jadwal Shalat & Kegiatan</a> -->
-            <!-- <a href="#">Donasi</a> -->
-            <!-- <a href="#">Kontak</a> -->
+        <div class="footer-kanan" style="margin: 10px; width:30%;">
+
             <ul>
-                <li><a href="{{ url('/') }}">Beranda</a></li>
-                <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
-                <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
-                <li><a href="{{ url('/infaq') }}"> Donasi</a></li>
-                <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
-                <li><a href="{{ url('/zakat') }}">Zakat</a></li>
+                @foreach ($data['navbar'] as $nav)
+                    <li><a href="{{ url($nav->url) }}">{{ $nav->name }}</a></li>
+                @endforeach
             </ul>
         </div>
     </footer>

@@ -38,9 +38,8 @@
         .card-title span {
             /* text-decoration: underline; */
             /* text-decoration-color: aqua; */
-            color: #012970 !important;
-            font-size: 20px !important;
-            font-weight: bolder !important;
+            {{-- color: #012970 !important; --}} font-size: 20px !important;
+            {{-- font-weight: bolder !important; --}}
         }
 
         a.card-title:hover {

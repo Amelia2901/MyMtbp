@@ -549,27 +549,26 @@
 
 
     <footer class="footer">
-        <div style="display: block;">
+        <div style="display: block; width:70%;">
             <p style="margin: 10px 15px;" class="copyright">&copy; Footprint Solutions 2025. All rights reserved.
             </p>
             <br>
-            <p style="margin: 10px 15px" class="footer-adress"> <u class="underlined">Address</u>: Taman Bumi Prima,
-                Jl.Pesantren Blk. H3 No.4
-            </p>
-            <p style="margin: 10px 15px" class="footer-adress"> Cibabat, Kec.Cimahi Utara, Kabupaten Bandung, Jawa
-                Barat
-                40513</p>
-            <p style="margin: 10px 15px" class="footer-adress">Phone: <u class="underlined">0813-2069-1810</u></p>
+            <div style="display: flex;">
+                <u style="margin: 10px 15px" class="underlined">Address </u>
+                <p style="margin: 10px 15px" class="footer-adress">
+                    {{ $data['contact']['address_mosque'] ??
+                        'Taman Bumi Prima, Jl.Pesantren Blk. H3 No.4 Cibabat, Kec.Cimahi Utara, Kabupaten Bandung, Jawa Barat 40513' }}
+                </p>
+            </div>
+
         </div>
 
-        <div class="footer-kanan">
+        <div class="footer-kanan" style="margin: 10px; width:30%;">
+
             <ul>
-                <li><a href="{{ url('/') }}">Beranda</a></li>
-                <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
-                <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
-                <li><a href="{{ url('/infaq') }}">Donasi</a></li>
-                <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
-                <li><a href="{{ url('/zakat') }}">Zakat</a></li>
+                @foreach ($data['navbar'] as $nav)
+                    <li><a href="{{ url($nav->url) }}">{{ $nav->name }}</a></li>
+                @endforeach
             </ul>
         </div>
     </footer>

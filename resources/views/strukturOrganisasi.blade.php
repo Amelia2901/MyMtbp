@@ -162,7 +162,7 @@
 
 
     <div class="slider">
-        <img src="{{ $data['banner']['banner_photo'] ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
+        <img src="{{ isset($data['banner']['banner_photo']) ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
             alt="" class="slider-img">
         <div class="content">
             <div class="isi-content">
@@ -215,7 +215,7 @@
                 <br>
                 <p></p>
                 <div style="display: flex; justify-content:center; margin-top: 40px;">
-                    <img src="{{ $data['Bagan']['bagan_photo'] ? asset('storage/' . $data['Bagan']['bagan_photo']) : asset('assets/img/website/stuktur.png') }}"
+                    <img src="{{ isset($data['Bagan']['bagan_photo']) ? asset('storage/' . $data['Bagan']['bagan_photo']) : asset('assets/img/website/stuktur.png') }}"
                         style="height: 750px; width: 95%; object-fit: fill;">
                     <br>
                 </div>
@@ -229,7 +229,7 @@
                 <p></p>
 
                 <div style="display: flex; justify-content:center; margin-top: 20px;">
-                    <img src="{{ $data['Bagan']['bagan_photo'] ? asset('storage/' . $data['Bagan']['bagan_photo']) : asset('assets/img/website/stuktur.png') }}"
+                    <img src="{{ isset($data['Bagan']['bagan_photo']) ? asset('storage/' . $data['Bagan']['bagan_photo']) : asset('assets/img/website/stuktur.png') }}"
                         style="height: 217px; width: 80%;">
                 </div>
         </div>
@@ -310,28 +310,26 @@
     </div>
 
     <footer class="footer">
-        <div style="display: block;">
-            <p style="margin: 10px 15px;">&copy; Footprint Solutions 2025. All rights reserved.</p>
+        <div style="display: block; width:70%;">
+            <p style="margin: 10px 15px;" class="copyright">&copy; Footprint Solutions 2025. All rights reserved.
+            </p>
             <br>
-            <p style="margin: 10px 15px"> <u class="underlined">Address </u>: Taman Bumi Prima, Jl.Pesantren Blk. H3
-                No.4</p>
-            <p style="margin: 10px 15px"> Cibabat, Kec.Cimahi Utara, Kabupaten Bandung, Jawa Barat 40513</p>
-            <p style="margin: 10px 15px">Phone: <u class="underlined">0813-2069-1810</u> </p>
+            <div style="display: flex;">
+                <u style="margin: 10px 15px" class="underlined">Address </u>
+                <p style="margin: 10px 15px" class="footer-adress">
+                    {{ $data['contact']['address_mosque'] ??
+                        'Taman Bumi Prima, Jl.Pesantren Blk. H3 No.4 Cibabat, Kec.Cimahi Utara, Kabupaten Bandung, Jawa Barat 40513' }}
+                </p>
+            </div>
+
         </div>
 
-        <div class="footer-kanan">
-            <!-- <a href="#">Beranda</a> -->
-            <!-- <a href="#">Tentang Kami</a> -->
-            <!-- <a href="#">Jadwal Shalat & Kegiatan</a> -->
-            <!-- <a href="#">Donasi</a> -->
-            <!-- <a href="#">Kontak</a> -->
+        <div class="footer-kanan" style="margin: 10px; width:30%;">
+
             <ul>
-                <li><a href="{{ url('/') }}">Beranda</a></li>
-                <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
-                <li><a href="{{ url('/#JadwalShalat') }}">Jadwal Shalat & Kegiatan</a></li>
-                <li><a href="{{ url('/infaq') }}">Donasi</a></li>
-                <li><a href="{{ url('/#Kontak') }}">Kontak</a></li>
-                <li><a href="{{ url('/zakat') }}">Zakat</a></li>
+                @foreach ($data['navbar'] as $nav)
+                    <li><a href="{{ url($nav->url) }}">{{ $nav->name }}</a></li>
+                @endforeach
             </ul>
         </div>
     </footer>

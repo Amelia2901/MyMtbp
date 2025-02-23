@@ -63,11 +63,30 @@ class ActivitiesController extends Controller
 
             // Simpan foto baru
             $photoPath = $request->file('activityPhoto')->store('uploads/activities', 'public');
-            $data['ActivityPhoto'] = $photoPath; 
         }
 
+        // echo $data;
 
-        $activities->update($data);
+        // echo $data['main_activity'];
+        if ($data['main_activity'] == 'on' ) {
+            // echo 'hai';
+            $all_activity = activities::all();
+            $all_activity->each(function ($activity) {
+                $activity->update(['main_activity' => 0]);
+            });
+        }
+
+        $activities->update([
+            'ActivityPhoto' => $photoPath ?? $activities->ActivityPhoto,
+            'ActivityName' => $data['activityName'],
+            'ActivityDescription' => $data['activityDescription'],
+            'ActivityDate' => $data['activityDate'],
+            'ActivityTime' => $data['activityTime'],
+            'ActivityTime2' => $data['activityTime2'],
+            'ActivityPlace' => $data['activityPlace'],
+            'ActivityPerformers' => $data['activityPerformers'],
+            'main_activity' => $data['main_activity'] == 'on' ? 1 : 0,
+        ]);
         return redirect()->route('kegiatan.index')->with('success', 'Data Kegiatan berhasil diperbarui');
     }
 

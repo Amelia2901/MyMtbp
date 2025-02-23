@@ -13,12 +13,18 @@
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-chat-left-text"></i>
-                    <span class="badge bg-success badge-number">{{ count($message) }}</span>
+                    @if (count($message) > 0)
+                        <span class="badge bg-success badge-number">{{ count($message) }}</span>
+                    @endif
                 </a><!-- End Messages Icon -->
-
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                     <li class="dropdown-header">
-                        Anda memiliki {{ count($message) }} pesan
+                        @if (count($message) > 0)
+                            Anda memiliki {{ count($message) }} pesan
+                        @else
+                            Anda belum memiliki pesan
+                        @endif
+
                     </li>
                     <li>
                         <hr class="dropdown-divider">

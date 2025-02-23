@@ -155,16 +155,17 @@
     </div>
 
     <div class="slider" style="background:rgba(139, 69, 19, 0.5); ">
-        <img src="{{ $data['banner']['banner_photo'] ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
+        <img src="{{ isset($data['banner']['banner_photo']) ? asset('storage/' . $data['banner']['banner_photo']) : asset('assets/img/website/slider.jpg') }}"
             alt="" class="slider-img">
+
 
         <div class="content">
             <div class="isi-content">
                 <h1>
-                    {{ $data['banner']['banner_title'] ? $data['banner']['banner_title'] : 'Masjid Bumi Prima' }}
+                    {{ isset($data['banner']['banner_title']) ? $data['banner']['banner_title'] : 'Masjid Bumi Prima' }}
                 </h1>
                 <p>
-                    {{ $data['banner']['banner_description']
+                    {{ isset($data['banner']['banner_description'])
                         ? $data['banner']['banner_description']
                         : 'Selamat datang di Masjid Bumi Prima, tempat ibadah yang nyaman dan penuh keberkahan.' }}
                 </p>
@@ -333,13 +334,16 @@
             <!-- <button><i class="fa-solid fa-filter"></i> Terbaru</button> -->
             <div class="dropdown-center">
                 <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-filter"></i> <span id="buttonFilter">Terbaru</span></button>
+                    <i class="fa-solid fa-filter"></i> <span id="buttonFilter">Terbaru</span>
                 </button>
                 <ul class="dropdown-menu" style="width: 108px !important;">
-                    <li style="display:flex; justify-content: center;"><a class="dropdown-item dropdown-filter active"
+                    <li style="display:flex; justify-content: center;">
+                        <a class="dropdown-item dropdown-filter active"
                             onclick="setFilter('Terbaru', this)">Terbaru</a>
                     </li>
-                    <li><a class="dropdown-item dropdown-filter" onclick="setFilter('Terlama', this)">Terlama</a></li>
+                    <li>
+                        <a class="dropdown-item dropdown-filter" onclick="setFilter('Terlama', this)">Terlama</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -382,31 +386,37 @@
             @endif
 
             <div class="row-berita" style="max-height: 480px; overflow: auto; padding-top:40px;">
-                @if (isset($data['activities']))
-                    @foreach ($data['activities'] as $index => $item)
-                        <div class="content-berita">
-                            <div class="foto-berita">
-                                <img src="{{ asset('storage/' . $item['ActivityPhoto']) }}">
-                            </div>
-                            <div class="isi-berita">
-                                @php
-                                    \Carbon\Carbon::setLocale('id');
-                                    $tanggal = \Carbon\Carbon::parse($item['ActivityDate']);
-                                @endphp
-                                <p
-                                    style="color: rgb(85, 61, 61)9, 23, 23); font-size:13px; font-weight:600; margin-top:-15px;">
-                                    <i style=" color: #F2AB43;" class="fa-regular fa-clock"></i>
-                                    {{ $tanggal->translatedFormat('l') }},
-                                    {{ $tanggal->translatedFormat('d F Y') }}
-                                </p>
-                                <h3>{{ $item['ActivityName'] }}</h3>
-                                <p>Deskripsi: {{ $item['ActivityDescription'] }}</p>
-                            </div>
-                        </div>
-                        <br>
-                    @endforeach
-                @endif
+                <div id="newsContainer">
+                    @if (isset($data['activities']))
+                        @php
+                            $sortedActivities = collect($data['activities'])->sortByDesc('ActivityDate');
+                        @endphp
 
+                        @foreach ($sortedActivities as $index => $item)
+                            <div class="content-berita" style="margin-bottom: 20px;"
+                                data-date="{{ $item['ActivityDate'] }}">
+                                <div class="foto-berita">
+                                    <img src="{{ asset('storage/' . $item['ActivityPhoto']) }}">
+                                </div>
+                                <div class="isi-berita">
+                                    @php
+                                        \Carbon\Carbon::setLocale('id');
+                                        $tanggal = \Carbon\Carbon::parse($item['ActivityDate']);
+                                    @endphp
+                                    <p
+                                        style="color: rgb(85, 61, 61); font-size:13px; font-weight:600; margin-top:-15px;">
+                                        <i style="color: #F2AB43;" class="fa-regular fa-clock"></i>
+                                        {{ $tanggal->translatedFormat('l') }},
+                                        {{ $tanggal->translatedFormat('d F Y') }}
+                                    </p>
+                                    <h3>{{ $item['ActivityName'] }}</h3>
+                                    <p>Deskripsi: {{ $item['ActivityDescription'] }}</p>
+                                </div>
+
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
             </div>
         </div>
 
@@ -454,7 +464,8 @@
                                     <div class="isi-kotak">
                                         <p style="margin-bottom: 20px;"><i class="fa-brands fa-youtube fa-2xl"></i>
                                         </p>
-                                        <p style="font-weight: bold;">{{ $data['contact']['youtube_channel'] }}</p>
+                                        <p style="font-weight: bold;">{{ $data['contact']['youtube_channel'] ?? '#' }}
+                                        </p>
                                         <p style="font-weight: 300px; font-size: 14px;">Youtube Masjid Bumi Prima
                                         </p>
                                     </div>
@@ -521,27 +532,26 @@
 
     <!-- footer -->
     <footer class="footer">
-        <div style="display: block;">
+        <div style="display: block; width:70%;">
             <p style="margin: 10px 15px;" class="copyright">&copy; Footprint Solutions 2025. All rights reserved.
             </p>
             <br>
-            <p style="margin: 10px 15px" class="footer-adress"> <u class="underlined">Address</u>: Taman Bumi Prima,
-                Jl.Pesantren Blk. H3 No.4
-            </p>
-            <p style="margin: 10px 15px" class="footer-adress"> Cibabat, Kec.Cimahi Utara, Kabupaten Bandung, Jawa
-                Barat
-                40513</p>
-            <p style="margin: 10px 15px" class="footer-adress">Phone: <u class="underlined">0813-2069-1810</u></p>
+            <div style="display: flex;">
+                <u style="margin: 10px 15px" class="underlined">Address </u>
+                <p style="margin: 10px 15px" class="footer-adress">
+                    {{ $data['contact']['address_mosque'] ??
+                        'Taman Bumi Prima, Jl.Pesantren Blk. H3 No.4 Cibabat, Kec.Cimahi Utara, Kabupaten Bandung, Jawa Barat 40513' }}
+                </p>
+            </div>
+
         </div>
 
-        <div class="footer-kanan">
+        <div class="footer-kanan" style="margin: 10px; width:30%;">
+
             <ul>
-                <li><a href="{{ url('/') }}">Beranda</a></li>
-                <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
-                <li><a href="#JadwalShalat">Jadwal Shalat & Kegiatan</a></li>
-                <li><a href="{{ url('/infaq') }}">Donasi</a></li>
-                <li><a href="#Kontak">Kontak</a></li>
-                <li><a href="{{ url('/zakat') }}">Zakat</a></li>
+                @foreach ($data['navbar'] as $nav)
+                    <li><a href="{{ url($nav->url) }}">{{ $nav->name }}</a></li>
+                @endforeach
             </ul>
         </div>
     </footer>
@@ -677,12 +687,24 @@
         });
 
 
-        function setFilter(filter, isi) {
-            $('#buttonFilter').text(filter);
-            $('.dropdown-filter').each(function() {
-                $(this).removeClass('active');
-            })
-            $(isi).addClass('active');
+        function setFilter(order, element) {
+            document.getElementById('buttonFilter').innerText = order;
+
+            document.querySelectorAll('.dropdown-filter').forEach(item => item.classList.remove('active'));
+
+            element.classList.add('active');
+
+            let newsContainer = document.getElementById('newsContainer');
+            let newsItems = Array.from(newsContainer.getElementsByClassName('content-berita'));
+
+            newsItems.sort((a, b) => {
+                let dateA = new Date(a.getAttribute('data-date'));
+                let dateB = new Date(b.getAttribute('data-date'));
+                return order === 'Terbaru' ? dateB - dateA : dateA - dateB;
+            });
+
+            newsContainer.innerHTML = "";
+            newsItems.forEach(item => newsContainer.appendChild(item));
         }
 
         function scrollKebawah() {

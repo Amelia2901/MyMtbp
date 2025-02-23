@@ -60,7 +60,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Formulir Kalender Kegiatan</h5>
-                                <form action="{{ isset($item) ? route('kegiatan.update', $item->id) : route('kegiatan.store') }}"
+                            <form
+                                action="{{ isset($item) ? route('kegiatan.update', $item->id) : route('kegiatan.store') }}"
                                 method="POST" enctype="multipart/form-data" id="activityForm">
                                 @csrf
                                 @if (isset($item))
@@ -71,16 +72,24 @@
                                 <div class="row mb-4">
                                     <label for="activityName" class="col-sm-2 col-form-label">Nama Kegiatan</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="ActivityName" id="activityName"
+                                        <input type="text" class="form-control" name="activityName" id="activityName"
                                             value="{{ old('activityName', $item->ActivityName ?? '') }}" required>
+                                        <div style="display: flex; align-items: center;">
+                                            <input type="checkbox" name="main_activity" id="main_activity"
+                                                style="cursor: pointer;">
+                                            <p style="margin: 0 5px;"><b>Jadikan kegiatan utama</b> (kegiatan utama yang
+                                                lama
+                                                akan terganti)</p>
+                                        </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Activity Photo-->
                                 <div class="row mb-4">
                                     <label for="activityPhoto" class="col-sm-2 col-form-label">Foto Kegiatan</label>
                                     <div class="col-sm-10">
-                                        <input type="file" class="form-control" name="activityPhoto" id="activityPhoto"  onchange="readURL(this)"
+                                        <input type="file" class="form-control" name="activityPhoto"
+                                            id="activityPhoto" onchange="readURL(this)"
                                             value="{{ old('activityPhoto', $item->ActivityPhoto ?? '') }}" required>
                                     </div>
                                 </div>
@@ -90,7 +99,8 @@
                                     <label for="activityPhoto" class="col-sm-2 col-form-label">Preview</label>
                                     <div class="col-sm-10">
                                         @if ($item && $item->ActivityPhoto)
-                                            <img src="{{ asset('storage/' . $item->ActivityPhoto) }}" alt="ActivityPhoto" id="previewActivity" width="35%">
+                                            <img src="{{ asset('storage/' . $item->ActivityPhoto) }}"
+                                                alt="ActivityPhoto" id="previewActivity" width="35%">
                                         @else
                                             <img src="" alt="" id="previewActivity" width="35%">
                                         @endif
@@ -100,7 +110,8 @@
 
                                 <!-- Activity Description-->
                                 <div class="row mb-4">
-                                    <label for="activityDescription" class="col-sm-2 col-form-label">Deskripsi kegiatan</label>
+                                    <label for="activityDescription" class="col-sm-2 col-form-label">Deskripsi
+                                        kegiatan</label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control" name="activityDescription" id="activityDescription" required>{{ old('activityDescription', $item->ActivityDescription ?? '') }}</textarea>
                                     </div>
@@ -108,10 +119,13 @@
 
                                 <!-- Activity Performers-->
                                 <div class="row mb-4">
-                                    <label for="activityPerformers" class="col-sm-2 col-form-label">Pengisi Kegiatan</label>
+                                    <label for="activityPerformers" class="col-sm-2 col-form-label">Pengisi
+                                        Kegiatan</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="activityPerformers" id="activityPerformers"
-                                            value="{{ old('activityPerformers', $item->ActivityPerformers ?? '') }}" required>
+                                        <input type="text" class="form-control" name="activityPerformers"
+                                            id="activityPerformers"
+                                            value="{{ old('activityPerformers', $item->ActivityPerformers ?? '') }}"
+                                            required>
                                     </div>
                                 </div>
 
@@ -119,7 +133,8 @@
                                 <div class="row mb-4">
                                     <label for="activityDate" class="col-sm-2 col-form-label">Tanggal Kegiatan</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" name="activityDate" id="activityDate"
+                                        <input type="date" class="form-control" name="activityDate"
+                                            id="activityDate"
                                             value="{{ old('activityDate', $item->ActivityDate ?? '') }}" required>
                                     </div>
                                 </div>
@@ -128,7 +143,8 @@
                                 <div class="row mb-4">
                                     <label for="activityTime" class="col-sm-2 col-form-label">Waktu Mulai</label>
                                     <div class="col-sm-10">
-                                        <input type="time" class="form-control" name="activityTime" id="activityTime"
+                                        <input type="time" class="form-control" name="activityTime"
+                                            id="activityTime"
                                             value="{{ old('activityTime', $item->ActivityTime ?? '') }}" required>
                                     </div>
                                 </div>
@@ -137,28 +153,30 @@
                                 <div class="row mb-4">
                                     <label for="activityTime2" class="col-sm-2 col-form-label">Waktu Selesai</label>
                                     <div class="col-sm-10">
-                                        <input type="time" class="form-control" name="activityTime2" id="activityTime2"
+                                        <input type="time" class="form-control" name="activityTime2"
+                                            id="activityTime2"
                                             value="{{ old('activityTime2', $item->ActivityTime2 ?? '') }}" required>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Activity Place-->
                                 <div class="row mb-4">
                                     <label for="activityPlace" class="col-sm-2 col-form-label">Tempat Kegiatan</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="activityPlace" id="activityPlace"
+                                        <input type="text" class="form-control" name="activityPlace"
+                                            id="activityPlace"
                                             value="{{ old('activityPlace', $item->ActivityPlace ?? '') }}" required>
                                     </div>
                                 </div>
 
                                 <!-- ======= Button ======= -->
                                 <input type="hidden" id="mode" value="{{ isset($item) ? 'edit' : 'tambah' }}">
-                                    <div class="row mb-4">
-                                        <div class="col-sm-12">
-                                            <button type="button" onclick="simpan()" class="btn btn-primary">
-                                                {{ isset($item) ? 'Update Data' : 'Tambah Data' }}</button>
-                                        </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-12">
+                                        <button type="button" onclick="simpan()" class="btn btn-primary">
+                                            {{ isset($item) ? 'Update Data' : 'Tambah Data' }}</button>
                                     </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -194,17 +212,21 @@
         // Validation for form before submission
         function validateForm() {
             let valid = true;
+            let mode = document.querySelector('#mode').value;
 
             if ($.trim($("#activityName").val()) == "") {
                 $('#activityName').addClass('is-invalid');
                 $('#activityName').after('<div class="invalid-feedback">Nama Kegiatan wajib diisi.</div>');
                 valid = false;
             }
-            if ($.trim($("#activityPhoto").val()) == "") {
-                $('#activityPhoto').addClass('is-invalid');
-                $('#activityPhoto').after('<div class="invalid-feedback">Foto kegiatan wajib diisi.</div>');
-                valid = false;
+            if (mode != 'edit') {
+                if ($.trim($("#activityPhoto").val()) == "") {
+                    $('#activityPhoto').addClass('is-invalid');
+                    $('#activityPhoto').after('<div class="invalid-feedback">Foto kegiatan wajib diisi.</div>');
+                    valid = false;
+                }
             }
+
             if ($.trim($("#activityDescription").val()) == "") {
                 $('#activityDescription').addClass('is-invalid');
                 $('#activityDescription').after('<div class="invalid-feedback">Deskripsi wajib diisi.</div>');
@@ -235,7 +257,7 @@
                 $('#activityPlace').after('<div class="invalid-feedback">Tempat Kegiatan wajib diisi.</div>');
                 valid = false;
             }
-            
+
 
             return valid;
         }
@@ -252,45 +274,46 @@
 
 
         function simpan() {
-        if (!validateForm()) {
-            return false;
-        }
-
-        let mode = document.querySelector('#mode').value; // Ambil nilai mode
-        let title, text, confirmButtonText;
-
-        if (mode === 'edit') {
-            title = 'Konfirmasi Edit';
-            text = 'Apakah anda yakin akan mengupdate data ini?';
-            confirmButtonText = 'Ya, Update Data';
-        } else {
-            title = 'Konfirmasi Tambah';
-            text = 'Apakah anda yakin akan menambahkan data baru?';
-            confirmButtonText = 'Ya, Tambah Data';
-        }
-        
-        Swal.fire({
-            title: title,
-            text: text,
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: confirmButtonText,
-            confirmButtonColor: '#253A82',
-            cancelButtonText: 'Tidak, Kembali'
-    }).then((result) => {
-            if (result.isConfirmed) {
-                document.querySelector('#activityForm').submit();
+            if (!validateForm()) {
+                return false;
             }
-    });
-}
+
+            let mode = document.querySelector('#mode').value; // Ambil nilai mode
+            let title, text, confirmButtonText;
+
+            if (mode === 'edit') {
+                title = 'Konfirmasi Edit';
+                text = 'Apakah anda yakin akan mengupdate data ini?';
+                confirmButtonText = 'Ya, Update Data';
+            } else {
+                title = 'Konfirmasi Tambah';
+                text = 'Apakah anda yakin akan menambahkan data baru?';
+                confirmButtonText = 'Ya, Tambah Data';
+            }
+
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: confirmButtonText,
+                confirmButtonColor: '#253A82',
+                cancelButtonText: 'Tidak, Kembali'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.querySelector('#activityForm').submit();
+                }
+            });
+        }
 
         // Remove invalid class when user starts typing
-        $('#activityName, #activityPhoto, #activityDescription, #activityPerformers, #activityDate, #activityTime, #activityTime2, #activityPlace').on('input', function() {
-            if ($.trim($(this).val()) !== "") {
-                $(this).removeClass('is-invalid');
-                $(this).next('.invalid-feedback').remove();
-            }
-        });
+        $('#activityName, #activityPhoto, #activityDescription, #activityPerformers, #activityDate, #activityTime, #activityTime2, #activityPlace')
+            .on('input', function() {
+                if ($.trim($(this).val()) !== "") {
+                    $(this).removeClass('is-invalid');
+                    $(this).next('.invalid-feedback').remove();
+                }
+            });
     </script>
 
     <!-- Template Main JS File -->

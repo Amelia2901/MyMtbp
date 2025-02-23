@@ -77,6 +77,12 @@
                             <h3 class="card-title">Pesan Masuk
                             </h3>
                             <div class="message-body">
+                                @if ($data['message'] == [])
+                                    <p class=""
+                                        style="margin:0; margin-top: 6px; font-size: 16px; padding: 0; font-weight:bold;">
+                                        Belum ada pesan masuk
+                                    </p>
+                                @endif
                                 @foreach ($data['message'] as $item)
                                     <div class="message-row" style="margin:0 50px;">
                                         <p class=""

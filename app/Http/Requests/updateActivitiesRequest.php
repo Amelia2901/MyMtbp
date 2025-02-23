@@ -23,13 +23,14 @@ class updateActivitiesRequest extends FormRequest
     {
         return [
             'activityName' => 'required|string|max:255',
-            'activityPhoto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'activityPhoto' => 'nullable|images|mimes:jpeg,png,jpg,gif|max:2048',
             'activityDescription' => 'required|string|max:255',
             'activityPerformers' => 'required|string|max:255',
             'activityDate' => 'required|date',
             'activityTime' => 'required|string|max:255',
             'activityTime2' => 'required|string|max:255',
             'activityPlace' => 'required|string|max:255',
+            'main_activity' => 'nullable'
         ];
     }
 
@@ -48,7 +49,6 @@ class updateActivitiesRequest extends FormRequest
             'activityTime.required' => 'Waktu kegiatan wajib diisi.',
             'activityTime2.required' => 'Waktu kegiatan (akhir) wajib diisi.',
             'activityPlace.required' => 'Tempat kegiatan wajib diisi.',
-
             'activityPhoto.image' => 'Foto harus berupa file gambar.',
             'activityPhoto.mimes' => 'Foto harus dalam format jpeg, png, jpg, atau gif.',
             'activityPhoto.max' => 'Ukuran foto tidak boleh lebih dari 2MB.',
